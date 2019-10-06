@@ -1,3 +1,5 @@
+import { equals as rEquals } from "ramda";
+
 export class Point {
   x: number;
   y: number;
@@ -7,7 +9,7 @@ export class Point {
     this.y = inverse ? 1 - y : y;
   }
 
-  equals(otherPoint: Point) {
-    return this.x === otherPoint.x && this.y === otherPoint.y;
+  equals(point: Point) {
+    return rEquals(this.x, point.x) && rEquals(this.y, point.y);
   }
 }

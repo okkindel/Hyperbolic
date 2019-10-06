@@ -1,22 +1,19 @@
-import { Point } from "./point";
-import { isNil } from "ramda";
-
 export class Canvas {
   ctx: CanvasRenderingContext2D;
   canvas: HTMLCanvasElement;
-  diameter: number;
-  radius: number;
 
   constructor(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D) {
     this.canvas = canvas;
     this.ctx = context;
+
+    // match to borders on resize
     window.addEventListener("resize", this.resizeCanvas);
     this.resizeCanvas();
   }
 
   resizeCanvas() {
-    this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
+    this.canvas.width = window.innerWidth;
     console.log(this.canvas.width, this.canvas.height);
     this.draw();
   }

@@ -1,5 +1,22 @@
-// import * as R from "ramda";
+import { Circle } from "./circle";
+import { Point } from "./point";
+import { Angle } from "./math";
 
-// const isNil = (value: any) => value === null || value === undefined;
-// const TAU = 2 * Math.PI;
-// const ramdaTest = (a: number, b: number) => R.add(a, b);
+export function drawArc(
+  context: CanvasRenderingContext2D,
+  circle: Circle,
+  start: Angle,
+  stop: Angle
+) {
+  context.beginPath();
+  context.arc(circle.origin.x, circle.origin.y, circle.radius, start, stop);
+  context.stroke();
+}
+
+export function drawCircle(context: CanvasRenderingContext2D, circle: Circle) {
+  drawArc(context, circle, 0, 2 * Math.PI);
+}
+
+export function drawPoint(context: CanvasRenderingContext2D, point: Point) {
+  context.fillRect(point.x - 1, point.y - 1, 2, 2);
+}
