@@ -23,7 +23,7 @@ export function drawArc(
   stop: Angle
 ) {
   context.beginPath();
-  context.arc(circle.origin.x, circle.origin.y, circle.radius, start, stop);
+  context.arc(circle.center.x, circle.center.y, circle.radius, start, stop);
   context.stroke();
 }
 

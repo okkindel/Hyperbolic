@@ -52,30 +52,5 @@ export class Canvas {
     this.basicCircle = basicCircle;
     drawPoint(this.ctx, middlePoint);
     drawCircle(this.ctx, basicCircle);
-
-    // --------------------------      --------------------------
-    // -------------------------- test --------------------------
-    // --------------------------      --------------------------
-
-    // const p = new Point(60, 40);
-    // const q = new Point(20, 120);
-    // const r = new Point(320, 320);
-
-    // const pp = inversion(basicCircle, p);
-    // const qq = inversion(basicCircle, q);
-    // const rr = inversion(basicCircle, r);
-
-    this.changeColors("#900");
-    // drawPoint(this.ctx, p);
-    // drawPoint(this.ctx, pp);
-    this.changeColors("#600");
-    // drawPoint(this.ctx, q);
-    // drawPoint(this.ctx, qq);
-    this.changeColors("#aa0");
-    // drawPoint(this.ctx, r);
-    // drawPoint(this.ctx, rr);
-
-    this.changeColors("#fa0");
-    // drawCircle(this.ctx, circleFromPoints(p, q, r));
   }
 }

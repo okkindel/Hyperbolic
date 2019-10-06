@@ -1,9 +1,8 @@
-// import { Canvas } from "./app/canvas";
-import { Canvas } from "./app/canvas";
-import "./styles/main.scss";
-import { Point } from "./app/point";
-import { drawPoint, drawCircle } from "./app/utils";
 import { circleFromPoints, inversion } from "./app/math";
+import { drawPoint, drawCircle } from "./app/utils";
+import { Canvas } from "./app/canvas";
+import { Point } from "./app/point";
+import "./styles/main.scss";
 
 var canvas: Canvas;
 
@@ -36,6 +35,8 @@ function createLoop() {
 
   window.setInterval(() => {
     canvas.setCanvas();
+
+    canvas.changeColors("#fa0");
     drawPoint(canvas.ctx, point);
     drawPoint(canvas.ctx, moving);
 

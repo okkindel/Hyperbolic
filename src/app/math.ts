@@ -2,7 +2,6 @@ import { Circle } from "./circle";
 import { Point } from "./point";
 import { Line } from "./line";
 
-// just simple angle tangent
 export type Angle = number;
 
 export const euclidean = (p: Point, q: Point): number => {
@@ -23,13 +22,13 @@ export const perpendicular = (l: number): number => {
 /* ------------------------------ */
 
 export const inversion = (circle: Circle, p: Point): Point => {
-  const o = circle.origin;
+  const c = circle.center;
   const r = circle.radius;
-  const denominator = Math.pow(p.x - o.x, 2) + Math.pow(p.y - o.y, 2);
+  const denominator = Math.pow(p.x - c.x, 2) + Math.pow(p.y - c.y, 2);
   const rSquare = r * r;
   return new Point(
-    o.x + (rSquare * (p.x - o.x)) / denominator,
-    o.y + (rSquare * (p.y - o.y)) / denominator
+    c.x + (rSquare * (p.x - c.x)) / denominator,
+    c.y + (rSquare * (p.y - c.y)) / denominator
   );
 };
 

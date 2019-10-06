@@ -1,11 +1,11 @@
 import { Point } from "./point";
 
 export class Circle {
-  origin: Point;
+  center: Point;
   radius: number;
 
-  constructor(origin: Point, radius: number) {
-    this.origin = origin;
+  constructor(center: Point, radius: number) {
+    this.center = center;
     this.radius = radius;
   }
 }
