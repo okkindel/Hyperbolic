@@ -1,6 +1,6 @@
+import { Circle } from "./circle";
 import { Point } from "./point";
 import { Line } from "./line";
-import { Circle } from "./circle";
 
 // just simple angle tangent
 export type Slope = number;
@@ -15,12 +15,27 @@ export const slope = (a: Point, b: Point): Slope => {
   return (b.y - a.y) / (b.x - a.x);
 };
 
-export const middle = (p1: Point, p2: Point): Point => {
-  return new Point((p2.x - p1.x) / 2 + p1.x, (p2.y - p1.y) / 2 + p1.y);
-};
-
 export const perpendicular = (l: number): number => {
   return -1 / l;
+};
+
+/* ------------------------------ */
+/** ------ Creating Point ------ **/
+/* ------------------------------ */
+
+export const inversion = (circle: Circle, p: Point): Point => {
+  const o = circle.origin;
+  const r = circle.radius;
+  const denom = Math.pow(p.x - o.x, 2) + Math.pow(p.y - o.y, 2);
+  const rSquare = r * r;
+  return new Point(
+    o.x + (rSquare * (p.x - o.x)) / denom,
+    o.y + (rSquare * (p.y - o.y)) / denom
+  );
+};
+
+export const middle = (p1: Point, p2: Point): Point => {
+  return new Point((p2.x - p1.x) / 2 + p1.x, (p2.y - p1.y) / 2 + p1.y);
 };
 
 /* ------------------------------ */

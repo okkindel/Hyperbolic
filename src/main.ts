@@ -2,10 +2,26 @@
 import { Canvas } from "./app/canvas";
 import "./styles/main.scss";
 
-// Go to next cycle of program, TOOD: fix it
+var canvas: Canvas;
 
-setTimeout(() => {
+window.onload = () => {
+  init();
+  createLoop();
+};
+
+function init() {
   const canvasHTML = <HTMLCanvasElement>document.getElementById("canvas");
   const context = canvasHTML.getContext("2d");
-  new Canvas(canvasHTML, context);
-}, 0);
+  canvas = new Canvas(canvasHTML, context);
+
+  // resize canvas on window resize
+  window.addEventListener("resize", () => {
+    canvas.setCanvas();
+  });
+}
+
+function createLoop() {
+  window.setInterval(() => {
+    canvas.setCanvas();
+  }, 500);
+}
