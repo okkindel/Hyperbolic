@@ -3,7 +3,6 @@ import { Point } from "./point";
 import { Line } from "./line";
 
 // just simple angle tangent
-export type Slope = number;
 export type Angle = number;
 
 export const euclidean = (p: Point, q: Point): number => {
@@ -11,7 +10,7 @@ export const euclidean = (p: Point, q: Point): number => {
 };
 
 // nasze a w ax+b, tangens konta nachylenia do ox
-export const slope = (a: Point, b: Point): Slope => {
+export const slope = (a: Point, b: Point): number => {
   return (b.y - a.y) / (b.x - a.x);
 };
 
@@ -26,11 +25,11 @@ export const perpendicular = (l: number): number => {
 export const inversion = (circle: Circle, p: Point): Point => {
   const o = circle.origin;
   const r = circle.radius;
-  const denom = Math.pow(p.x - o.x, 2) + Math.pow(p.y - o.y, 2);
+  const denominator = Math.pow(p.x - o.x, 2) + Math.pow(p.y - o.y, 2);
   const rSquare = r * r;
   return new Point(
-    o.x + (rSquare * (p.x - o.x)) / denom,
-    o.y + (rSquare * (p.y - o.y)) / denom
+    o.x + (rSquare * (p.x - o.x)) / denominator,
+    o.y + (rSquare * (p.y - o.y)) / denominator
   );
 };
 
@@ -48,7 +47,7 @@ export const lineFromPoints = (p: Point, q: Point): Line => {
   return new Line(m, b);
 };
 
-export const lineFromPointSlope = (p: Point, m: Slope): Line => {
+export const lineFromPointSlope = (p: Point, m: number): Line => {
   const b = -m * p.x + p.y;
   return new Line(m, b);
 };

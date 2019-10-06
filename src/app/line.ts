@@ -1,12 +1,11 @@
 import { Point } from "./point";
-import { Slope } from "./math";
 
 // ax + b
 export class Line {
-  a: Slope;
+  a: number;
   b: number;
 
-  constructor(a: Slope, b: number) {
+  constructor(a: number, b: number) {
     this.a = a;
     this.b = b;
   }

@@ -13,3 +13,5 @@ Narysujmy koło na płaszczyźnie euklidesowej. Wnętrze tego koła (ale nie sam
 2. „Linie” w płaszczyźnie hiperbolicznej to albo euklidesowe średnice koła (linie przechodzące przez środek) minus ich punkty końcowe, albo koła euklidesowe, które przecinają główny okrąg pod kątem prostym.
 
 3. W modelu kąty są zachowane, więc jeśli zmierzymy kąt za pomocą kątomierza, będzie on taki sam jak kąt hiperboliczny. Inaczej jest z długością. W miarę zbliżania się do krawędzi odległość euklidesowa maleje w porównaniu do odległości hiperbolicznej.
+
+![canvas](./src/assets/hc.gif)
