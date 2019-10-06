@@ -1,2 +1,9 @@
-node_modules
-package-lock.json
+# YARN
+yarn-error.log
+yarn.lock
+
+# NODE
+/node_modules
+
+# DIST
+/dist
