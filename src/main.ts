@@ -1,5 +1,4 @@
-import { circleFromPoints, inversion } from "./app/math";
-import { drawPoint, drawCircle } from "./app/utils";
+import { HLine } from "./app/hyperbolic";
 import { Canvas } from "./app/canvas";
 import { Point } from "./app/point";
 import "./styles/main.scss";
@@ -12,13 +11,13 @@ window.onload = () => {
 };
 
 function init() {
-  const canvasHTML = <HTMLCanvasElement>document.getElementById("canvas");
-  const context = canvasHTML.getContext("2d");
-  canvas = new Canvas(canvasHTML, context);
+  const canvasElement = document.getElementById("canvas") as HTMLCanvasElement;
+  const context = canvasElement.getContext("2d");
+  canvas = new Canvas(canvasElement, context);
 
   // resize canvas on window resize
   window.addEventListener("resize", () => {
-    canvas.setCanvas();
+    canvas.setupCanvas();
   });
 }
 
@@ -34,15 +33,32 @@ function createLoop() {
   });
 
   window.setInterval(() => {
-    canvas.setCanvas();
+    canvas.drawOverlay();
 
-    canvas.changeColors("#fa0");
-    drawPoint(canvas.ctx, point);
-    drawPoint(canvas.ctx, moving);
+    canvas.setColors("#fa0");
+    canvas.drawPoint(point);
+    canvas.drawPoint(moving);
+    const resCircle = new HLine(point, moving, canvas.plane);
 
-    drawCircle(
-      canvas.ctx,
-      circleFromPoints(point, moving, inversion(canvas.basicCircle, point))
-    );
+    canvas.drawCircle(resCircle.circle);
+
+    let minAngle = Math.min(resCircle.startAngle, resCircle.endAngle);
+    let maxAngle = Math.max(resCircle.startAngle, resCircle.endAngle);
+
+    // FIXME: wrap 360
+    // if (
+    //   ((resCircle.circle.center.x < canvas.canvas.width &&
+    //     resCircle.circle.center.y < canvas.canvas.height) ||
+    //     (resCircle.circle.center.x < canvas.canvas.width &&
+    //       resCircle.circle.center.y >= canvas.canvas.height)) &&
+    //   minAngle < Math.PI
+    // ) {
+    //   const temp = minAngle;
+    //   minAngle = maxAngle;
+    //   maxAngle = temp;
+    // }
+
+    canvas.setColors("#900");
+    canvas.drawArc(resCircle.circle, minAngle, maxAngle);
   }, 50);
 }
