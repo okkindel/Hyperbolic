@@ -35,8 +35,8 @@ function init() {
  * Main program loop.
  */
 function createLoop() {
-  // ----------------------------------------------------
-  // TEST -----------------------------------------------
+  // -----------------------------------------------------
+  // --------------------- TEST --------------------------
   let point: Point;
   let polygon: HypPolygon;
 
@@ -59,23 +59,20 @@ function createLoop() {
   });
 
   window.addEventListener("mousemove", e => {
-    if (polygon) {
-      point = new Point(e.clientX, canvas.canvas.height - e.clientY);
-    }
+    point = new Point(e.clientX, canvas.canvas.height - e.clientY);
   });
-
-  // TEST -----------------------------------------------
-  // ----------------------------------------------------
+  // --------------------- TEST --------------------------
+  // -----------------------------------------------------
 
   window.setInterval(() => {
     canvas.drawOverlay();
-    test(point, polygon, canvas);
+    polygonDemo(point, polygon, canvas);
   }, 1000 / CONFIG.FRAMES);
 }
 
-// ----------------------------------------------------
-// TEST -----------------------------------------------
-function test(point: Point, polygon: HypPolygon, canvas: Canvas) {
+// -----------------------------------------------------
+// --------------------- TEST --------------------------
+function polygonDemo(point: Point, polygon: HypPolygon, canvas: Canvas) {
   if (polygon) {
     canvas.setColors("#150");
     canvas.drawCircle(
@@ -87,9 +84,14 @@ function test(point: Point, polygon: HypPolygon, canvas: Canvas) {
       new HypLine(point, last(polygon.verticles), canvas.plane)
     );
 
-    canvas.setColors("#4005");
+    canvas.setColors("#625");
     canvas.drawHypPolygon(polygon, true);
+
+    canvas.setColors("#f50");
+    polygon.verticles.forEach(verticle => {
+      canvas.drawPoint(verticle);
+    });
   }
 }
-// TEST -----------------------------------------------
-// ----------------------------------------------------
+// --------------------- TEST --------------------------
+// -----------------------------------------------------

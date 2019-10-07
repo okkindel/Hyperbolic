@@ -1,6 +1,5 @@
 import { Circle, Point, Line, HypPolygon, HypLine } from "./entity";
 import CONFIG = require("../assets/config.json");
-import { last, head } from "ramda";
 
 export class Canvas {
   ctx: CanvasRenderingContext2D;
@@ -80,12 +79,9 @@ export class Canvas {
 
   drawHypPolygon(polygon: HypPolygon, isFilled?: boolean) {
     this.ctx.beginPath();
-    polygon.lines.forEach(element => {
+    polygon.getCompletePolygonLines().forEach(element => {
       this.drawArc(element);
     });
-    this.drawArc(
-      new HypLine(last(polygon.verticles), head(polygon.verticles), this.plane)
-    );
     this.ctx.stroke();
     if (isFilled) this.ctx.fill();
   }
