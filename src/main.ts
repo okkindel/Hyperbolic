@@ -64,7 +64,7 @@ function test(point: Point, moving: Point, canvas: Canvas) {
   canvas.drawPoint(moving);
   const resCircle = new HypLine(point, moving, canvas.plane);
 
-  canvas.drawCircle(resCircle.circle);
+  canvas.drawCircle(resCircle.arc);
 
   let minAngle = Math.min(resCircle.startAngle, resCircle.endAngle);
   let maxAngle = Math.max(resCircle.startAngle, resCircle.endAngle);
@@ -81,7 +81,7 @@ function test(point: Point, moving: Point, canvas: Canvas) {
   //   }
 
   canvas.setColors("#000");
-  canvas.drawArc(resCircle.circle, minAngle, maxAngle);
+  canvas.drawArc(resCircle.arc, minAngle, maxAngle);
 }
 // ----------------------------------------------------
 // TEST -----------------------------------------------

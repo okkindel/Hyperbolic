@@ -32,23 +32,27 @@ export class Line {
 export class HypLine {
   startAngle: number;
   endAngle: number;
-  circle: Circle;
+  plane: Circle;
+  arc: Circle;
   p: Point;
   q: Point;
 
   constructor(p: Point, q: Point, plane: Circle) {
+    this.plane = plane;
     this.p = p;
     this.q = q;
-    this.circle = circleFromPoints(p, q, inversion(plane, p));
+    this.calculateArc();
+  }
 
+  calculateArc() {
+    this.arc = circleFromPoints(this.p, this.q, inversion(this.plane, this.p));
     this.startAngle = Math.atan2(
-      p.y - this.circle.center.y,
-      p.x - this.circle.center.x
+      this.p.y - this.arc.center.y,
+      this.p.x - this.arc.center.x
     );
-
     this.endAngle = Math.atan2(
-      q.y - this.circle.center.y,
-      q.x - this.circle.center.x
+      this.q.y - this.arc.center.y,
+      this.q.x - this.arc.center.x
     );
   }
 }
