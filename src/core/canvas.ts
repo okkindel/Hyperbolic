@@ -47,6 +47,13 @@ export class Canvas {
     this.ctx.stroke();
   }
 
+  drawSection(p: Point, q: Point) {
+    this.ctx.beginPath();
+    this.ctx.moveTo(p.x, p.y);
+    this.ctx.lineTo(q.x, q.y);
+    this.ctx.stroke();
+  }
+
   drawCircle(circle: Circle) {
     this.drawArc(circle, 0, 2 * Math.PI);
   }

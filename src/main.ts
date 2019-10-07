@@ -1,3 +1,4 @@
+import CONFIG = require("./assets/config.json");
 import { Point, HypLine } from "./core/entity";
 import { Canvas } from "./core/canvas";
 import "./styles/main.scss";
@@ -6,11 +7,6 @@ import "./styles/main.scss";
  * Canvas object.
  */
 var canvas: Canvas;
-
-/**
- * Engine's FPS's.
- */
-const framesPerSecond = 1000 / 60;
 
 /**
  * Init hyperbolic canvas engine on page load.
@@ -40,54 +36,84 @@ function init() {
 function createLoop() {
   // ----------------------------------------------------
   // TEST -----------------------------------------------
-  // ----------------------------------------------------
-  let point = new Point(canvas.canvas.width / 2, canvas.canvas.height / 2);
+  let lines: HypLine[] = [];
+  let isMarked = false;
+  let moving: Point;
+  let point: Point;
+
   window.addEventListener("click", e => {
-    point = new Point(e.clientX, canvas.canvas.height - e.clientY);
+    if (!isMarked) {
+      point = new Point(e.clientX, canvas.canvas.height - e.clientY);
+      isMarked = true;
+    } else {
+      const resCircle = new HypLine(point, moving, canvas.plane);
+      lines.push(resCircle);
+      isMarked = false;
+    }
   });
 
-  let moving = new Point(0, 0);
   window.addEventListener("mousemove", e => {
-    moving = new Point(e.clientX, canvas.canvas.height - e.clientY);
+    if (isMarked) {
+      moving = new Point(e.clientX, canvas.canvas.height - e.clientY);
+    }
   });
-  // ----------------------------------------------------
   // TEST -----------------------------------------------
   // ----------------------------------------------------
 
   window.setInterval(() => {
     canvas.drawOverlay();
-    test(point, moving, canvas);
-  }, framesPerSecond);
+    test(point, moving, lines, isMarked, canvas);
+  }, 1000 / CONFIG.FRAMES);
 }
 
 // ----------------------------------------------------
 // TEST -----------------------------------------------
-// ----------------------------------------------------
-function test(point: Point, moving: Point, canvas: Canvas) {
-  const resCircle = new HypLine(point, moving, canvas.plane);
+function test(
+  point: Point,
+  moving: Point,
+  lines: HypLine[],
+  isMarked: boolean,
+  canvas: Canvas
+) {
+  if (isMarked && moving && point) {
+    const resCircle = new HypLine(point, moving, canvas.plane);
 
-  // canvas.setColors("#777");
-  // canvas.drawCircle(resCircle.circle);
+    // canvas.setColors("#7773");
+    // canvas.drawCircle(resCircle.circle);
 
-  let minAngle = Math.min(resCircle.startAngle, resCircle.endAngle);
-  let maxAngle = Math.max(resCircle.startAngle, resCircle.endAngle);
+    let minAngle = Math.min(resCircle.startAngle, resCircle.endAngle);
+    let maxAngle = Math.max(resCircle.startAngle, resCircle.endAngle);
 
-  // FIXME: wrap 360
-  //   if (
-  //     ((resCircle.circle.center.x < 0 && resCircle.circle.center.y < 0) ||
-  //       (resCircle.circle.center.x < 0 && resCircle.circle.center.y >= 0)) &&
-  //     minAngle < Math.PI
-  //   ) {
-  //     const temp = minAngle;
-  //     minAngle = maxAngle;
-  //     maxAngle = temp;
-  //   }
+    // FIXME: wrap 360
+    //   if (
+    //     ((resCircle.circle.center.x < 0 && resCircle.circle.center.y < 0) ||
+    //       (resCircle.circle.center.x < 0 && resCircle.circle.center.y >= 0)) &&
+    //     minAngle < Math.PI
+    //   ) {
+    //     const temp = minAngle;
+    //     minAngle = maxAngle;
+    //     maxAngle = temp;
+    //   }
 
-  canvas.setColors("#000");
-  canvas.drawPoint(point);
-  canvas.drawPoint(moving);
-  canvas.drawArc(resCircle.circle, minAngle, maxAngle);
+    canvas.setColors("#000");
+    canvas.drawPoint(point);
+    canvas.drawPoint(moving);
+    canvas.drawArc(resCircle.circle, minAngle, maxAngle);
+  }
+
+  lines.forEach(element => {
+    let minAngle = Math.min(element.startAngle, element.endAngle);
+    let maxAngle = Math.max(element.startAngle, element.endAngle);
+    // TEST
+    canvas.setColors("#ccc3");
+    canvas.drawSection(element.p, element.q);
+    canvas.drawCircle(element.circle);
+
+    canvas.setColors("#123");
+    canvas.drawPoint(element.p);
+    canvas.drawPoint(element.q);
+    canvas.drawArc(element.circle, minAngle, maxAngle);
+  });
 }
-// ----------------------------------------------------
 // TEST -----------------------------------------------
 // ----------------------------------------------------

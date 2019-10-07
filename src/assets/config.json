@@ -1,4 +1,5 @@
 {
+  "FRAMES": 60,
   "PLANE": {
     "INNER_COLOR": "#999",
     "OUTER_COLOR": "#555",
