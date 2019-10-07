@@ -1,0 +1,9 @@
+{
+  "FRAMES": 60,
+  "PLANE": {
+    "INNER_COLOR": "#999",
+    "OUTER_COLOR": "#555",
+    "DRAW_CENTER": true
+  },
+  "BACKGROUND_COLOR": "#123"
+}
