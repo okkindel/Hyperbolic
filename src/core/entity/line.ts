@@ -30,6 +30,7 @@ export class Line {
  * Line in Poincare concept.
  */
 export class HypLine {
+  antyclokwise = false;
   startAngle: number;
   endAngle: number;
   plane: Circle;
@@ -46,13 +47,17 @@ export class HypLine {
 
   calculateArc() {
     this.arc = circleFromPoints(this.p, this.q, inversion(this.plane, this.p));
-    this.startAngle = Math.atan2(
+    const startAngle = Math.atan2(
       this.p.y - this.arc.center.y,
       this.p.x - this.arc.center.x
     );
-    this.endAngle = Math.atan2(
+    const endAngle = Math.atan2(
       this.q.y - this.arc.center.y,
       this.q.x - this.arc.center.x
     );
+
+    // TODO
+    this.startAngle = Math.min(startAngle, endAngle);
+    this.endAngle = Math.max(startAngle, endAngle);
   }
 }

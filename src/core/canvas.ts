@@ -1,5 +1,6 @@
+import { Circle, Point, Line, HypPolygon, HypLine } from "./entity";
 import CONFIG = require("../assets/config.json");
-import { Circle, Point, Line } from "./entity";
+import { last, head } from "ramda";
 
 export class Canvas {
   ctx: CanvasRenderingContext2D;
@@ -28,12 +29,6 @@ export class Canvas {
     );
   }
 
-  drawArc(circle: Circle, start: number, stop: number) {
-    this.ctx.beginPath();
-    this.ctx.arc(circle.center.x, circle.center.y, circle.radius, start, stop);
-    this.ctx.stroke();
-  }
-
   drawPoint(point: Point) {
     this.ctx.beginPath();
     this.ctx.arc(point.x, point.y, this.ctx.lineWidth, 0, 2 * Math.PI, false);
@@ -55,7 +50,44 @@ export class Canvas {
   }
 
   drawCircle(circle: Circle) {
-    this.drawArc(circle, 0, 2 * Math.PI);
+    this.ctx.beginPath();
+    this.ctx.arc(
+      circle.center.x,
+      circle.center.y,
+      circle.radius,
+      0,
+      2 * Math.PI
+    );
+    this.ctx.stroke();
+  }
+
+  drawArc(line: HypLine) {
+    this.ctx.arc(
+      line.arc.center.x,
+      line.arc.center.y,
+      line.arc.radius,
+      line.startAngle,
+      line.endAngle,
+      line.antyclokwise
+    );
+  }
+
+  drawHypLine(line: HypLine) {
+    this.ctx.beginPath();
+    this.drawArc(line);
+    this.ctx.stroke();
+  }
+
+  drawHypPolygon(polygon: HypPolygon, isFilled?: boolean) {
+    this.ctx.beginPath();
+    polygon.lines.forEach(element => {
+      this.drawArc(element);
+    });
+    this.drawArc(
+      new HypLine(last(polygon.verticles), head(polygon.verticles), this.plane)
+    );
+    this.ctx.stroke();
+    if (isFilled) this.ctx.fill();
   }
 
   setColors(color: string) {

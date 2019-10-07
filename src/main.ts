@@ -1,6 +1,7 @@
+import { Point, HypPolygon, HypLine } from "./core/entity";
 import CONFIG = require("./assets/config.json");
-import { Point, HypLine } from "./core/entity";
 import { Canvas } from "./core/canvas";
+import { last } from "ramda";
 import "./styles/main.scss";
 
 /**
@@ -36,84 +37,59 @@ function init() {
 function createLoop() {
   // ----------------------------------------------------
   // TEST -----------------------------------------------
-  let lines: HypLine[] = [];
-  let isMarked = false;
-  let moving: Point;
   let point: Point;
+  let polygon: HypPolygon;
 
   window.addEventListener("click", e => {
-    if (!isMarked) {
-      point = new Point(e.clientX, canvas.canvas.height - e.clientY);
-      isMarked = true;
+    if (!polygon) {
+      if (!point) {
+        point = new Point(e.clientX, canvas.canvas.height - e.clientY);
+      } else {
+        polygon = new HypPolygon(
+          point,
+          new Point(e.clientX, canvas.canvas.height - e.clientY),
+          canvas.plane
+        );
+      }
     } else {
-      const resCircle = new HypLine(point, moving, canvas.plane);
-      lines.push(resCircle);
-      isMarked = false;
+      polygon.addVerticle(
+        new Point(e.clientX, canvas.canvas.height - e.clientY)
+      );
     }
   });
 
   window.addEventListener("mousemove", e => {
-    if (isMarked) {
-      moving = new Point(e.clientX, canvas.canvas.height - e.clientY);
+    if (polygon) {
+      point = new Point(e.clientX, canvas.canvas.height - e.clientY);
     }
   });
+
   // TEST -----------------------------------------------
   // ----------------------------------------------------
 
   window.setInterval(() => {
     canvas.drawOverlay();
-    test(point, moving, lines, isMarked, canvas);
+    test(point, polygon, canvas);
   }, 1000 / CONFIG.FRAMES);
 }
 
 // ----------------------------------------------------
 // TEST -----------------------------------------------
-function test(
-  point: Point,
-  moving: Point,
-  lines: HypLine[],
-  isMarked: boolean,
-  canvas: Canvas
-) {
-  if (isMarked && moving && point) {
-    const resCircle = new HypLine(point, moving, canvas.plane);
+function test(point: Point, polygon: HypPolygon, canvas: Canvas) {
+  if (polygon) {
+    canvas.setColors("#150");
+    canvas.drawCircle(
+      new HypLine(point, last(polygon.verticles), canvas.plane).arc
+    );
 
-    // canvas.setColors("#7773");
-    // canvas.drawCircle(resCircle.circle);
+    canvas.setColors("#650");
+    canvas.drawHypLine(
+      new HypLine(point, last(polygon.verticles), canvas.plane)
+    );
 
-    let minAngle = Math.min(resCircle.startAngle, resCircle.endAngle);
-    let maxAngle = Math.max(resCircle.startAngle, resCircle.endAngle);
-
-    // FIXME: wrap 360
-    //   if (
-    //     ((resCircle.circle.center.x < 0 && resCircle.circle.center.y < 0) ||
-    //       (resCircle.circle.center.x < 0 && resCircle.circle.center.y >= 0)) &&
-    //     minAngle < Math.PI
-    //   ) {
-    //     const temp = minAngle;
-    //     minAngle = maxAngle;
-    //     maxAngle = temp;
-    //   }
-
-    canvas.setColors("#000");
-    canvas.drawPoint(point);
-    canvas.drawPoint(moving);
-    canvas.drawArc(resCircle.arc, minAngle, maxAngle);
+    canvas.setColors("#4005");
+    canvas.drawHypPolygon(polygon, true);
   }
-
-  lines.forEach(element => {
-    let minAngle = Math.min(element.startAngle, element.endAngle);
-    let maxAngle = Math.max(element.startAngle, element.endAngle);
-    // TEST
-    canvas.setColors("#ccc3");
-    canvas.drawSection(element.p, element.q);
-    canvas.drawCircle(element.arc);
-
-    canvas.setColors("#123");
-    canvas.drawPoint(element.p);
-    canvas.drawPoint(element.q);
-    canvas.drawArc(element.arc, minAngle, maxAngle);
-  });
 }
 // TEST -----------------------------------------------
 // ----------------------------------------------------
