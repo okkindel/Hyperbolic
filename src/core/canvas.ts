@@ -1,6 +1,4 @@
-import { Circle } from "./circle";
-import { Point } from "./point";
-import { Line } from "./line";
+import { Circle, Point, Line } from "./entity";
 
 export class Canvas {
   ctx: CanvasRenderingContext2D;
@@ -16,6 +14,7 @@ export class Canvas {
   setupCanvas() {
     this.canvas.height = window.innerHeight;
     this.canvas.width = window.innerWidth;
+    this.setLineWidth(2);
 
     // set canvas origin to the lower-left corner
     this.ctx.translate(0, this.canvas.height);
@@ -36,7 +35,7 @@ export class Canvas {
 
   drawPoint(point: Point) {
     this.ctx.beginPath();
-    this.ctx.arc(point.x, point.y, 5, 0, 2 * Math.PI, false);
+    this.ctx.arc(point.x, point.y, this.ctx.lineWidth, 0, 2 * Math.PI, false);
     this.ctx.fill();
   }
 
@@ -56,14 +55,20 @@ export class Canvas {
     this.ctx.fillStyle = color;
   }
 
+  setLineWidth(weight: number) {
+    this.ctx.lineWidth = weight;
+  }
+
   drawOverlay() {
     // draw background
-    this.setColors("#123");
+    this.setColors("rgba(95,14,38,1)");
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     // draw plane
-    this.setColors("#FFF");
+    this.setColors("#999");
     this.drawCircle(this.plane);
+    this.ctx.fill();
+    this.setColors("#FFF");
     this.drawPoint(this.plane.center);
   }
 }

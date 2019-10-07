@@ -1,30 +1,5 @@
-import { Circle } from "./circle";
-import { Point } from "./point";
-import { Line } from "./line";
-
-export const euclidean = (p: Point, q: Point): number => {
-  return Math.sqrt(Math.pow(p.x - q.x, 2) + Math.pow(p.y - q.y, 2));
-};
-
-export const slope = (a: Point, b: Point): number => {
-  return (b.y - a.y) / (b.x - a.x);
-};
-
-export const perpLine = (l: number): number => {
-  return -1 / l;
-};
-
-export const polarToCartesian = (
-  point: Point,
-  radius: number,
-  angleInDegrees: number
-): Point => {
-  const angleInRadians = angleInDegrees;
-  return new Point(
-    point.x + radius * Math.cos(angleInRadians),
-    point.y + radius * Math.sin(angleInRadians)
-  );
-};
+import { perpLine, slope, euclidean } from "./utils";
+import { Circle, Point, Line } from "./entity";
 
 /* ------------------------------ */
 /** ------ Creating Point ------ **/
@@ -45,6 +20,17 @@ export const inversion = (circle: Circle, p: Point): Point => {
 export const midpoint = (p1: Point, p2: Point): Point => {
   // https://en.wikipedia.org/wiki/Midpoint
   return new Point((p2.x - p1.x) / 2 + p1.x, (p2.y - p1.y) / 2 + p1.y);
+};
+
+export const polarToCartesian = (
+  point: Point,
+  radius: number,
+  slope: number
+): Point => {
+  return new Point(
+    point.x + radius * Math.cos(slope),
+    point.y + radius * Math.sin(slope)
+  );
 };
 
 /* ------------------------------ */

@@ -1,17 +1,35 @@
-import { circleFromPoints, inversion } from "./math";
+import { circleFromPoints, inversion } from "../geometry";
 import { Circle } from "./circle";
 import { Point } from "./point";
 
-export const distance = (p: Point, q: Point): number => {
-  // https://en.wikipedia.org/wiki/Poincar%C3%A9_disk_model#Distance
-  const numer = 2 * (Math.pow(p.x - q.x, 2) + Math.pow(p.y - q.y, 2));
-  const denominator =
-    (1 - (Math.pow(p.x, 2) + Math.pow(p.y, 2))) *
-    (1 - (Math.pow(q.x, 2) + Math.pow(q.y, 2)));
-  return Math.acosh(1 + numer / denominator);
-};
+/**
+ * Line in Euclidean concept
+ * in the form of ax + b.
+ */
+export class Line {
+  a: number;
+  b: number;
 
-export class HLine {
+  constructor(a: number, b: number) {
+    this.a = a;
+    this.b = b;
+  }
+
+  at(x: number): number {
+    return this.a * x + this.b;
+  }
+
+  intersect(line: Line): Point {
+    const x = (line.b - this.b) / (this.a - line.a);
+    const y = this.at(x);
+    return new Point(x, y);
+  }
+}
+
+/**
+ * Line in Poincare concept.
+ */
+export class HypLine {
   startAngle: number;
   endAngle: number;
   circle: Circle;

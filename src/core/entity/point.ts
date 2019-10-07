@@ -1,5 +1,8 @@
 import { equals as rEquals } from "ramda";
 
+/**
+ * The Poincare disc point is free.
+ */
 export class Point {
   x: number;
   y: number;
