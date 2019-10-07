@@ -3,7 +3,8 @@
     "target": "es6",
     "module": "commonjs",
     "outDir": "bin",
-    "removeComments": true
+    "removeComments": true,
+    "resolveJsonModule": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

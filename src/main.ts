@@ -8,7 +8,12 @@ import "./styles/main.scss";
 var canvas: Canvas;
 
 /**
- * Init hyperbolic canvas engine on page load
+ * Engine's FPS's.
+ */
+const framesPerSecond = 1000 / 60;
+
+/**
+ * Init hyperbolic canvas engine on page load.
  */
 window.onload = () => {
   init();
@@ -52,19 +57,17 @@ function createLoop() {
   window.setInterval(() => {
     canvas.drawOverlay();
     test(point, moving, canvas);
-  }, 50);
+  }, framesPerSecond);
 }
 
 // ----------------------------------------------------
 // TEST -----------------------------------------------
 // ----------------------------------------------------
 function test(point: Point, moving: Point, canvas: Canvas) {
-  canvas.setColors("rgba(105,24,48,0.5)");
-  canvas.drawPoint(point);
-  canvas.drawPoint(moving);
   const resCircle = new HypLine(point, moving, canvas.plane);
 
-  canvas.drawCircle(resCircle.circle);
+  // canvas.setColors("#777");
+  // canvas.drawCircle(resCircle.circle);
 
   let minAngle = Math.min(resCircle.startAngle, resCircle.endAngle);
   let maxAngle = Math.max(resCircle.startAngle, resCircle.endAngle);
@@ -81,6 +84,8 @@ function test(point: Point, moving: Point, canvas: Canvas) {
   //   }
 
   canvas.setColors("#000");
+  canvas.drawPoint(point);
+  canvas.drawPoint(moving);
   canvas.drawArc(resCircle.circle, minAngle, maxAngle);
 }
 // ----------------------------------------------------

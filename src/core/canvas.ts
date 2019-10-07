@@ -1,3 +1,4 @@
+import CONFIG = require("../assets/config.json");
 import { Circle, Point, Line } from "./entity";
 
 export class Canvas {
@@ -61,14 +62,28 @@ export class Canvas {
 
   drawOverlay() {
     // draw background
-    this.setColors("rgba(95,14,38,1)");
+    this.setColors(CONFIG.BACKGROUND_COLOR);
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     // draw plane
-    this.setColors("#999");
+    const gradient = this.ctx.createRadialGradient(
+      this.plane.center.x,
+      this.plane.center.y,
+      10,
+      this.plane.center.x,
+      this.plane.center.y,
+      this.plane.radius
+    );
+
+    gradient.addColorStop(0, CONFIG.PLANE.INNER_COLOR);
+    gradient.addColorStop(1, CONFIG.PLANE.OUTER_COLOR);
     this.drawCircle(this.plane);
+    this.ctx.fillStyle = gradient;
     this.ctx.fill();
-    this.setColors("#FFF");
-    this.drawPoint(this.plane.center);
+
+    if (CONFIG.PLANE.DRAW_CENTER) {
+      this.setColors("#FFF");
+      this.drawPoint(this.plane.center);
+    }
   }
 }
