@@ -80,6 +80,8 @@ function polygonDemo(
   canvas: Canvas
 ) {
   if (polygon) {
+    console.log(polygon);
+
     canvas.setColors("#150");
     canvas.drawCircle(
       new HypLine(moving_point, last(polygon.verticles), canvas.plane).arc
@@ -90,7 +92,7 @@ function polygonDemo(
       new HypLine(last(polygon.verticles), moving_point, canvas.plane)
     );
 
-    canvas.setColors("#625");
+    canvas.setColors("#6255");
     canvas.drawHypPolygon(polygon, true);
 
     canvas.setColors("#f50");

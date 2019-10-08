@@ -1,7 +1,7 @@
 import { head, last, append, equals } from "ramda";
-import { Circle } from "./circle";
-import { HypLine } from "./line";
-import { Point } from "./point";
+import { HypLine } from "./hyp-line";
+import { Circle } from "../circle";
+import { Point } from "../point";
 
 export class HypPolygon {
   verticles: Point[] = [];
@@ -9,15 +9,17 @@ export class HypPolygon {
   plane: Circle;
 
   constructor(p1: Point, p2: Point, plane: Circle) {
-    this.lines.push(new HypLine(p1, p2, plane));
-    this.verticles.push(p1);
-    this.verticles.push(p2);
+    const line = new HypLine(p1, p2, plane);
+    this.lines.push(line);
+    this.verticles.push(line.p);
+    this.verticles.push(line.q);
     this.plane = plane;
   }
 
   addVerticle(point: Point) {
-    this.lines.push(new HypLine(last(this.verticles), point, this.plane));
-    this.verticles.push(point);
+    const line = new HypLine(last(this.verticles), point, this.plane);
+    this.verticles.push(line.q);
+    this.lines.push(line);
   }
 
   getCompletePolygonLines(): HypLine[] {
