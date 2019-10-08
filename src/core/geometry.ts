@@ -10,10 +10,9 @@ export const inversion = (circle: Circle, p: Point): Point => {
   const c = circle.center;
   const r = circle.radius;
   const denominator = Math.pow(p.x - c.x, 2) + Math.pow(p.y - c.y, 2);
-  const rSquare = r * r;
   return new Point(
-    c.x + (rSquare * (p.x - c.x)) / denominator,
-    c.y + (rSquare * (p.y - c.y)) / denominator
+    c.x + (r * r * (p.x - c.x)) / denominator,
+    c.y + (r * r * (p.y - c.y)) / denominator
   );
 };
 

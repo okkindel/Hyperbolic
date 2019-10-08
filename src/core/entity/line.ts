@@ -1,4 +1,5 @@
 import { circleFromPoints, inversion } from "../geometry";
+import { fromAtanToCanvasArc } from "../utils";
 import { Circle } from "./circle";
 import { Point } from "./point";
 
@@ -47,30 +48,28 @@ export class HypLine {
 
   calculateArc() {
     this.arc = circleFromPoints(this.p, this.q, inversion(this.plane, this.p));
-    const startAngle = Math.atan2(
+    this.startAngle = Math.atan2(
       this.p.y - this.arc.center.y,
       this.p.x - this.arc.center.x
     );
-    const endAngle = Math.atan2(
+    this.endAngle = Math.atan2(
       this.q.y - this.arc.center.y,
       this.q.x - this.arc.center.x
     );
 
-    // TODO
-    this.startAngle = Math.min(startAngle, endAngle);
-    this.endAngle = Math.max(startAngle, endAngle);
+    const radStartAngle = fromAtanToCanvasArc(this.startAngle);
+    const radEndAngle = fromAtanToCanvasArc(this.endAngle);
 
-    // Handle angle wrapping around 360
-    // if (
-    //   (this.arc.center.x < this.plane.radius * 2 &&
-    //     this.arc.center.y < this.plane.radius * 2) ||
-    //   (this.arc.center.x < this.plane.radius * 2 &&
-    //     this.arc.center.y >= this.plane.radius * 2)
-    // ) {
-    //   this.antyclokwise =
-    //     this.startAngle < Math.PI && this.endAngle > Math.PI ? true : false;
-    // } else {
-    //   this.antyclokwise = false;
-    // }
+    const isRotated = radStartAngle < radEndAngle;
+    const rotatesForward =
+      radStartAngle > Math.PI &&
+      radEndAngle < Math.PI &&
+      Math.abs(radStartAngle - radEndAngle) > Math.PI;
+    const rotatesBackward =
+      radEndAngle > Math.PI &&
+      radStartAngle < Math.PI &&
+      Math.abs(radStartAngle - radEndAngle) > Math.PI;
+
+    this.antyclokwise = (isRotated && !rotatesBackward) || rotatesForward;
   }
 }

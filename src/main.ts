@@ -67,22 +67,27 @@ function createLoop() {
 
   window.setInterval(() => {
     canvas.drawOverlay();
-    polygonDemo(moving_point, polygon, canvas);
+    polygonDemo(point, moving_point, polygon, canvas);
   }, 1000 / CONFIG.FRAMES);
 }
 
 // -----------------------------------------------------
 // --------------------- TEST --------------------------
-function polygonDemo(moving_point: Point, polygon: HypPolygon, canvas: Canvas) {
+function polygonDemo(
+  point: Point,
+  moving_point: Point,
+  polygon: HypPolygon,
+  canvas: Canvas
+) {
   if (polygon) {
     canvas.setColors("#150");
     canvas.drawCircle(
       new HypLine(moving_point, last(polygon.verticles), canvas.plane).arc
     );
 
-    canvas.setColors("#650");
+    canvas.setColors("#FFF");
     canvas.drawHypLine(
-      new HypLine(moving_point, last(polygon.verticles), canvas.plane)
+      new HypLine(last(polygon.verticles), moving_point, canvas.plane)
     );
 
     canvas.setColors("#625");
@@ -92,6 +97,11 @@ function polygonDemo(moving_point: Point, polygon: HypPolygon, canvas: Canvas) {
     polygon.verticles.forEach(verticle => {
       canvas.drawPoint(verticle);
     });
+  } else {
+    canvas.setColors("#150");
+    canvas.drawCircle(new HypLine(point, moving_point, canvas.plane).arc);
+    canvas.setColors("#FFF");
+    canvas.drawHypLine(new HypLine(point, moving_point, canvas.plane));
   }
 }
 // --------------------- TEST --------------------------
