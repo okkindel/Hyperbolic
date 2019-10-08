@@ -28,6 +28,37 @@ export class Canvas {
     );
   }
 
+  drawOverlay() {
+    // draw background
+    this.setColors(CONFIG.BACKGROUND_COLOR);
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+    // draw plane
+    const gradient = this.ctx.createRadialGradient(
+      this.plane.center.x,
+      this.plane.center.y,
+      10,
+      this.plane.center.x,
+      this.plane.center.y,
+      this.plane.radius
+    );
+
+    gradient.addColorStop(0, CONFIG.PLANE.INNER_COLOR);
+    gradient.addColorStop(1, CONFIG.PLANE.OUTER_COLOR);
+    this.drawCircle(this.plane);
+    this.ctx.fillStyle = gradient;
+    this.ctx.fill();
+
+    if (CONFIG.PLANE.DRAW_CENTER) {
+      this.setColors("#FFF");
+      this.drawPoint(this.plane.center);
+    }
+  }
+
+  /********************
+   * Drawing funtions *
+   *******************/
+
   drawPoint(point: Point) {
     this.ctx.beginPath();
     this.ctx.arc(point.x, point.y, this.ctx.lineWidth, 0, 2 * Math.PI, false);
@@ -86,6 +117,10 @@ export class Canvas {
     if (isFilled) this.ctx.fill();
   }
 
+  /********************
+   ** Utils funtions **
+   *******************/
+
   setColors(color: string) {
     this.ctx.strokeStyle = color;
     this.ctx.fillStyle = color;
@@ -93,32 +128,5 @@ export class Canvas {
 
   setLineWidth(weight: number) {
     this.ctx.lineWidth = weight;
-  }
-
-  drawOverlay() {
-    // draw background
-    this.setColors(CONFIG.BACKGROUND_COLOR);
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
-    // draw plane
-    const gradient = this.ctx.createRadialGradient(
-      this.plane.center.x,
-      this.plane.center.y,
-      10,
-      this.plane.center.x,
-      this.plane.center.y,
-      this.plane.radius
-    );
-
-    gradient.addColorStop(0, CONFIG.PLANE.INNER_COLOR);
-    gradient.addColorStop(1, CONFIG.PLANE.OUTER_COLOR);
-    this.drawCircle(this.plane);
-    this.ctx.fillStyle = gradient;
-    this.ctx.fill();
-
-    if (CONFIG.PLANE.DRAW_CENTER) {
-      this.setColors("#FFF");
-      this.drawPoint(this.plane.center);
-    }
   }
 }
