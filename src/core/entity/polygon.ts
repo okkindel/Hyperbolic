@@ -21,7 +21,7 @@ export class HypPolygon {
   }
 
   getCompletePolygonLines(): HypLine[] {
-    return equals(this.verticles.length, 2)
+    return equals(this.verticles.length, 1)
       ? this.lines
       : append(
           new HypLine(last(this.verticles), head(this.verticles), this.plane),
