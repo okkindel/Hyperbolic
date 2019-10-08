@@ -97,7 +97,7 @@ function polygonDemo(
     polygon.verticles.forEach(verticle => {
       canvas.drawPoint(verticle);
     });
-  } else {
+  } else if (point) {
     canvas.setColors("#150");
     canvas.drawCircle(new HypLine(point, moving_point, canvas.plane).arc);
     canvas.setColors("#FFF");
