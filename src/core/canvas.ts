@@ -80,10 +80,15 @@ export class Canvas {
   drawHypPolygon(polygon: HypPolygon, isFilled?: boolean) {
     this.ctx.beginPath();
     polygon.getCompletePolygonLines().forEach(element => {
+      this.ctx.moveTo(
+        Math.cos(element.startAngle) * element.arc.radius +
+          element.arc.center.x,
+        Math.sin(element.startAngle) * element.arc.radius + element.arc.center.y
+      );
       this.drawArc(element);
     });
     this.ctx.stroke();
-    if (isFilled) this.ctx.fill();
+    // if (isFilled) this.ctx.fill();
   }
 
   setColors(color: string) {

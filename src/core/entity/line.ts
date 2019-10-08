@@ -59,5 +59,18 @@ export class HypLine {
     // TODO
     this.startAngle = Math.min(startAngle, endAngle);
     this.endAngle = Math.max(startAngle, endAngle);
+
+    // Handle angle wrapping around 360
+    // if (
+    //   (this.arc.center.x < this.plane.radius * 2 &&
+    //     this.arc.center.y < this.plane.radius * 2) ||
+    //   (this.arc.center.x < this.plane.radius * 2 &&
+    //     this.arc.center.y >= this.plane.radius * 2)
+    // ) {
+    //   this.antyclokwise =
+    //     this.startAngle < Math.PI && this.endAngle > Math.PI ? true : false;
+    // } else {
+    //   this.antyclokwise = false;
+    // }
   }
 }

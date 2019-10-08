@@ -1,4 +1,4 @@
-import { head, last, append } from "ramda";
+import { head, last, append, equals } from "ramda";
 import { Circle } from "./circle";
 import { HypLine } from "./line";
 import { Point } from "./point";
@@ -21,9 +21,11 @@ export class HypPolygon {
   }
 
   getCompletePolygonLines(): HypLine[] {
-    return append(
-      new HypLine(last(this.verticles), head(this.verticles), this.plane),
-      this.lines
-    );
+    return equals(this.verticles.length, 2)
+      ? this.lines
+      : append(
+          new HypLine(last(this.verticles), head(this.verticles), this.plane),
+          this.lines
+        );
   }
 }

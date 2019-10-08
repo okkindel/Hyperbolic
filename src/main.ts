@@ -38,6 +38,7 @@ function createLoop() {
   // -----------------------------------------------------
   // --------------------- TEST --------------------------
   let point: Point;
+  let moving_point: Point;
   let polygon: HypPolygon;
 
   window.addEventListener("click", e => {
@@ -59,29 +60,29 @@ function createLoop() {
   });
 
   window.addEventListener("mousemove", e => {
-    point = new Point(e.clientX, canvas.canvas.height - e.clientY);
+    moving_point = new Point(e.clientX, canvas.canvas.height - e.clientY);
   });
   // --------------------- TEST --------------------------
   // -----------------------------------------------------
 
   window.setInterval(() => {
     canvas.drawOverlay();
-    polygonDemo(point, polygon, canvas);
+    polygonDemo(moving_point, polygon, canvas);
   }, 1000 / CONFIG.FRAMES);
 }
 
 // -----------------------------------------------------
 // --------------------- TEST --------------------------
-function polygonDemo(point: Point, polygon: HypPolygon, canvas: Canvas) {
+function polygonDemo(moving_point: Point, polygon: HypPolygon, canvas: Canvas) {
   if (polygon) {
     canvas.setColors("#150");
     canvas.drawCircle(
-      new HypLine(point, last(polygon.verticles), canvas.plane).arc
+      new HypLine(moving_point, last(polygon.verticles), canvas.plane).arc
     );
 
     canvas.setColors("#650");
     canvas.drawHypLine(
-      new HypLine(point, last(polygon.verticles), canvas.plane)
+      new HypLine(moving_point, last(polygon.verticles), canvas.plane)
     );
 
     canvas.setColors("#625");
