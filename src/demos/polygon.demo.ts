@@ -66,7 +66,7 @@ export class PolygonDemo {
       });
 
       this.canvas.drawPoint(this.moving_point);
-    } else if (print) {
+    } else if (this.point) {
       this.canvas.setColors("#9995");
       this.canvas.drawCircle(
         new HypLine(this.point, this.moving_point, this.canvas.plane).arc
