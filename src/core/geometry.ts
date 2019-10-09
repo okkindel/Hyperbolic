@@ -61,7 +61,7 @@ export const circleFromPoints = (p: Point, q: Point, r: Point): Circle => {
   // https://www.qc.edu.hk/math/Advanced%20Level/circle%20given%203%20points.htm
   const b1 = bisector(p, q);
   const b2 = bisector(q, r);
-  const center = b1.intersect(b2);
+  const center = b1.intersectPoint(b2);
   const radius = euclidean(p, center);
   return new Circle(center, radius);
 };

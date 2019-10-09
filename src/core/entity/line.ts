@@ -17,7 +17,7 @@ export class Line {
     return this.a * x + this.b;
   }
 
-  intersect(line: Line): Point {
+  intersectPoint(line: Line): Point {
     const x = (line.b - this.b) / (this.a - line.a);
     const y = this.at(x);
     return new Point(x, y);

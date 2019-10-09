@@ -1,14 +1,17 @@
 import { HypPolygon, Point, HypLine } from "../core/entity";
 import { Canvas } from "../core/canvas";
+import { Plane } from "../core/plane";
 import { last } from "ramda";
 
 export class PolygonDemo {
   polygon: HypPolygon;
   moving_point: Point;
   canvas: Canvas;
+  plane: Plane;
   point: Point;
 
   constructor(canvas: Canvas) {
+    this.plane = Plane.getInstance();
     this.canvas = canvas;
 
     window.addEventListener("click", e => {
@@ -19,7 +22,7 @@ export class PolygonDemo {
           this.polygon = new HypPolygon(
             this.point,
             new Point(e.clientX, canvas.canvas.height - e.clientY),
-            canvas.plane
+            Plane.getInstance()
           );
         }
       } else {
@@ -41,11 +44,8 @@ export class PolygonDemo {
     if (this.polygon) {
       this.canvas.setColors("#9995");
       this.canvas.drawCircle(
-        new HypLine(
-          this.moving_point,
-          last(this.polygon.verticles),
-          this.canvas.plane
-        ).arc
+        new HypLine(this.moving_point, last(this.polygon.verticles), this.plane)
+          .arc
       );
 
       this.canvas.setColors("#6255");
@@ -53,11 +53,7 @@ export class PolygonDemo {
 
       this.canvas.setColors("#FFF");
       this.canvas.drawHypLine(
-        new HypLine(
-          last(this.polygon.verticles),
-          this.moving_point,
-          this.canvas.plane
-        )
+        new HypLine(last(this.polygon.verticles), this.moving_point, this.plane)
       );
 
       this.canvas.setColors("#615");
@@ -69,12 +65,12 @@ export class PolygonDemo {
     } else if (this.point) {
       this.canvas.setColors("#9995");
       this.canvas.drawCircle(
-        new HypLine(this.point, this.moving_point, this.canvas.plane).arc
+        new HypLine(this.point, this.moving_point, this.plane).arc
       );
 
       this.canvas.setColors("#FFF");
       this.canvas.drawHypLine(
-        new HypLine(this.point, this.moving_point, this.canvas.plane)
+        new HypLine(this.point, this.moving_point, this.plane)
       );
 
       this.canvas.drawPoint(this.point);

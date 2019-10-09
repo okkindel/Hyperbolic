@@ -1,5 +1,5 @@
-import { atan2ToRad, circleIntersection, euclidean } from "../../utils";
 import { circleFromPoints, inversion } from "../../geometry";
+import { atan2ToRad, euclidean } from "../../utils";
 import { head, last } from "ramda";
 import { Circle } from "../circle";
 import { Point } from "../point";
@@ -31,7 +31,7 @@ export class HypLine {
   }
 
   cutIfSticksOut(point: Point): Point {
-    const intersection = circleIntersection(this.plane, this.arc);
+    const intersection = this.plane.intersectPoints(this.arc);
     if (euclidean(point, this.plane.center) > this.plane.radius) {
       return euclidean(point, head(intersection)) <
         euclidean(point, last(intersection))

@@ -1,10 +1,10 @@
 import { Circle, Point, Line, HypPolygon, HypLine } from "./entity";
 import CONFIG = require("../assets/config.json");
+import { Plane } from "./plane";
 
 export class Canvas {
   ctx: CanvasRenderingContext2D;
   canvas: HTMLCanvasElement;
-  plane: Circle;
 
   constructor(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D) {
     this.canvas = canvas;
@@ -20,38 +20,34 @@ export class Canvas {
     // set canvas origin to the lower-left corner
     this.ctx.translate(0, this.canvas.height);
     this.ctx.scale(1, -1);
-
-    // setup plane
-    this.plane = new Circle(
-      new Point(this.canvas.width / 2, this.canvas.height / 2),
-      Math.min((this.canvas.height - 100) / 2, (this.canvas.width - 100) / 2)
-    );
   }
 
   drawOverlay() {
+    const plane = Plane.getInstance();
+
     // draw background
     this.setColors(CONFIG.BACKGROUND_COLOR);
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     // draw plane
     const gradient = this.ctx.createRadialGradient(
-      this.plane.center.x,
-      this.plane.center.y,
+      plane.center.x,
+      plane.center.y,
       10,
-      this.plane.center.x,
-      this.plane.center.y,
-      this.plane.radius
+      plane.center.x,
+      plane.center.y,
+      plane.radius
     );
 
     gradient.addColorStop(0, CONFIG.PLANE.INNER_COLOR);
     gradient.addColorStop(1, CONFIG.PLANE.OUTER_COLOR);
-    this.drawCircle(this.plane);
+    this.drawCircle(plane);
     this.ctx.fillStyle = gradient;
     this.ctx.fill();
 
     if (CONFIG.PLANE.DRAW_CENTER) {
       this.setColors("#FFF");
-      this.drawPoint(this.plane.center);
+      this.drawPoint(plane.center);
     }
   }
 
