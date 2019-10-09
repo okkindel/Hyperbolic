@@ -1,8 +1,12 @@
-import { circleFromPoints, inversion } from "../../geometry";
-import { atan2ToRad, euclidean } from "../../utils";
 import { head, last } from "ramda";
 import { Circle } from "../circle";
 import { Point } from "../point";
+import {
+  circleFromPoints,
+  atan2ToRad,
+  inversion,
+  euclidean
+} from "../../geometry";
 
 /**
  * Line in Poincare concept.
