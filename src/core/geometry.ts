@@ -93,3 +93,62 @@ export const slope = (a: Point, b: Point): number => {
 export const atan2ToRad = (angle: number): number => {
   return angle < 0 ? Math.abs(angle) : Math.PI * 2 - angle;
 };
+
+// function computeHyperbolicCircle(p, q) {
+//   function findPoint(startPoint, endPoint, l, radius) {
+//     const objective = function(z) {
+//       const otherPoint = new Point(z[0], (-l.a / l.b) * z[0] - l.c / l.b);
+//       return Math.pow(hypDistance(startPoint, otherPoint) - radius, 2);
+//     };
+
+//     let tol = 1e10;
+//     const resultPoint = startPoint;
+//     let i = 1;
+
+//     const dist = endPoint != null ? hypDistance(startPoint, endPoint) : -1;
+//     const ePoint = endPoint != null ? endPoint : startPoint;
+//     while (
+//       (tol > 0.001 && i < 100) ||
+//       (tol < 0.001 && hypDistance(ePoint, resultPoint) < dist)
+//     ) {
+//       let x0;
+//       if (endPoint != null)
+//         x0 = [startPoint.x - 0.005 * i * (ePoint.x - startPoint.x)];
+//       else x0 = [startPoint.x + 0.005 * i * startPoint.x];
+
+//       const sol = numeric.uncmin(objective, x0);
+//       const resultPoint = new Point(
+
+//         sol.solution[0],
+//         (-l.a / l.b) * sol.solution[0] - l.c / l.b
+//         )
+//       };
+//       tol = sol.f;
+//       i = i + 1;
+//     }
+//     return resultPoint;
+//   }
+
+//   function findPoint2(startPoint, l, radius) {
+//     objective = function(z) {
+//       otherPoint = { x: z[0], y: (-l.a / l.b) * z[0] - l.c / l.b };
+//       return Math.pow(hypDistance(startPoint, otherPoint) - radius, 2);
+//     };
+
+//     tol = 1e10;
+//     resultPoint = startPoint;
+//     i = 1;
+
+//     while (tol > 0.001 && i < 1000) {
+//       x0 = [startPoint.x + Math.random() / 100];
+//       sol = numeric.uncmin(objective, x0);
+//       resultPoint = {
+//         x: sol.solution[0],
+//         y: (-l.a / l.b) * sol.solution[0] - l.c / l.b
+//       };
+//       tol = sol.f;
+//       i = i + 1;
+//     }
+//     return resultPoint;
+//   }
+// }

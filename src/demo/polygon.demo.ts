@@ -42,13 +42,13 @@ export class PolygonDemo {
 
   createLoop() {
     if (this.polygon) {
-      this.canvas.setColors("#9995");
+      this.canvas.setColors("#bbb5");
       this.canvas.drawCircle(
         new HypLine(this.moving_point, last(this.polygon.verticles), this.plane)
           .arc
       );
 
-      this.canvas.setColors("#6255");
+      this.canvas.setColors("rgba(255,173,0,0.5)");
       this.canvas.drawHypPolygon(this.polygon, true);
 
       this.canvas.setColors("#FFF");
@@ -56,14 +56,14 @@ export class PolygonDemo {
         new HypLine(last(this.polygon.verticles), this.moving_point, this.plane)
       );
 
-      this.canvas.setColors("#615");
+      this.canvas.setColors("#915");
       this.polygon.verticles.forEach(verticle => {
         this.canvas.drawPoint(verticle);
       });
 
       this.canvas.drawPoint(this.moving_point);
     } else if (this.point) {
-      this.canvas.setColors("#9995");
+      this.canvas.setColors("#bbb5");
       this.canvas.drawCircle(
         new HypLine(this.point, this.moving_point, this.plane).arc
       );

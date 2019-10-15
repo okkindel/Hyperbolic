@@ -16,20 +16,18 @@ export class Canvas {
     this.canvas.height = window.innerHeight;
     this.canvas.width = window.innerWidth;
     this.setLineWidth(2);
-
-    // set canvas origin to the lower-left corner
+    /* set canvas origin to the lower-left corner */
     this.ctx.translate(0, this.canvas.height);
     this.ctx.scale(1, -1);
   }
 
   drawOverlay() {
-    const plane = Plane.getInstance();
-
     // draw background
     this.setColors(CONFIG.BACKGROUND_COLOR);
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     // draw plane
+    const plane = Plane.getInstance();
     const gradient = this.ctx.createRadialGradient(
       plane.center.x,
       plane.center.y,
@@ -38,11 +36,11 @@ export class Canvas {
       plane.center.y,
       plane.radius
     );
-
     gradient.addColorStop(0, CONFIG.PLANE.INNER_COLOR);
     gradient.addColorStop(1, CONFIG.PLANE.OUTER_COLOR);
-    this.drawCircle(plane);
+
     this.ctx.fillStyle = gradient;
+    this.drawCircle(plane);
     this.ctx.fill();
 
     if (CONFIG.PLANE.DRAW_CENTER) {
