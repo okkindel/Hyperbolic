@@ -6,6 +6,8 @@ import { Circle, Point } from "./entity";
  */
 
 export class Plane extends Circle {
+  windowHeight = window.innerHeight;
+  windowWidth = window.innerWidth;
   private static instance: Plane;
 
   private constructor() {

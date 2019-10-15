@@ -1,6 +1,7 @@
 import { PolygonDemo } from "../demo/polygon.demo";
 import CONFIG = require("../assets/config.json");
 import { Canvas } from "./canvas";
+import { SquaewDemo } from "../demo/square.demo";
 
 export class Engine {
   /**
@@ -29,7 +30,8 @@ export class Engine {
    */
   createLoop() {
     /* just a simple test program */
-    const demo = new PolygonDemo(this.canvas);
+    // const demo = new PolygonDemo(this.canvas);
+    const demo = new SquaewDemo(this.canvas);
 
     window.setInterval(() => {
       this.canvas.drawOverlay();
