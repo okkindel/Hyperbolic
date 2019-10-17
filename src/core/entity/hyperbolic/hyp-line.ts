@@ -35,8 +35,8 @@ export class HypLine {
   }
 
   cutIfSticksOut(point: Point): Point {
-    const intersection = this.plane.intersectPoints(this.arc);
     if (euclidean(point, this.plane.center) > this.plane.radius) {
+      const intersection = this.plane.intersectPoints(this.arc);
       return euclidean(point, head(intersection)) <
         euclidean(point, last(intersection))
         ? head(intersection)

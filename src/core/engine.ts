@@ -1,7 +1,7 @@
 import { PolygonDemo } from "../demo/polygon.demo";
+import { SquaewDemo } from "../demo/square.demo";
 import CONFIG = require("../assets/config.json");
 import { Canvas } from "./canvas";
-import { SquaewDemo } from "../demo/square.demo";
 
 export class Engine {
   /**
