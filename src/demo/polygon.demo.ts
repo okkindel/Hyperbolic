@@ -1,6 +1,5 @@
-import { HypPolygon, Point, HypLine } from "../core/entity";
+import { HypPolygon, Point, HypLine, Plane } from "../core/entity";
 import { Canvas } from "../core/canvas";
-import { Plane } from "../core/plane";
 import { last } from "ramda";
 
 export class PolygonDemo {

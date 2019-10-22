@@ -1,4 +1,4 @@
-import { Circle, Point, Line } from "./entity";
+import { Circle, Point, Line, HypPoint, Plane } from "./entity";
 
 /* ------------------------------ */
 /** ------ Creating Point ------ **/
@@ -29,6 +29,10 @@ export const polarToCartesian = (
     point.x + radius * Math.cos(slope),
     point.y + radius * Math.sin(slope)
   );
+};
+
+export const fromPolar = (r: number, t: number, p: Plane): HypPoint => {
+  return new HypPoint(r * Math.cos(t), r * Math.sin(t), p);
 };
 
 /* ------------------------------ */

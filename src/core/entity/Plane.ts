@@ -1,4 +1,5 @@
-import { Circle, Point } from "./entity";
+import { Circle } from "./Circle";
+import { Point } from "./Point";
 
 /**
  * Poincare disc, main plane of engine.

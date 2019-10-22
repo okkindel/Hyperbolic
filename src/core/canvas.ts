@@ -1,6 +1,5 @@
-import { Circle, Point, Line, HypPolygon, HypLine } from "./entity";
+import { Circle, Point, Line, HypPolygon, HypLine, Plane } from "./entity";
 import CONFIG = require("../assets/config.json");
-import { Plane } from "./plane";
 
 export class Canvas {
   ctx: CanvasRenderingContext2D;

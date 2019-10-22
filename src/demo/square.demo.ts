@@ -1,11 +1,5 @@
-import {
-  HypPolygon,
-  Point,
-  CartesianPoint,
-  HyperbolicPoint
-} from "../core/entity";
+import { HypPolygon, HypPoint, Point, Plane } from "../core/entity";
 import { Canvas } from "../core/canvas";
-import { Plane } from "../core/plane";
 
 export class SquaewDemo {
   polygon: HypPolygon;
@@ -20,31 +14,32 @@ export class SquaewDemo {
       const point = new Point(
         e.clientX,
         canvas.canvas.height - e.clientY
-      ).toCartesianCoords(this.plane);
+      ).toHypPoint(this.plane);
 
       const x = point.x;
       const y = point.y;
 
-      const point1 = new HyperbolicPoint(
-        new CartesianPoint(x - 0.3, y + 0.3, this.plane),
+      const temp1 = new HypPoint(x + 0.3, y - 0.3, this.plane);
+      const temp2 = new HypPoint(x - 0.3, y - 0.3, this.plane);
+      // const point3 = point.reflect(temp1).toCanvasCoords();
+      // const point4 = point.reflect(temp2).toCanvasCoords();
+      const point1 = temp1.toCanvasCoords();
+      const point2 = temp2.toCanvasCoords();
+      const point3 = new HypPoint(
+        x - 0.3,
+        y + 0.3,
         this.plane
       ).toCanvasCoords();
-      const point2 = new HyperbolicPoint(
-        new CartesianPoint(x + 0.3, y + 0.3, this.plane),
-        this.plane
-      ).toCanvasCoords();
-      const point3 = new HyperbolicPoint(
-        new CartesianPoint(x + 0.3, y - 0.3, this.plane),
-        this.plane
-      ).toCanvasCoords();
-      const point4 = new HyperbolicPoint(
-        new CartesianPoint(x - 0.3, y - 0.3, this.plane),
+      const point4 = new HypPoint(
+        x + 0.3,
+        y + 0.3,
         this.plane
       ).toCanvasCoords();
 
       this.polygon = new HypPolygon(point1, point2, this.plane);
       this.polygon.addVerticle(point3);
       this.polygon.addVerticle(point4);
+      this.polygon = this.polygon.moebius(point, 0);
     });
   }
 

@@ -1,2 +1,3 @@
-export * from "./hyp-polygon";
-export * from "./hyp-line";
+export * from "./HypPolgon";
+export * from "./HypPoint";
+export * from "./HypLine";

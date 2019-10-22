@@ -1,6 +1,6 @@
 import { head, last } from "ramda";
-import { Circle } from "../circle";
-import { Point } from "../point";
+import { Circle } from "../Circle";
+import { Point } from "../Point";
 import {
   circleFromPoints,
   atan2ToRad,
