@@ -23,6 +23,8 @@ export class HypPoint {
   }
 
   /**
+   * https://mathcs.clarku.edu/~djoyce/poincare/Point.java
+   *
    * Reflect the point A through this point B to get the returned point C.
    * The rule for computing A thru B (as Point numbers) is:		|
    *
@@ -32,14 +34,12 @@ export class HypPoint {
    */
   reflect(point: HypPoint): HypPoint {
     const t = (1 + this.norm2) / 2;
-    // compute the numerator as  B - t * A
     const times = point.times(t);
     const numerator = new HypPoint(
       this.x - times.x,
       this.y - times.y,
       this.plane
     );
-    // compute the denominator as  t - A * B'
     const minus = point.times(new HypPoint(this.x, -this.y, this.plane));
     const denominator = new HypPoint(t - minus.x, -minus.y, this.plane);
     return numerator.over(denominator);
