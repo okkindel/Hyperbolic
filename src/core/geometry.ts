@@ -31,8 +31,8 @@ export const polarToCartesian = (
   );
 };
 
-export const fromPolar = (r: number, t: number, p: Plane): HypPoint => {
-  return new HypPoint(r * Math.cos(t), r * Math.sin(t), p);
+export const fromPolar = (r: number, t: number): HypPoint => {
+  return new HypPoint(r * Math.cos(t), r * Math.sin(t), Plane.getInstance());
 };
 
 /* ------------------------------ */

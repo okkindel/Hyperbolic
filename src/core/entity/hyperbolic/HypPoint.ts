@@ -48,7 +48,7 @@ export class HypPoint {
   // http://homepages.gac.edu/~hvidsten/geom-text/web-chapters/hyper-transf.pdf
   moebius(point: HypPoint, t: number): HypPoint {
     const minus = new HypPoint(this.x - point.x, this.y - point.y, this.plane);
-    const numerator = fromPolar(1, t, this.plane).times(minus);
+    const numerator = fromPolar(1, t).times(minus);
     const times = this.times(new HypPoint(point.x, -point.y, this.plane));
     const denominator = new HypPoint(1 - times.x, -times.y, this.plane);
     return numerator.over(denominator);

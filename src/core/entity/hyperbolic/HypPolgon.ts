@@ -33,19 +33,28 @@ export class HypPolygon {
   }
 
   moebius(point: HypPoint, t: number): HypPolygon {
-    let verts: Point[] = [];
-    this.verticles.forEach((vertex: Point) => {
-      verts.push(
-        vertex
-          .toHypPoint(this.plane)
-          .moebius(point, t)
-          .toCanvasCoords()
-      );
+    let verticles: Point[] = [];
+    this.verticles.forEach((vert: Point, index: number) => {
+      verticles[index] = point
+        .moebius(vert.toHypPoint(this.plane), t)
+        .toCanvasCoords();
     });
-    const polygon = new HypPolygon(verts[0], verts[1], this.plane);
-    for (let i = 2; i < verts.length; i++) {
-      polygon.addVerticle(verts[i]);
-    }
+    return HypPolygon.fromVerticles(verticles, this.plane);
+  }
+
+  reflect(point: HypPoint) {
+    let verticles: Point[] = [];
+    this.verticles.forEach((vert: Point, index: number) => {
+      verticles[index] = point
+        .reflect(vert.toHypPoint(this.plane))
+        .toCanvasCoords();
+    });
+    return HypPolygon.fromVerticles(verticles, this.plane);
+  }
+
+  static fromVerticles(verts: Point[], plane: Plane): HypPolygon {
+    const polygon = new HypPolygon(verts[0], verts[1], plane);
+    verts.slice(2, verts.length).forEach((v: Point) => polygon.addVerticle(v));
     return polygon;
   }
 }
