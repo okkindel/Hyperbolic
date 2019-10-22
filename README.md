@@ -14,6 +14,7 @@ Narysujmy koło na płaszczyźnie euklidesowej. Wnętrze tego koła (ale nie sam
 
 3. W modelu kąty są zachowane, więc jeśli zmierzymy kąt za pomocą kątomierza, będzie on taki sam jak kąt hiperboliczny. Inaczej jest z długością. W miarę zbliżania się do krawędzi odległość euklidesowa maleje w porównaniu do odległości hiperbolicznej.
 
+![canvas](./src/assets/img/hc_3.gif)
 ![canvas](./src/assets/img/hc_2.gif)
 ![canvas](./src/assets/img/hc_1.gif)
 ![canvas](./src/assets/img/hc_0.gif)
