@@ -1,7 +1,7 @@
 import { HypPolygon, HypPoint, Point, Plane } from "../core/entity";
 import { Canvas } from "../core/canvas";
 
-export class SquaewDemo {
+export class SquareDemo {
   polygon: HypPolygon;
   polygon2: HypPolygon;
   canvas: Canvas;
@@ -20,7 +20,6 @@ export class SquaewDemo {
       const x = point.x;
       const y = point.y;
 
-      const zero = new HypPoint(0, 0, this.plane);
       const point1 = new HypPoint(
         x + 0.3,
         y - 0.3,

@@ -1,5 +1,6 @@
 import { head, last } from "ramda";
 import { Circle } from "../Circle";
+import { Plane } from "../Plane";
 import { Point } from "../Point";
 import {
   circleFromPoints,
@@ -15,12 +16,12 @@ export class HypLine {
   antyclokwise = false;
   startAngle: number;
   endAngle: number;
-  plane: Circle;
+  plane: Plane;
   arc: Circle;
   p: Point;
   q: Point;
 
-  constructor(p: Point, q: Point, plane: Circle) {
+  constructor(p: Point, q: Point, plane: Plane) {
     this.plane = plane;
     this.p = p;
     this.q = q;

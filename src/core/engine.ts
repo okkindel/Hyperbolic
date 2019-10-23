@@ -1,5 +1,7 @@
+import { DistanceDemo } from "../demo/distance.demo";
 import { PolygonDemo } from "../demo/polygon.demo";
-import { SquaewDemo } from "../demo/square.demo";
+import { FiguresDemo } from "../demo/figures.demo";
+import { SquareDemo } from "../demo/square.demo";
 import CONFIG = require("../assets/config.json");
 import { Canvas } from "./canvas";
 
@@ -31,7 +33,9 @@ export class Engine {
   createLoop() {
     /* just a simple test program */
     // const demo = new PolygonDemo(this.canvas);
-    const demo = new SquaewDemo(this.canvas);
+    // const demo = new SquareDemo(this.canvas);
+    // const demo = new DistanceDemo(this.canvas);
+    const demo = new FiguresDemo(this.canvas);
 
     window.setInterval(() => {
       this.canvas.drawOverlay();

@@ -73,7 +73,7 @@ export const circleFromPoints = (p: Point, q: Point, r: Point): Circle => {
 /** ----------- Utils ---------- **/
 /* ------------------------------ */
 
-export const hypDistance = (p: Point, q: Point): number => {
+export const hypDistance = (p: HypPoint, q: HypPoint): number => {
   // https://en.wikipedia.org/wiki/Poincar%C3%A9_disk_model#Distance
   const numer = 2 * (Math.pow(p.x - q.x, 2) + Math.pow(p.y - q.y, 2));
   const denominator =
