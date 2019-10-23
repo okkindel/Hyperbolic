@@ -1,25 +1,19 @@
-import { HypPolygon, HypPoint, Point, Plane } from "../core/entity";
+import { HypPolygon, HypPoint, Point } from "../core/entity";
+import { Program } from "../core/program";
 import { Canvas } from "../core/canvas";
 
-export class FiguresDemo {
+export class FiguresDemo extends Program {
   polygons: HypPolygon[];
-  canvas: Canvas;
-  plane: Plane;
 
   constructor(canvas: Canvas) {
-    this.plane = Plane.getInstance();
-    this.canvas = canvas;
+    super(canvas);
 
-    window.addEventListener("mousemove", e => {
-      const point = new Point(
-        e.clientX,
-        canvas.canvas.height - e.clientY
-      ).toHypPoint(this.plane);
+    window.addEventListener("mousemove", () => {
+      const point = this.point.toHypPoint(this.plane);
       const x = point.x;
       const y = point.y;
 
       this.polygons = [];
-
       const points: Point[][] = [];
       points.push(this.createSquare(x, y, 0.4));
       points.push(this.createTiangle(x, y + 0.5, 0.1));

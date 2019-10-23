@@ -1,34 +1,31 @@
 import { HypPoint, Point, Plane, HypLine } from "../core/entity";
 import { Canvas } from "../core/canvas";
 import { euclidean, hypDistance } from "../core/geometry";
+import { Program } from "../core/program";
 
-export class DistanceDemo {
+export class DistanceDemo extends Program {
   line: HypLine;
-  canvas: Canvas;
-  plane: Plane;
 
   constructor(canvas: Canvas) {
-    this.plane = Plane.getInstance();
-    this.canvas = canvas;
+    super(canvas);
 
     window.addEventListener("mousemove", e => {
       const zero = new HypPoint(0.01, 0.01, this.plane).toCanvasCoords();
-      const point = new Point(e.clientX, canvas.canvas.height - e.clientY);
-      this.line = new HypLine(zero, point, this.plane);
+      this.line = new HypLine(zero, this.point, this.plane);
 
       const a = new Point(
         zero.toHypPoint(this.plane).x,
         zero.toHypPoint(this.plane).y
       );
-      const b = new Point(
-        point.toHypPoint(this.plane).x,
-        point.toHypPoint(this.plane).y
-      );
+      const b = new Point(this.point.x, this.point.y);
 
       console.log("e", euclidean(a, b));
       console.log(
         "h",
-        hypDistance(zero.toHypPoint(this.plane), point.toHypPoint(this.plane))
+        hypDistance(
+          zero.toHypPoint(this.plane),
+          this.point.toHypPoint(this.plane)
+        )
       );
     });
   }

@@ -1,26 +1,16 @@
-import { DistanceDemo } from "../demo/distance.demo";
-import { PolygonDemo } from "../demo/polygon.demo";
-import { FiguresDemo } from "../demo/figures.demo";
-import { SquareDemo } from "../demo/square.demo";
 import CONFIG = require("../assets/config.json");
+import { Program } from "./program";
 import { Canvas } from "./canvas";
 
 export class Engine {
-  /**
-   * Canvas object.
-   */
+  interval: number;
   canvas: Canvas;
 
   /**
    * Engine initialize function. Get canvas element. Resize element on page resize.
    */
-  constructor() {
-    const canvasElement = document.getElementById(
-      "canvas"
-    ) as HTMLCanvasElement;
-    const context = canvasElement.getContext("2d");
-    this.canvas = new Canvas(canvasElement, context);
-
+  constructor(canvas: Canvas) {
+    this.canvas = canvas;
     /* resize canvas on window resize */
     window.addEventListener("resize", () => {
       this.canvas.setupCanvas();
@@ -30,16 +20,14 @@ export class Engine {
   /**
    * Main program loop.
    */
-  createLoop() {
-    /* just a simple test program */
-    // const demo = new PolygonDemo(this.canvas);
-    // const demo = new SquareDemo(this.canvas);
-    // const demo = new DistanceDemo(this.canvas);
-    const demo = new FiguresDemo(this.canvas);
-
-    window.setInterval(() => {
+  createLoop(program: Program) {
+    this.interval = window.setInterval(() => {
       this.canvas.drawOverlay();
-      demo.createLoop();
+      program.createLoop();
     }, 1000 / CONFIG.FRAMES);
+  }
+
+  removeLoop() {
+    clearInterval(this.interval);
   }
 }
