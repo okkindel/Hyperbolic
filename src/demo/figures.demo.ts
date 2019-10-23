@@ -21,11 +21,11 @@ export class FiguresDemo {
       this.polygons = [];
 
       const points: Point[][] = [];
-      points.push(this.createSquare(x, y, 0.2));
-      points.push(this.createTiangle(x, y + 0.35, 0.1));
-      points.push(this.createTiangle(x + 0.35, y, 0.1));
-      points.push(this.createSquare(x, y - 0.35, 0.1));
-      points.push(this.createTiangle(x - 0.35, y, 0.1));
+      points.push(this.createSquare(x, y, 0.4));
+      points.push(this.createTiangle(x, y + 0.5, 0.1));
+      points.push(this.createTiangle(x + 0.5, y, 0.1));
+      points.push(this.createSquare(x, y - 0.5, 0.1));
+      points.push(this.createTiangle(x - 0.5, y, 0.1));
 
       points.forEach((element: Point[]) => {
         this.polygons.push(
@@ -39,9 +39,14 @@ export class FiguresDemo {
 
   createLoop() {
     if (this.polygons) {
-      this.canvas.setColors("rgba(255,173,0,0.5)");
+      this.canvas.setColors("rgba(0,255,126,1)");
       this.polygons.forEach(element => {
         this.canvas.drawHypPolygon(element, true);
+      });
+      this.canvas.setColors("rgba(0,0,0,1)");
+      this.canvas.setLineWidth(1);
+      this.polygons.forEach(element => {
+        this.canvas.drawHypPolygon(element, false);
       });
     }
   }
