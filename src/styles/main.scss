@@ -13,3 +13,13 @@ body {
     top: 0px;
   }
 }
+
+.button {
+  border-radius: 50%;
+  position: fixed;
+  outline: none;
+  bottom: 1rem;
+  height: 3rem;
+  width: 3rem;
+  right: 1rem;
+}

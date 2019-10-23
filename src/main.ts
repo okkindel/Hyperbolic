@@ -1,25 +1,30 @@
+import { FiguresDemo } from "./demo/figures.demo";
+import { PolygonDemo } from "./demo/polygon.demo";
 import { Engine } from "./core/engine";
 import { Canvas } from "./core/canvas";
 import "./styles/main.scss";
 
-import { FiguresDemo } from "./demo/figures.demo";
-import { DistanceDemo } from "./demo/distance.demo";
-import { PolygonDemo } from "./demo/polygon.demo";
-import { SquareDemo } from "./demo/square.demo";
+var canvas: Canvas;
+var engine: Engine;
 
 /**
  * Init hyperbolic canvas engine on page load.
  */
 window.onload = () => {
-  const canvasElement = document.getElementById("canvas") as HTMLCanvasElement;
-  const canvas = new Canvas(canvasElement, canvasElement.getContext("2d"));
-  const engine = new Engine(canvas);
+  const element = document.getElementById("canvas") as HTMLCanvasElement;
+  canvas = new Canvas(element, element.getContext("2d"));
+  engine = new Engine(canvas);
+  createChooserButton();
 
-  /* simple test programs */
-  // const demo = new PolygonDemo(canvas);
-  // const demo = new SquareDemo(canvas);
-  // const demo = new DistanceDemo(canvas);
-  const demo = new FiguresDemo(canvas);
+  engine.createLoop(new FiguresDemo(canvas));
+};
 
-  engine.createLoop(demo);
+const createChooserButton = () => {
+  const button = document.createElement("button");
+  button.className = "button";
+  button.onclick = () => {
+    engine.removeLoop();
+    engine.createLoop(new PolygonDemo(canvas));
+  };
+  document.body.appendChild(button);
 };
