@@ -11,9 +11,7 @@ export class InteractionDemo extends Program {
   }
 
   createTiles() {
-    const point = this.point 
-        ? this.point.toHypPoint(this.plane) 
-        : new HypPoint(0, 0, this.plane);
+    const point = this.point.toHypPoint(this.plane) 
     const x = point.x;
     const y = point.y;
 
