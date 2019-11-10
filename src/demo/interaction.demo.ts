@@ -11,7 +11,9 @@ export class InteractionDemo extends Program {
   }
 
   createTiles() {
-    const point = this.point.toHypPoint(this.plane);
+    const point = this.point 
+        ? this.point.toHypPoint(this.plane) 
+        : new HypPoint(0, 0, this.plane);
     const x = point.x;
     const y = point.y;
 
@@ -26,6 +28,7 @@ export class InteractionDemo extends Program {
 
   createLoop() {
     this.createTiles();
+
     this.canvas.setColors("rgba(235,255,113,1)");
     this.tiles.forEach(element => {
       this.canvas.drawHypPolygon(element.polygon, true);
