@@ -156,11 +156,9 @@ npm install
 
 Wywołanie trybu odbywa się komendą:
 
-
 ``` BASH
 npm run build-watch
 ```
-
 
 # Omówinie kodu źródłowego
 
@@ -169,3 +167,4 @@ npm run build-watch
 # Bibliografia
 
 - Hyperbolic geometry MA448 - Caroline Series With assistance from Sara Maloni
+- AN INTRODUCTION TO HYPERBOLIC GEOMETRY MAT4510/3510 - BJØRN JAHREN

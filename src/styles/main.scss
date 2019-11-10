@@ -14,12 +14,18 @@ body {
   }
 }
 
-.button {
-  border-radius: 50%;
+.buttons {
+  flex-flow: column;
   position: fixed;
-  outline: none;
+  display: flex;
   bottom: 1rem;
-  height: 3rem;
-  width: 3rem;
   right: 1rem;
+
+  button {
+    border-radius: 50%;
+    outline: none;
+    height: 3rem;
+    margin: 5px;
+    width: 3rem;
+  }
 }

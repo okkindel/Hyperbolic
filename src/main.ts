@@ -1,10 +1,14 @@
+import { InteractionDemo } from "./demo/interaction.demo";
 import { FiguresDemo } from "./demo/figures.demo";
 import { PolygonDemo } from "./demo/polygon.demo";
 import { TilesDemo } from "./demo/tile.demo";
+
 import { Engine } from "./core/engine";
 import { Canvas } from "./core/canvas";
+import { head } from "ramda";
 import "./styles/main.scss";
 
+var programs = [InteractionDemo, FiguresDemo, PolygonDemo, TilesDemo];
 var canvas: Canvas;
 var engine: Engine;
 
@@ -15,17 +19,27 @@ window.onload = () => {
   const element = document.getElementById("canvas") as HTMLCanvasElement;
   canvas = new Canvas(element, element.getContext("2d"));
   engine = new Engine(canvas);
-  createChooserButton();
+  createChooserButtons();
 
-  engine.createLoop(new TilesDemo(canvas));
+  engine.createLoop(new InteractionDemo(canvas));
 };
 
-const createChooserButton = () => {
-  const button = document.createElement("button");
-  button.className = "button";
-  button.onclick = () => {
-    engine.removeLoop();
-    engine.createLoop(new PolygonDemo(canvas));
-  };
-  document.body.appendChild(button);
+/**
+ * Create buttons for choosing programs.
+ */
+const createChooserButtons = () => {
+  const div = document.createElement("buttons");
+  div.className = "buttons";
+
+  programs.forEach(program => {
+    const button = document.createElement("button");
+    button.innerHTML = head(program.name);
+    button.onclick = () => {
+      engine.removeLoop();
+      engine.createLoop(new program(canvas));
+    };
+    div.appendChild(button);
+  });
+
+  document.body.appendChild(div);
 };

@@ -1,9 +1,6 @@
+import { HypTile, HypPoint } from "../core/entity";
 import { Program } from "../core/program";
-import { HypTile, HypPoint, HypPolygon, Plane, HypLine } from "../core/entity";
 import { Canvas } from "../core/canvas";
-import { fromPolar } from "../core/geometry";
-
-var center: HypPoint;
 
 export class TilesDemo extends Program {
   tiles: HypTile[];
@@ -11,12 +8,9 @@ export class TilesDemo extends Program {
   constructor(canvas: Canvas) {
     super(canvas);
 
-    window.addEventListener("mousemove", () => {
-      const point = this.point.toHypPoint(this.plane);
+      const point = new HypPoint(0, 0, this.plane);
       const x = point.x;
       const y = point.y;
-
-      center = point;
 
       this.tiles = [];
 
@@ -33,17 +27,18 @@ export class TilesDemo extends Program {
       //     );
       //   }
       // }
+      
+      // this.tiles.push(new HypTile(4, 0.3, new HypPoint(x, y, this.plane), this.plane));
+      // this.tiles.push(new HypTile(4, 0.3, new HypPoint(x + 0.142, y + 0.142, this.plane), this.plane));
+      // this.tiles.push(new HypTile(4, 0.3, new HypPoint(x - 0.142, y + 0.142, this.plane), this.plane));
+      // this.tiles.push(new HypTile(4, 0.3, new HypPoint(x + 0.142, y - 0.142, this.plane), this.plane));
+      // this.tiles.push(new HypTile(4, 0.3, new HypPoint(x - 0.142, y - 0.142, this.plane), this.plane));
 
-      this.tiles.push(new HypTile(3, 0.2, new HypPoint(x, y, this.plane), this.plane, Math.PI / 2));
-      this.tiles.push(new HypTile(4, 0.2, new HypPoint(x + 0.2, y, this.plane), this.plane,  Math.PI / 4));
-      this.tiles.push(new HypTile(5, 0.2, new HypPoint(x, y + 0.2, this.plane), this.plane));
-      this.tiles.push(new HypTile(6, 0.2, new HypPoint(x + 0.2, y + 0.2, this.plane), this.plane));
-      this.tiles.push(new HypTile(7, 0.2, new HypPoint(x - 0.2, y - 0.2, this.plane), this.plane));
-      this.tiles.push(new HypTile(8, 0.2, new HypPoint(x + 0.2, y - 0.2, this.plane), this.plane));
-      this.tiles.push(new HypTile(9, 0.2, new HypPoint(x - 0.2, y + 0.2, this.plane), this.plane));
-      this.tiles.push(new HypTile(10, 0.2, new HypPoint(x - 0.2, y, this.plane), this.plane));
-      this.tiles.push(new HypTile(11, 0.2, new HypPoint(x, y - 0.2, this.plane), this.plane));
-    });
+      this.tiles.push(new HypTile(8, 0.45, new HypPoint(x, y, this.plane), this.plane));
+      this.tiles.push(new HypTile(8, 0.45, new HypPoint(x + 0.45, y, this.plane), this.plane));
+      this.tiles.push(new HypTile(8, 0.45, new HypPoint(x - 0.45, y, this.plane), this.plane));
+      this.tiles.push(new HypTile(8, 0.45, new HypPoint(x, y + 0.45, this.plane), this.plane));
+      this.tiles.push(new HypTile(8, 0.45, new HypPoint(x, y - 0.45, this.plane), this.plane));
   }
 
   createLoop() {
