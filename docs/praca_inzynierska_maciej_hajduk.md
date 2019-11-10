@@ -31,7 +31,7 @@ header-includes: |
 
 We wszystkich szkołach od 2500 lat nauczana jest geometria. Sama nazwa - geometria - kojarzyć się może z nauką przyrodniczą, z rzeczą poznawaną na codzień z doświaczenia. Taka właśnie geometria jest również czymś bardzo instynktownym i dobrze wydawałoby się poznanym. Nasuwa się pytanie, czy może istnieć jakaś konkurencyjna do niej teoria.
 
-Sama nazwa tej geometrii - geometria euklidesowa, bierze się z faktu, że została ona sformułowana aksjomatycznie w dziele 'Elementy' około 300 roku przed naszą erą, przez dyrektora Biblioteki Aleksandryjsciej - Euklidesa. Euklides przedstawił 5 postulatów z których wyprowadził całą geometrię, jaką przez kolejne wieki znano:
+Sama nazwa tej geometrii - geometria euklidesowa, bierze się z faktu, że została ona sformułowana aksjomatycznie w dziele _Elementy_ około 300 roku przed naszą erą, przez dyrektora Biblioteki Aleksandryjsciej - Euklidesa. Euklides przedstawił 5 postulatów z których wyprowadził całą geometrię, jaką przez kolejne wieki znano:
 
 > 1. Dowolne dwa punkty można połączyć odcinkiem.
 > 2. Dowolny odcinek można przedłużyć nieograniczenie (uzyskując prostą).
@@ -100,8 +100,8 @@ Sposobem opisania różnic między tymi geometriami jest rozważenie dwóch lini
 ![Zachowanie linii ze wspólną prostopadłą w każdym z trzech rodzajów geometrii](figures/noneuclid.png)
 
 - W geometrii euklidesowej linie pozostają w stałej odległości od siebie (co oznacza, że linia narysowana prostopadle do jednej linii w dowolnym punkcie przecina drugą linię, a długość odcinka linii łączącego punkty przecięcia pozostaje stała) i są znane jako równoległe.
-- W geometrii hiperbolicznej linie "zakrzywiają się" od siebie, zwiększając odległość w miarę przesuwania się dalej od punktów przecięcia ze wspólną prostopadłą; linie te są często nazywane ultraparallelami .
-- W geometrii eliptycznej linie "zakrzywiają się" do siebie i w końcu przecinają.
+- W geometrii hiperbolicznej linie _zakrzywiają się_ od siebie, zwiększając odległość w miarę przesuwania się dalej od punktów przecięcia ze wspólną prostopadłą; linie te są często nazywane ultraparallelami .
+- W geometrii eliptycznej linie _zakrzywiają się_ do siebie i w końcu przecinają.
 
 ## Model Kleina
 
@@ -166,5 +166,10 @@ npm run build-watch
 
 # Bibliografia
 
-- Hyperbolic geometry MA448 - Caroline Series With assistance from Sara Maloni
-- AN INTRODUCTION TO HYPERBOLIC GEOMETRY MAT4510/3510 - BJØRN JAHREN
+- Caroline Series With assistance from Sara Maloni, Hyperbolic geometry MA448
+- Bjørn Jahren, An introduction to hyperbolic geometry, MAT4510/3510
+- Martin Freiherr von Gagern, Creation of Hyperbolic OrnamentsAlgorithmic and Interactive Methods, Technischen Universitat Mu̧nchen
+- Izabela Przezdzink, Geometria Poincarego i Kleina. Skrypt do zajęć: Podstawy geometrii i elementy geometrii nieeuklidesowej, Wrocław 2010, Uniwersytet Wrocławski Wydział Matematyki i Informatyki Instytut Matematyczny
+- Mateusz Kłeczek, Geometria hiperboliczna, Chrzanów 2016
+- Steve Szydlik, Hyperbolic Constructions inGeometer’s Sketchpad, December 21, 2001
+- Marek Kordos, Geometria Bolyaia–Łobaczewskiego, http://www.deltami.edu.pl/temat/matematyka/geometria/geometrie_nieeuklidesowe/2018/07/23/Geometria_Bolyaia_Lobaczewskiego/, Sierpień 2018

@@ -19,11 +19,11 @@ export class InteractionDemo extends Program {
 
     this.tiles = [];
 
-    this.tiles.push(new HypTile(4, 0.4, new HypPoint(x, y, this.plane), this.plane, this.rotate));
-    this.tiles.push(new HypTile(3, 0.3, new HypPoint(x, y + 0.4, this.plane), this.plane, this.rotate));
-    this.tiles.push(new HypTile(3, 0.3, new HypPoint(x + 0.4, y, this.plane), this.plane, this.rotate));
-    this.tiles.push(new HypTile(4, 0.3, new HypPoint(x, y - 0.4, this.plane), this.plane, this.rotate));
-    this.tiles.push(new HypTile(3, 0.3, new HypPoint(x - 0.4, y, this.plane), this.plane, this.rotate));
+    this.tiles.push(HypTile.createRegularPolygon(7, 0.4, new HypPoint(x, y, this.plane), this.plane, this.rotate));
+    this.tiles.push(HypTile.createRegularPolygon(3, 0.3, new HypPoint(x, y + 0.4, this.plane), this.plane, this.rotate));
+    this.tiles.push(HypTile.createRegularPolygon(4, 0.3, new HypPoint(x + 0.4, y, this.plane), this.plane, this.rotate));
+    this.tiles.push(HypTile.createRegularPolygon(5, 0.3, new HypPoint(x, y - 0.4, this.plane), this.plane, this.rotate));
+    this.tiles.push(HypTile.createRegularPolygon(6, 0.3, new HypPoint(x - 0.4, y, this.plane), this.plane, this.rotate));
   }
 
   createLoop() {

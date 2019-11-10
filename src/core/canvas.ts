@@ -101,7 +101,7 @@ export class Canvas {
     this.ctx.stroke();
   }
 
-  drawHypPolygon(polygon: HypPolygon, isFilled?: boolean) {
+  drawHypPolygon(polygon: HypPolygon, isFilled = false) {
     this.ctx.beginPath();
     polygon.getCompletePolygonLines().forEach(element => {
       this.drawArc(element);
