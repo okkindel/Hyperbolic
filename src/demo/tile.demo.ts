@@ -20,29 +20,29 @@ export class TilesDemo extends Program {
 
       this.tiles = [];
 
-      for (let i = -1; i < 1; i+= 0.1) {
-        for (let j = -1; j < 1; j+= 0.1) {
-          this.tiles.push(
-            new HypTile(
-              4,
-              0.12,
-              new HypPoint(x + i, y + j, this.plane),
-              this.plane,
-              Math.PI / 4
-            )
-          );
-        }
-      }
+      // for (let i = -1; i < 1; i+= 0.1) {
+      //   for (let j = -1; j < 1; j+= 0.1) {
+      //     this.tiles.push(
+      //       new HypTile(
+      //         4,
+      //         0.14,
+      //         new HypPoint(x + i, y + j, this.plane),
+      //         this.plane,
+      //         Math.PI / 4
+      //       )
+      //     );
+      //   }
+      // }
 
-      // this.tiles.push(new HypTile(3, 0.2, new HypPoint(x, y, this.plane), this.plane, Math.PI / 2));
-      // this.tiles.push(new HypTile(4, 0.2, new HypPoint(x + 0.2, y, this.plane), this.plane,  Math.PI / 4));
-      // this.tiles.push(new HypTile(5, 0.2, new HypPoint(x, y + 0.2, this.plane), this.plane));
-      // this.tiles.push(new HypTile(6, 0.2, new HypPoint(x + 0.2, y + 0.2, this.plane), this.plane));
-      // this.tiles.push(new HypTile(7, 0.2, new HypPoint(x - 0.2, y - 0.2, this.plane), this.plane));
-      // this.tiles.push(new HypTile(8, 0.2, new HypPoint(x + 0.2, y - 0.2, this.plane), this.plane));
-      // this.tiles.push(new HypTile(9, 0.2, new HypPoint(x - 0.2, y + 0.2, this.plane), this.plane));
-      // this.tiles.push(new HypTile(10, 0.2, new HypPoint(x - 0.2, y, this.plane), this.plane));
-      // this.tiles.push(new HypTile(11, 0.2, new HypPoint(x, y - 0.2, this.plane), this.plane));
+      this.tiles.push(new HypTile(3, 0.2, new HypPoint(x, y, this.plane), this.plane, Math.PI / 2));
+      this.tiles.push(new HypTile(4, 0.2, new HypPoint(x + 0.2, y, this.plane), this.plane,  Math.PI / 4));
+      this.tiles.push(new HypTile(5, 0.2, new HypPoint(x, y + 0.2, this.plane), this.plane));
+      this.tiles.push(new HypTile(6, 0.2, new HypPoint(x + 0.2, y + 0.2, this.plane), this.plane));
+      this.tiles.push(new HypTile(7, 0.2, new HypPoint(x - 0.2, y - 0.2, this.plane), this.plane));
+      this.tiles.push(new HypTile(8, 0.2, new HypPoint(x + 0.2, y - 0.2, this.plane), this.plane));
+      this.tiles.push(new HypTile(9, 0.2, new HypPoint(x - 0.2, y + 0.2, this.plane), this.plane));
+      this.tiles.push(new HypTile(10, 0.2, new HypPoint(x - 0.2, y, this.plane), this.plane));
+      this.tiles.push(new HypTile(11, 0.2, new HypPoint(x, y - 0.2, this.plane), this.plane));
     });
   }
 

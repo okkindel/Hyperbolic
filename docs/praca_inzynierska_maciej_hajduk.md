@@ -45,7 +45,7 @@ Jednym z pierwszych zajmujących się tym problemem uczonych, był żyjący w V 
 
 > Nie jest możliwe, aby uczony tej miary co Euklides godził się na obecność tak długiego postulatu w aksjomatyce – obecność postulatu wzięła się z pospiesznego kończenia przez niego Elementów, tak aby zdążyć przed nadejściem słusznie oczekiwanej rychłej śmierci; my zatem – czcząc jego pamięć – powinniśmy ten postulat usunąć lub co najmniej znacznie uprościć.
 
-Wyzwanie usunięcia piątego aksjomatu podjęło wielu matematyków w kolejnych wiekach, znane są dowody Ibn al-Haythama (Alhazen, XI wiek), Omar Khayyáma (XII wiek), Nasir al-Din al-Tūsīa (XIII wiek) i Giovanni Girolamo Saccheriego (XVIII wiek), wszystkie jegnak jak się później okazywało były błędne. Fakt, że były to błędy dość trywialne, wskazuje na kłopot, jakim dla uczonych było przyjęcie do wiadomości, że mogą istnieć dwie różne a wręcz wykluczające się, ale jednocześnie poprawne geometrie, a więc dwie teorie opisujące w różny sposób ten sam obiekt. W szczególności Immanuel Kant w swoim dziele _Krytyka czystego rozumu_ stwierdził, że intuicja geometryczna jest wrodzona, więc nie może istnieć wiele równoległych geometrii, a każdy kto chciałby zajmować się alternatywnymi geometriami nie nadaje się do nauki. Spotkało się to ze sprzeciwem. Johann Heinrich Lambert, zająwszy się taką alternatywną geometrią, ogłosił, że jeśli to nie jest nauka, to on chce uprawiać nienaukę. Udano się do największego w tamtym czasie autorytetu - Carla Friedricha Gaussa, ten jednak wycofał się, bojąc się - jak pisał - wrzasku Boetów. Problem jednak był i należało się do niego jakoś odnieść. Odważyło się na to dwóch młodych ludzi, którzy uparli się nie tylko na uprawianie tej geometrii, ale wręcz głosili jej równoprawność. Rosjanin,  Nikołaj Łobaczewski oraz Węgier - Janos Bolyai, niezależnie od siebie opublikowali prace w których - chociaż odmiennie - nowa geometria była konsekwentnie wyprowadzona. Obu odkrywców spotkała też za to kara, Łobaczewski został wręcz zmuszony do opuszczenia uczelni.
+Wyzwanie usunięcia piątego aksjomatu podjęło wielu matematyków w kolejnych wiekach, znane są dowody Ibn al-Haythama (Alhazen, XI wiek), Omar Khayyáma (XII wiek), Nasir al-Din al-Tūsīa (XIII wiek) i Giovanni Girolamo Saccheriego (XVIII wiek), wszystkie jednak, jak się później okazywało, były błędne. Fakt, że mimo prostych błędów funkcjonowały i były nawet nauczane, wskazuje na kłopot, jakim dla uczonych było przyjęcie do wiadomości, że mogą istnieć dwie różne a wręcz wykluczające się, ale jednocześnie poprawne geometrie, a więc dwie teorie opisujące w różny sposób ten sam obiekt. W szczególności Immanuel Kant w swoim dziele _Krytyka czystego rozumu_ stwierdził, że intuicja geometryczna jest wrodzona, więc nie może istnieć wiele równoległych geometrii, a każdy kto chciałby zajmować się alternatywnymi geometriami nie nadaje się do nauki. Spotkało się to ze sprzeciwem. Johann Heinrich Lambert, zająwszy się taką alternatywną geometrią, ogłosił, że jeśli to nie jest nauka, to on chce uprawiać nienaukę. Udano się do największego w tamtym czasie autorytetu - Carla Friedricha Gaussa, ten jednak wycofał się, bojąc się - jak pisał - wrzasku Boetów. Problem jednak był i należało się do niego jakoś odnieść. Odważyło się na to dwóch młodych ludzi, którzy uparli się nie tylko na uprawianie tej geometrii, ale wręcz głosili jej równoprawność. Rosjanin,  Nikołaj Łobaczewski oraz Węgier - Janos Bolyai, niezależnie od siebie opublikowali prace w których - chociaż odmiennie - nowa geometria była konsekwentnie wyprowadzona. Obu odkrywców spotkała też za to kara, Łobaczewski został wręcz zmuszony do opuszczenia uczelni.
 
 Sprawę nowej geometrii (nazywanej już geometrią Bolyaia-Łobaczewskiego) przejął Felix Klein. Postawił on tezę, że jeżeli za pomocą geometrii euklidesowej jesteśmy w stanie przedstawić tę nieeuklidesową - i odwrotnie, to oba modele są sobie w istocie równoważne. Opublikował też w 1870 roku dzieło, w którym dowiódł równoprawności obu modeli.
 
@@ -105,7 +105,16 @@ Sposobem opisania różnic między tymi geometriami jest rozważenie dwóch lini
 
 ## Model Kleina
 
-Model Kleina - a w zaszadzie model dysku Beltrami–Kleina jest modelem geometrii hiberbolicznej (inaczej gemobetrii Bolyaia-Łobaczewskiego)
+Model Kleina - a w zaszadzie model dysku Beltrami–Kleina jest modelem geometrii hiberbolicznej, w którym punkty są reprezentowane przez punkty we wnętrzu dysku. Przyjmuje on następujące zalożenia:
+
+- Płaszczyną jest wnętrze koła bez krawędzi
+<!-- - TODO: TO FAJNE POWIEDZENIE GAUSSA -->
+- Prostymi są cięciwy tego koła ()
+- Proste będą prostopadłe wtedy, gdy przedłużenie jednej z nich przechodzi przez punkt przecięcia stycznych do  math w końcach drugiej.
+
+![Koła w modelu Kleina](figures/klein_circles.png)
+
+Model nie jest zgodny , co oznacza, że kąty są zniekształcone, a okręgi na płaszczyźnie hiperbolicznej na ogół nie są okrągłe w modelu.
 
 # Projekt systemu
 
