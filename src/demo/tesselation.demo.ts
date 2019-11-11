@@ -7,8 +7,8 @@ export class TesselationDemo extends Program {
   x = new HypPoint(0, 0, this.plane).x;
   y = new HypPoint(0, 0, this.plane).y;
 
-  n = 6;
-  k = 6;
+  n = 8;
+  k = 3;
   q = true;
 
   tiles: HypTile[] = [];
@@ -31,7 +31,7 @@ export class TesselationDemo extends Program {
     );
     rule[0] = 0;
     let j = 1; // index of the next tile to create
-    for (let i = 0; i < 20; ++i) {
+    for (let i = 0; i < 100; ++i) {
       j = this.applyRule(i, j, rule);
     }
   }

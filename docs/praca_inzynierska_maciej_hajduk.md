@@ -16,6 +16,7 @@ header-includes: |
 - [Analiza problemu](#analiza-problemu)
   - [Podstawowy podział](#podstawowy-podzia%c5%82)
   - [Model Kleina](#model-kleina)
+  - [Model półpłaszczyzny Poincaré](#model-p%c3%b3%c5%82p%c5%82aszczyzny-poincar%c3%a9)
 - [Projekt systemu](#projekt-systemu)
 - [Implementacja systemu](#implementacja-systemu)
   - [Opis technologii](#opis-technologii)
@@ -53,27 +54,27 @@ Dosadnie do nowego modelu odniósł się fizyk - Hermann Helmholtz, publikując 
 
 ## Wybrane zagadnienie
 
-W niniejszej pracy zaimplementowany zostanie prosty silnik graficzny skupiający się na renderowaniu wizualizjacji płaszczyny dysku w modelu Poincarégo geometrii hiberbolitycznej.
+W niniejszej pracy zaimplementowany zostanie prosty silnik graficzny skupiający się na renderowaniu wizualizjacji płaszczyny dysku w modelu Poincarégo geometrii hiperbolitycznej.
 
-Praca swoim zakresem objemie obsługę rysowania lini, okręgów, wielokątów na tejże płaszczyźnie oraz implementacje przykładowych programów objemujących wizualizacje bardziej skomplikowanych struktur. Istnieje kilka implementacji realizujących podobne założenie, przy czym skupiają się one zazwyczaj na dostarczeniu pewnej określonej funkcjonalności, w przeciwieńtwie do omówionej poniżej aplikacji, która w głównej mierze dostarcza narzędzia pozwalające na osiągnięcie takich efektów małym kosztem, bez dogłębnej znajomości tematu.
+Praca swoim zakresem objemie obsługę rysowania lini, okręgów, wielokątów na tejże płaszczyźnie oraz implementacje przykładowych programów objemujących wizualizacje bardziej skomplikowanych struktur. Na tle innych implementacji, aplikacja wyróżnia się dostarczanymi możliwościami i realizacją problemu z pomocą matematycznego opisu pewnego modelu. Przykładowe demonstracje możliwości aplikacji są dostarczone razem z kodem źródłowym, jest to, poza możliwością narysowania dowolnego wielokątu, rysowaniem figur foremnych czy prostych animacji, także interakcja z urządzeniami peryferyjnymi i tesselacja przestrzeni hiperbolicznej. Niewątpliwą zaletą dostarczonej aplikacji jest prostota implementacja własnych rozwiązań, na co składa się silne typowanie języka Typescript wraz z dokładnymi interfejsami dla klas oraz funkcje dostarczone przez silnik, pozwalające na łatwie manipulowanie wyświetlającymi się obiektami, nie wymagające przy tym zrozumienia modelu.
 
 Praca składa się z czterech rozdziałów:
 
-W rozdziale pierwszym omówiono analizę wybranego problemu, przedstawiono motywacje podjęcia tego tematu oraz uzasadniono wybór modelu płaszczyzny Poincarégo.
+__Rozdział pierwszy__: W rozdziale omówiono analizę wybranego problemu, przedstawiono motywacje podjęcia tego tematu oraz uzasadniono wybór modelu płaszczyzny Poincarégo. Rozdział zawiera poza tym komentarz do różnych rodzajów geometrii nieeuklidesowych, oraz krótki opis i porównanie innych modeli geometrii hiperbolicznej.
 
-Rozdział drugi zawiera szczegółowy opis systemu wraz z opisem poszczególnych plików oraz przeznaczeniem klas i funkcji składających się na aplikacje. Opisane w nim zostały algorytmy przekształcające byty w geometrii Euklidesowe na odpowiadające im elementy geometrii hiberbolicznej, funkcje pomocnicze, reprezentacje punktów i linii w obu modelach.
+__Rozdział drugi__: Rozdział zawiera szczegółową charakterystykę systemu wraz z opisem poszczególnych plików oraz przeznaczeniem klas i funkcji składających się na program. Opisane w nim zostały algorytmy przekształcające byty w geometrii Euklidesowe na odpowiadające im elementy geometrii hiperbolicznej, funkcje pomocnicze, reprezentacje punktów i linii w obu modelach.
 
-W rozdziale trzecim opisano technologie implementacji projektu: wybrany język programowania, środowisko składające się na aplikację oraz biblioteki wykorzystane w programie.
+__Rozdział trzeci__: W rodziale wymieniono technologie użyte do implementacji projektu: wybrany język programowania, środowisko składające się na aplikację oraz biblioteki wykorzystane w programie.
 
-W rozdziale czwartym przedstawiono sposób instalacji i wdrożenia systemu w środowisku docelowym. Końcowy rozdział stanowi podsumowanie uzyskanych wyników.
+__Rozdział czwarty__: Rozdział zawiera instrukcje instalacji i wdrożenia systemu w środowisku docelowym. Końcowy rozdział stanowi podsumowanie uzyskanych wyników i ewentualne możliwości rozwoju projektu.
 
 # Analiza problemu
 
 __W niniejszym rozdziale przedstawiona będzie analiza problemu, opis matematyczny modelu płaszczyny dysku Poincarégo oraz przegląd kilku wybranych modeli geometrii nieeuklicesowej.__
 
-Debata nad piątym postulatem Euklidesa stworzyła problem, jak alternatywna geometria powinna wyglądać. Umiano pokazać poszczególne właściwości, ale nie powstał żaden model pozwalający na szersze spojrzenie na problem. Pierwszy model geometrii nieeuklidesowej został stworzony przez Kleina. W sprawę zaangażował się również Bernard Rieman. Stwierdził on, że można opisać nieskończenie wiele struktur matematycznych, które nie będą spełniały postulatów Euklidesa, będąc dalej geometriami.
+Odkrycie, że piątego aksjomatu nigdy nie można udowodnić na podstawie pozostałych czterech aksjomatów, było dla naukowców niespodzianką. Zrobiono to, demonstrując istnienie geometrii, w której pierwsze cztery aksjomaty utrzymywały się, ale piąty nie. Debata nad piątym postulatem Euklidesa stworzyła problem, jak alternatywna geometria powinna wyglądać. Umiano pokazać zaledwie poszczególne właściwości takich geometrii. Pierwszy model geometrii nieeuklidesowej został stworzony przez Kleina. W sprawę zaangażowało się wielu matematyków, w tym również Bernard Rieman. Stwierdził on, że można opisać nieskończenie wiele struktur matematycznych, które nie będą spełniały postulatów Euklidesa, będąc dalej geometriami.
 
-<!-- TODO: Wygląda to na jakis bullshit Koncepcja Riemana zakłada płaszczynę jako zbiór punków, dla których określamy iloczyn skalarny. Będąc w zbiorze liczb rzeczywistych, iloczyn skalarny dla $X=(x_1, y_1)$ i $Y=(x_2, y_2)$ wynosi
+<!-- TODO: Koncepcja Riemana zakłada płaszczynę jako zbiór punków, dla których określamy iloczyn skalarny. Będąc w zbiorze liczb rzeczywistych, iloczyn skalarny dla $X=(x_1, y_1)$ i $Y=(x_2, y_2)$ wynosi
 
 $$ X \cdot Y = g_{11}x_1y_1 + g_{12}x_1y_2 + g_{21}x_2y_1 + g_{22}x_2y_2 $$
 
@@ -82,6 +83,8 @@ gdzie $g_{ij}$ są dobrane tak, by liczba  -->
 ## Podstawowy podział
 
 Geometria nieeuklidesowa to każda geometria, która nie spełnia przynajmniej jednego z postulatów Euklidesa. Geometrie nieeuklidesowe możemy podzielić na dwa rodzaje:
+
+![Trójkąt oraz dwie proste przedstawione na powierzchni o geometrii hiperbolicznej](figures/hyp-triangle.png)
 
 __Geometria Łobaczewskiego-Bólyaia (hiperboliczna):__
 
@@ -95,26 +98,33 @@ __Geometria Riemanna (eliptyczna):__
   
   W modelu eliptycznym dla dowolnej linii $L$ i punktu $X$, który nie jest na $L$, wszystkie linie przechodzące przez $X$ przecinają się $L$.
 
-Sposobem opisania różnic między tymi geometriami jest rozważenie dwóch linii prostych rozciągniętych w nieskończoność w płaszczyźnie dwuwymiarowej, które są prostopadłe do trzeciej linii:
-
 ![Zachowanie linii ze wspólną prostopadłą w każdym z trzech rodzajów geometrii](figures/noneuclid.png)
+
+Sposobem opisania różnic między tymi geometriami jest rozważenie dwóch linii prostych rozciągniętych w nieskończoność w płaszczyźnie dwuwymiarowej, które są prostopadłe do trzeciej linii:
 
 - W geometrii euklidesowej linie pozostają w stałej odległości od siebie (co oznacza, że linia narysowana prostopadle do jednej linii w dowolnym punkcie przecina drugą linię, a długość odcinka linii łączącego punkty przecięcia pozostaje stała) i są znane jako równoległe.
 - W geometrii hiperbolicznej linie _zakrzywiają się_ od siebie, zwiększając odległość w miarę przesuwania się dalej od punktów przecięcia ze wspólną prostopadłą; linie te są często nazywane ultraparallelami .
 - W geometrii eliptycznej linie _zakrzywiają się_ do siebie i w końcu przecinają.
 
+Ta praca skupia się na geometrii hiperbolicznej. Istnieje kilka możliwych sposobów wykorzystania części przestrzeni euklidesowej jako modelu płaszczyzny hiperbolicznej. Wszystkie te modele spełniają ten sam zestaw aksjomatów i wyrażają tę samą abstrakcyjną płaszczyznę hiperboliczną. Dlatego wybór modelu nie ma znaczenia dla twierdzeń czysto hiperbolicznych. Jednak robi to różnicę podczas wizualizacji geometrii hiperbolicznej. Następne rozdziały są poświęcone krótkiemu omówieniu najpopularniejszych z nich.
+
 ## Model Kleina
 
-Model Kleina - a w zaszadzie model dysku Beltrami–Kleina jest modelem geometrii hiberbolicznej, w którym punkty są reprezentowane przez punkty we wnętrzu dysku. Przyjmuje on następujące zalożenia:
+![Model Kleina](figures/klein_model.png)
+
+Model Kleina - a w zaszadzie model dysku Beltrami–Kleina jest modelem geometrii hiperbolicznej, w którym punkty są reprezentowane przez punkty we wnętrzu dysku. Przyjmuje on następujące zalożenia:
 
 - Płaszczyną jest wnętrze koła bez krawędzi
-<!-- - TODO: TO FAJNE POWIEDZENIE GAUSSA -->
-- Prostymi są cięciwy tego koła ()
+- Prostymi są cięciwy tego koła (końce prostej)
 - Proste będą prostopadłe wtedy, gdy przedłużenie jednej z nich przechodzi przez punkt przecięcia stycznych do  math w końcach drugiej.
 
 ![Koła w modelu Kleina](figures/klein_circles.png)
 
-Model nie jest zgodny , co oznacza, że kąty są zniekształcone, a okręgi na płaszczyźnie hiperbolicznej na ogół nie są okrągłe w modelu.
+__Zalety__: Linie pozostają proste, a cały model można łatwo osadzić w ramach rzeczywistej geometrii rzutowej.
+
+__Wady__: Model nie jest zgodny , co oznacza, że kąty są zniekształcone, a okręgi na płaszczyźnie hiperbolicznej na ogół nie są okrągłe w modelu.
+
+## Model półpłaszczyzny Poincaré
 
 # Projekt systemu
 
@@ -168,7 +178,7 @@ npm run build-watch
 
 - Caroline Series With assistance from Sara Maloni, Hyperbolic geometry MA448
 - Bjørn Jahren, An introduction to hyperbolic geometry, MAT4510/3510
-- Martin Freiherr von Gagern, Creation of Hyperbolic OrnamentsAlgorithmic and Interactive Methods, Technischen Universitat Mu̧nchen
+- Martin Freiherr von Gagern, Creation of Hyperbolic OrnamentsAlgorithmic and Interactive Methods, Technischen Universitat Munchen
 - Izabela Przezdzink, Geometria Poincarego i Kleina. Skrypt do zajęć: Podstawy geometrii i elementy geometrii nieeuklidesowej, Wrocław 2010, Uniwersytet Wrocławski Wydział Matematyki i Informatyki Instytut Matematyczny
 - Mateusz Kłeczek, Geometria hiperboliczna, Chrzanów 2016
 - Steve Szydlik, Hyperbolic Constructions inGeometer’s Sketchpad, December 21, 2001
