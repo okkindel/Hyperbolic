@@ -15,8 +15,11 @@ header-includes: |
   - [Wybrane zagadnienie](#wybrane-zagadnienie)
 - [Analiza problemu](#analiza-problemu)
   - [Podstawowy podział](#podstawowy-podzia%c5%82)
-  - [Model Kleina](#model-kleina)
-  - [Model półpłaszczyzny Poincaré](#model-p%c3%b3%c5%82p%c5%82aszczyzny-poincar%c3%a9)
+    - [Model Kleina](#model-kleina)
+    - [Model półpłaszczyzny Poincaré](#model-p%c3%b3%c5%82p%c5%82aszczyzny-poincar%c3%a9)
+    - [Model dysku Poincaré](#model-dysku-poincar%c3%a9)
+    - [Model hemisfery](#model-hemisfery)
+  - [Uzasadnienie wybory modelu dysku Poincare](#uzasadnienie-wybory-modelu-dysku-poincare)
 - [Projekt systemu](#projekt-systemu)
 - [Implementacja systemu](#implementacja-systemu)
   - [Opis technologii](#opis-technologii)
@@ -74,17 +77,11 @@ __W niniejszym rozdziale przedstawiona będzie analiza problemu, opis matematycz
 
 Odkrycie, że piątego aksjomatu nigdy nie można udowodnić na podstawie pozostałych czterech aksjomatów, było dla naukowców niespodzianką. Zrobiono to, demonstrując istnienie geometrii, w której pierwsze cztery aksjomaty utrzymywały się, ale piąty nie. Debata nad piątym postulatem Euklidesa stworzyła problem, jak alternatywna geometria powinna wyglądać. Umiano pokazać zaledwie poszczególne właściwości takich geometrii. Pierwszy model geometrii nieeuklidesowej został stworzony przez Kleina. W sprawę zaangażowało się wielu matematyków, w tym również Bernard Rieman. Stwierdził on, że można opisać nieskończenie wiele struktur matematycznych, które nie będą spełniały postulatów Euklidesa, będąc dalej geometriami.
 
-<!-- TODO: Koncepcja Riemana zakłada płaszczynę jako zbiór punków, dla których określamy iloczyn skalarny. Będąc w zbiorze liczb rzeczywistych, iloczyn skalarny dla $X=(x_1, y_1)$ i $Y=(x_2, y_2)$ wynosi
-
-$$ X \cdot Y = g_{11}x_1y_1 + g_{12}x_1y_2 + g_{21}x_2y_1 + g_{22}x_2y_2 $$
-
-gdzie $g_{ij}$ są dobrane tak, by liczba  -->
-
 ## Podstawowy podział
 
 Geometria nieeuklidesowa to każda geometria, która nie spełnia przynajmniej jednego z postulatów Euklidesa. Geometrie nieeuklidesowe możemy podzielić na dwa rodzaje:
 
-![Trójkąt oraz dwie proste przedstawione na powierzchni o geometrii hiperbolicznej](figures/hyp-triangle.png)
+![Trójkąt oraz dwie proste przedstawione na powierzchni o geometrii hiperbolicznej](figures/hyp-triangle.png){ width=250px }
 
 __Geometria Łobaczewskiego-Bólyaia (hiperboliczna):__
 
@@ -106,11 +103,11 @@ Sposobem opisania różnic między tymi geometriami jest rozważenie dwóch lini
 - W geometrii hiperbolicznej linie _zakrzywiają się_ od siebie, zwiększając odległość w miarę przesuwania się dalej od punktów przecięcia ze wspólną prostopadłą; linie te są często nazywane ultraparallelami .
 - W geometrii eliptycznej linie _zakrzywiają się_ do siebie i w końcu przecinają.
 
-Ta praca skupia się na geometrii hiperbolicznej. Istnieje kilka możliwych sposobów wykorzystania części przestrzeni euklidesowej jako modelu płaszczyzny hiperbolicznej. Wszystkie te modele spełniają ten sam zestaw aksjomatów i wyrażają tę samą abstrakcyjną płaszczyznę hiperboliczną. Dlatego wybór modelu nie ma znaczenia dla twierdzeń czysto hiperbolicznych. Jednak robi to różnicę podczas wizualizacji geometrii hiperbolicznej. Następne rozdziały są poświęcone krótkiemu omówieniu najpopularniejszych z nich.
+Ta praca skupia się na geometrii hiperbolicznej. Istnieje kilka możliwych sposobów wykorzystania części przestrzeni euklidesowej jako modelu płaszczyzny hiperbolicznej. Wszystkie te modele spełniają ten sam zestaw aksjomatów i wyrażają tę samą abstrakcyjną płaszczyznę hiperboliczną. Dlatego wybór modelu nie ma znaczenia dla twierdzeń czysto hiperbolicznych. Jednak robi to różnicę podczas wizualizacji geometrii hiperbolicznej. Następne podrozdziały są poświęcone krótkiemu omówieniu najpopularniejszych z nich.
 
-## Model Kleina
+### Model Kleina
 
-![Model Kleina](figures/klein_model.png)
+![Model Kleina](figures/klein_model.png){ width=250px }
 
 Model Kleina - a w zaszadzie model dysku Beltrami–Kleina jest modelem geometrii hiperbolicznej, w którym punkty są reprezentowane przez punkty we wnętrzu dysku. Przyjmuje on następujące zalożenia:
 
@@ -118,17 +115,55 @@ Model Kleina - a w zaszadzie model dysku Beltrami–Kleina jest modelem geometri
 - Prostymi są cięciwy tego koła (końce prostej)
 - Proste będą prostopadłe wtedy, gdy przedłużenie jednej z nich przechodzi przez punkt przecięcia stycznych do  math w końcach drugiej.
 
-![Koła w modelu Kleina](figures/klein_circles.png)
+![Koła w modelu Kleina](figures/klein_circles.png){ width=250px }
 
-__Zalety__: Linie pozostają proste, a cały model można łatwo osadzić w ramach rzeczywistej geometrii rzutowej.
+Linie w modelu pozostają proste, a cały model można łatwo osadzić w ramach rzeczywistej geometrii rzutowej. Model ten nie jest jednak zgodny, co oznacza, że kąty są zniekształcone, a okręgi na płaszczyźnie hiperbolicznej na ogół nie są okrągłe w modelu.
 
-__Wady__: Model nie jest zgodny , co oznacza, że kąty są zniekształcone, a okręgi na płaszczyźnie hiperbolicznej na ogół nie są okrągłe w modelu.
+### Model półpłaszczyzny Poincaré
 
-## Model półpłaszczyzny Poincaré
+Model półpłaszczysny Poincare to płaszczyzna:
+$$ {\{(x, y) \mid y > 0; x, y \in \mathbb {R} \}} {\displaystyle \{(x, y) \mid y > 0; x, y \in \mathbb {R} \}} $$
+Jest to również model dwuwymiarowej geometrii hiperbolicznej (geometrii Lobaczewskiego).
+
+![Tesselacja w modelu półpłaszczyzny Poincaré](figures/halfplane_tesselation.png){ width=250px }
+
+Model nosi imię Henri Poincare, ale został stworzony przez Eugenio Beltramiego, który użył go wraz z modelem Klein i modelem Poincare, aby pokazać, że geometria hiperboliczna jest równie spójna, jak spójna jest geometria euklidesowa. Ten model jest zgodny, co oznacza, że kąty zmierzone w punkcie modelu są równe kątom na płaszczyźnie hiperbolicznej.
+
+### Model dysku Poincaré
+
+Model dysku Poincaré wykorzystuje wnętrze dysku jako model płaszczyzny hiperbolicznej. Najbardziej oczywistym wyborem dla dysku jest dysk jednostkowy, który będzie również przedmiotem dalszych rozważań.
+
+- __Punkty hiperboliczne__ to punkty wewnątrz dysku jednostkowego.
+- __Linie hiperboliczne__ to łuki koła prostopadłe do dysku. Linie hiperboliczne przechodzące przez początek degenerują się do średnic, o których można pomyśleć jako łuki kół o nieskończonym promieniu.
+- __Kąty__ są mierzone jako kąt euklidesowy między stycznymi w punkcie przecięcia.
+- __Odległości__ między punktami hiperbolicznymi można mierzyć w oparciu o normę euklideso
+
+$$ {\displaystyle \delta (u,v)=2{\frac {\lVert u-v\rVert ^{2}}{(1-\lVert u\rVert ^{2})(1-\lVert v\rVert ^{2})}}} $$
+
+Ponieważ rozpatrywany jest dysk jednostkowy, formuła nie zawiera w zmiennej dla promienia.
+
+![Tesselacja w modelu dysku Poincare](figures/poincare_disk_tesselation.png){ width=250px }
+
+Model jest zgodny, to znaczy, że zachowuje kąty. Oznacza to, że kąty hiperboliczne między krzywymi są równe kątom euklidesowym w punkcie przecięcia. Wadą jest fakt, że ponieważ linia hiperboliczna jest modelowana przez łuk koła euklidesowego, linie proste wydają się zakrzywione.
+
+### Model hemisfery
+
+Hemisfera nie jest często używana jako model płaszczyzny hiperbolicznej jako taka. Jest to jednak bardzo przydatna w łączeniu różnych innych modeli za pomocą różnych rzutów, jak pokazano na poniższym rysunki.
+
+- __Punkty hiperboliczne__ to punkty na półkuli południowej.
+- __Linie hiperboliczne__ to półkola powstałe z przecięcia półkuli południowej z płaszczyznami prostopadłymi do równika.
+
+![Rzut na dysk Poincarégo (a) i projekcja do modelu Klein-Beltrami (b)](figures/hemisphere.png){ width=800px }
+
+Wadą tego rozwiązania, jest dodatkowy wymiar, jaki należy rozpatrywać przy pracy z tym modelem.
+
+## Uzasadnienie wybory modelu dysku Poincare
+
+Jak stwierdzono na początku tego rozdziału, kolejne rozdziały, a także opisane implementacje będą prawie wyłącznie korzystać z modelu dysku Poincaré. Podczas renderowania geometrii hiperbolicznej wydaje się to być właściwym wyborem, z uwagi na wartości estetyczne i zgodność modelu.
 
 # Projekt systemu
 
-__W niniejszym rozdziale przedstawiony zostanie szczegółowy projekt systemu, zależności pomiędzy klasami oraz podstawowe algorytmy składające się na logikę funkcjonowania silnika.__
+__W niniejszym rozdziale przedstawiony zostanie szczegółowy projekt systemu, jego matematyczną interpretacje, zależności pomiędzy klasami oraz podstawowe algorytmy składające się na logikę funkcjonowania silnika.__
 
 # Implementacja systemu
 
