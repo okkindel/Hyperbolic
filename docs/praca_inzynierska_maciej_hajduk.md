@@ -11,27 +11,34 @@ header-includes: |
 
 - [Spis treści](#spis-tre%c5%9bci)
 - [Wstęp](#wst%c4%99p)
-  - [Rys hostoryczny](#rys-hostoryczny)
+  - [Kontekst historyczny](#kontekst-historyczny)
   - [Wybrane zagadnienie](#wybrane-zagadnienie)
 - [Analiza problemu](#analiza-problemu)
   - [Podstawowy podział](#podstawowy-podzia%c5%82)
+    - [Geometria Łobaczewskiego-Bólyaia (hiperboliczna)](#geometria-%c5%81obaczewskiego-b%c3%b3lyaia-hiperboliczna)
+    - [Geometria Riemanna (eliptyczna)](#geometria-riemanna-eliptyczna)
+    - [Różnice pomiędzy geometriami](#r%c3%b3%c5%bcnice-pomi%c4%99dzy-geometriami)
+  - [Najpopularniejsze modele](#najpopularniejsze-modele)
     - [Model Kleina](#model-kleina)
     - [Model półpłaszczyzny Poincaré](#model-p%c3%b3%c5%82p%c5%82aszczyzny-poincar%c3%a9)
     - [Model dysku Poincaré](#model-dysku-poincar%c3%a9)
-    - [Model hemisfery](#model-hemisfery)
+    - [Model Hemisfery](#model-hemisfery)
   - [Uzasadnienie wybory modelu dysku Poincare](#uzasadnienie-wybory-modelu-dysku-poincare)
 - [Projekt systemu](#projekt-systemu)
+  - [Cykl pracy silnika](#cykl-pracy-silnika)
+  - [Klasy obiektów](#klasy-obiekt%c3%b3w)
 - [Implementacja systemu](#implementacja-systemu)
   - [Opis technologii](#opis-technologii)
 - [Instalacja i wdrożenie](#instalacja-i-wdro%c5%bcenie)
   - [Serwer deweloperski](#serwer-deweloperski)
-- [Omówinie kodu źródłowego](#om%c3%b3winie-kodu-%c5%bar%c3%b3d%c5%82owego)
 - [Podsumowanie](#podsumowanie)
 - [Bibliografia](#bibliografia)
 
+\newpage
+
 # Wstęp
 
-## Rys hostoryczny
+## Kontekst historyczny
 
 We wszystkich szkołach od 2500 lat nauczana jest geometria. Sama nazwa - geometria - kojarzyć się może z nauką przyrodniczą, z rzeczą poznawaną na codzień z doświaczenia. Taka właśnie geometria jest również czymś bardzo instynktownym i dobrze wydawałoby się poznanym. Nasuwa się pytanie, czy może istnieć jakaś konkurencyjna do niej teoria.
 
@@ -71,6 +78,8 @@ __Rozdział trzeci__: W rodziale wymieniono technologie użyte do implementacji 
 
 __Rozdział czwarty__: Rozdział zawiera instrukcje instalacji i wdrożenia systemu w środowisku docelowym. Końcowy rozdział stanowi podsumowanie uzyskanych wyników i ewentualne możliwości rozwoju projektu.
 
+\newpage
+
 # Analiza problemu
 
 __W niniejszym rozdziale przedstawiona będzie analiza problemu, opis matematyczny modelu płaszczyny dysku Poincarégo oraz przegląd kilku wybranych modeli geometrii nieeuklicesowej.__
@@ -83,19 +92,19 @@ Geometria nieeuklidesowa to każda geometria, która nie spełnia przynajmniej j
 
 ![Trójkąt oraz dwie proste przedstawione na powierzchni o geometrii hiperbolicznej](figures/hyp-triangle.png){ width=250px }
 
-__Geometria Łobaczewskiego-Bólyaia (hiperboliczna):__
+### Geometria Łobaczewskiego-Bólyaia (hiperboliczna)
 
   Geometria hiperboliczna jest bliżej związana z geometrią euklidesową, niż się wydaje: jedyną różnicą aksjomatyczną jest postulat równoległy. Po usunięciu postulatu równoległego z geometrii euklidesowej geometria wynikowa jest geometrią absolutną. Wszystkie twierdzenia o geometrii absolutnej, w tym pierwsze 28 twierdzeń zaprezentowanych przez Euklisdesa, obowiązują w geometrii i euklidesowej i hiperbolicznej.
 
   W modelu hiperbolicznym, w płaszczyźnie dwuwymiarowej, dla dowolnej linii $L$ i punktu $X$, który nie jest na $L$, istnieje nieskończenie wiele linii przechodzących przez $X$, które się nie przecinają $L$.
 
-__Geometria Riemanna (eliptyczna):__
+### Geometria Riemanna (eliptyczna)
 
-  Najprostszym modelem geometrii eliptycznej jest kula, w której linie są kołami wielkimi (takimi jak równik lub południki na kuli ziemskiej). Jest to również jeden ze standardowych modeli prawdziwej płaszczyzny projekcyjnej. Różnica polega na tym, że jako model geometrii eliptycznej wprowadza się metrykę umożliwiającą pomiar długości i kątów, natomiast jako model płaszczyzny rzutowej takiej metryki nie ma.
+  Geometria eliptyczna jest geometrią nieeuklidesową o dodatniej krzywiźnie, która zastępuje postulat równoległy stwierdzeniem 'przez dowolny punkt na płaszczyźnie, nie ma linii równoległych do danej linii'. Geometria liptyczna jest czasem nazywana również geometrią Riemannowską. Model można zwizualizować jako powierzchnię kuli, na której linie przyjmowane są jako wielkie koła. W geometrii eliptycznej suma kątów trójkąta wynosi >180 stopni.
   
   W modelu eliptycznym dla dowolnej linii $L$ i punktu $X$, który nie jest na $L$, wszystkie linie przechodzące przez $X$ przecinają się $L$.
 
-![Zachowanie linii ze wspólną prostopadłą w każdym z trzech rodzajów geometrii](figures/noneuclid.png)
+### Różnice pomiędzy geometriami
 
 Sposobem opisania różnic między tymi geometriami jest rozważenie dwóch linii prostych rozciągniętych w nieskończoność w płaszczyźnie dwuwymiarowej, które są prostopadłe do trzeciej linii:
 
@@ -103,17 +112,23 @@ Sposobem opisania różnic między tymi geometriami jest rozważenie dwóch lini
 - W geometrii hiperbolicznej linie _zakrzywiają się_ od siebie, zwiększając odległość w miarę przesuwania się dalej od punktów przecięcia ze wspólną prostopadłą; linie te są często nazywane ultraparallelami .
 - W geometrii eliptycznej linie _zakrzywiają się_ do siebie i w końcu przecinają.
 
-Ta praca skupia się na geometrii hiperbolicznej. Istnieje kilka możliwych sposobów wykorzystania części przestrzeni euklidesowej jako modelu płaszczyzny hiperbolicznej. Wszystkie te modele spełniają ten sam zestaw aksjomatów i wyrażają tę samą abstrakcyjną płaszczyznę hiperboliczną. Dlatego wybór modelu nie ma znaczenia dla twierdzeń czysto hiperbolicznych. Jednak robi to różnicę podczas wizualizacji geometrii hiperbolicznej. Następne podrozdziały są poświęcone krótkiemu omówieniu najpopularniejszych z nich.
+![Zachowanie linii ze wspólną prostopadłą w każdym z trzech rodzajów geometrii](figures/noneuclid.png)
+
+Ta praca skupia się na geometrii hiperbolicznej. Istnieje kilka możliwych sposobów wykorzystania części przestrzeni euklidesowej jako modelu płaszczyzny hiperbolicznej. Wszystkie te modele spełniają ten sam zestaw aksjomatów i wyrażają tę samą abstrakcyjną płaszczyznę hiperboliczną. Dlatego wybór modelu nie ma znaczenia dla twierdzeń czysto hiperbolicznych, jednak robi to różnicę podczas wizualizacji geometrii hiperbolicznej. Następne podrozdziały są poświęcone krótkiemu omówieniu najpopularniejszych z nich.
+
+## Najpopularniejsze modele
+
+Geometria hiperboliczna została opisana za pomocą wielu modeli. Najpopularniejsze przedstawiono poniżej.
 
 ### Model Kleina
 
-![Model Kleina](figures/klein_model.png){ width=250px }
-
 Model Kleina - a w zaszadzie model dysku Beltrami–Kleina jest modelem geometrii hiperbolicznej, w którym punkty są reprezentowane przez punkty we wnętrzu dysku. Przyjmuje on następujące zalożenia:
 
-- Płaszczyną jest wnętrze koła bez krawędzi
-- Prostymi są cięciwy tego koła (końce prostej)
-- Proste będą prostopadłe wtedy, gdy przedłużenie jednej z nich przechodzi przez punkt przecięcia stycznych do  math w końcach drugiej.
+![Model Kleina](figures/klein_model.png){ width=250px }
+
+- __Płaszczyną hiperboliczną__ jest wnętrze koła bez krawędzi.
+- __Prostymi hiperbolicznymi__ są cięciwy tego koła (końce prostej).
+<!-- - __Proste będą prostopadłe__ wtedy, gdy przedłużenie jednej z nich przechodzi przez punkt przecięcia stycznych do  w końcach drugiej. -->
 
 ![Koła w modelu Kleina](figures/klein_circles.png){ width=250px }
 
@@ -122,8 +137,8 @@ Linie w modelu pozostają proste, a cały model można łatwo osadzić w ramach 
 ### Model półpłaszczyzny Poincaré
 
 Model półpłaszczysny Poincare to płaszczyzna:
-$$ {\{(x, y) \mid y > 0; x, y \in \mathbb {R} \}} {\displaystyle \{(x, y) \mid y > 0; x, y \in \mathbb {R} \}} $$
-Jest to również model dwuwymiarowej geometrii hiperbolicznej (geometrii Lobaczewskiego).
+$$ {\{(x, y) \mid y > 0; x, y \in \mathbb {R} \}} $$
+Jest to model dwuwymiarowej geometrii hiperbolicznej (geometrii Lobaczewskiego).
 
 ![Tesselacja w modelu półpłaszczyzny Poincaré](figures/halfplane_tesselation.png){ width=250px }
 
@@ -136,7 +151,7 @@ Model dysku Poincaré wykorzystuje wnętrze dysku jako model płaszczyzny hiperb
 - __Punkty hiperboliczne__ to punkty wewnątrz dysku jednostkowego.
 - __Linie hiperboliczne__ to łuki koła prostopadłe do dysku. Linie hiperboliczne przechodzące przez początek degenerują się do średnic, o których można pomyśleć jako łuki kół o nieskończonym promieniu.
 - __Kąty__ są mierzone jako kąt euklidesowy między stycznymi w punkcie przecięcia.
-- __Odległości__ między punktami hiperbolicznymi można mierzyć w oparciu o normę euklideso
+- __Odległości__ między punktami hiperbolicznymi można mierzyć w oparciu o normę euklidesową:
 
 $$ {\displaystyle \delta (u,v)=2{\frac {\lVert u-v\rVert ^{2}}{(1-\lVert u\rVert ^{2})(1-\lVert v\rVert ^{2})}}} $$
 
@@ -146,7 +161,7 @@ Ponieważ rozpatrywany jest dysk jednostkowy, formuła nie zawiera w zmiennej dl
 
 Model jest zgodny, to znaczy, że zachowuje kąty. Oznacza to, że kąty hiperboliczne między krzywymi są równe kątom euklidesowym w punkcie przecięcia. Wadą jest fakt, że ponieważ linia hiperboliczna jest modelowana przez łuk koła euklidesowego, linie proste wydają się zakrzywione.
 
-### Model hemisfery
+### Model Hemisfery
 
 Hemisfera nie jest często używana jako model płaszczyzny hiperbolicznej jako taka. Jest to jednak bardzo przydatna w łączeniu różnych innych modeli za pomocą różnych rzutów, jak pokazano na poniższym rysunki.
 
@@ -161,9 +176,33 @@ Wadą tego rozwiązania, jest dodatkowy wymiar, jaki należy rozpatrywać przy p
 
 Jak stwierdzono na początku tego rozdziału, kolejne rozdziały, a także opisane implementacje będą prawie wyłącznie korzystać z modelu dysku Poincaré. Podczas renderowania geometrii hiperbolicznej wydaje się to być właściwym wyborem, z uwagi na wartości estetyczne i zgodność modelu.
 
+\newpage
+
 # Projekt systemu
 
 __W niniejszym rozdziale przedstawiony zostanie szczegółowy projekt systemu, jego matematyczną interpretacje, zależności pomiędzy klasami oraz podstawowe algorytmy składające się na logikę funkcjonowania silnika.__
+
+## Cykl pracy silnika
+
+Głównym plikiem silnika jest `main.ts` znajdujący się w katalogu `/src`. Po załadowaniu programu, tworzy on instancje klasy `Canvas` odpowiedzialnej za rysowanie elementów na ekranie, ładuje konfiguracje wyświetlanego programu i tworzy pętlę silnika poprzez wywołanie metody `createLoop()` klasy `Engine`.
+
+![Diagram klasy Canvas](figures/program_canvas.png)
+
+Moduł odpowiedzialny za renderowanie obrazu znajduje się w pliku `canvas.ts`. Konstruktor klasy `Canvas` przyjmuje elemtent `canvas` ze strony oraz jego kontekst, oraz inicjuje się poprzez wywołanie funkcji `setupCanvas()`, która ustala szerokość i wysokość elementu. W każdym cyklu silnika, wywoływana jest funkcja `drawOverlay()`, która resetuje element do podstawowego widoku. Kolejne funkcje klasy odpowiadają za rysowanie punktów, liń, łuków i wielokątów. Poza tym klasa udostępnia też funcje zmiany koloru rysowanych elementów i grubości linii.
+
+![Diagram klasy Engine](figures/program_engine.png)
+
+Klasa `Engine` przyjmuje pobiera z pliku `/assets/config.json`, która ustala ilość klatek na sekunde, wywołuje metodę `drawOverlay()` klasy `Canvas`, następnie odpala funkcję `onLoop()` z programu, konfigurację którego dostaje przed `dependency injection` w parametrach konstruktora.
+
+![Diagram klasy Program](figures/program_program.png)
+
+Odtwarzany program tworzony jest poprzez wywołanie instancji klasy programu, dziedziczącej po abstrakcyjnej klasie `Program`, udostępniającej metody takie jak `onLoop()`.
+
+## Klasy obiektów
+
+Każdy możliwy do narysowania obiekt jest instancją jednej z klas. W kodzie silnika istnieje wyraźny podział na klasy udostępniające obiekty rysowane w przestrzeni euklidesowej i hiperbolicznej. Kolejne rodziały są poświęcone opisie i matematycznej interpretacji poszczególnych klas.
+
+\newpage
 
 # Implementacja systemu
 
@@ -205,9 +244,11 @@ Wywołanie trybu odbywa się komendą:
 npm run build-watch
 ```
 
-# Omówinie kodu źródłowego
+\newpage
 
 # Podsumowanie
+
+\newpage
 
 # Bibliografia
 
@@ -217,4 +258,4 @@ npm run build-watch
 - Izabela Przezdzink, Geometria Poincarego i Kleina. Skrypt do zajęć: Podstawy geometrii i elementy geometrii nieeuklidesowej, Wrocław 2010, Uniwersytet Wrocławski Wydział Matematyki i Informatyki Instytut Matematyczny
 - Mateusz Kłeczek, Geometria hiperboliczna, Chrzanów 2016
 - Steve Szydlik, Hyperbolic Constructions inGeometer’s Sketchpad, December 21, 2001
-- Marek Kordos, Geometria Bolyaia–Łobaczewskiego, http://www.deltami.edu.pl/temat/matematyka/geometria/geometrie_nieeuklidesowe/2018/07/23/Geometria_Bolyaia_Lobaczewskiego/, Sierpień 2018
+- Marek Kordos, Geometria Bolyaia–Łobaczewskiego, http://www.deltami.edu.pl, Sierpień 2018
