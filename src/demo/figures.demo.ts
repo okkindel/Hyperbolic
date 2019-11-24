@@ -31,7 +31,7 @@ export class FiguresDemo extends Program {
     });
   }
 
-  createLoop() {
+  onLoop() {
     if (this.polygons) {
       this.canvas.setColors("rgba(0,255,126,1)");
       this.polygons.forEach(element => {

@@ -23,7 +23,7 @@ export class Engine {
   createLoop(program: Program) {
     this.interval = window.setInterval(() => {
       this.canvas.drawOverlay();
-      program.createLoop();
+      program.onLoop();
     }, 1000 / CONFIG.FRAMES);
   }
 

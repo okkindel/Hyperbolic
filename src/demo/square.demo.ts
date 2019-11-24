@@ -42,7 +42,7 @@ export class SquareDemo extends Program {
     });
   }
 
-  createLoop() {
+  onLoop() {
     if (this.polygon) {
       this.canvas.setColors("rgba(255,173,0,0.5)");
       this.canvas.drawHypPolygon(this.polygon, true);

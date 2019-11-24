@@ -15,5 +15,5 @@ export class Program {
     });
   }
 
-  createLoop(): void {}
+  onLoop(): void {}
 }

@@ -26,7 +26,7 @@ export class InteractionDemo extends Program {
     this.tiles.push(HypTile.createRegularPolygon(6, 0.3, new HypPoint(x - 0.4, y, this.plane), this.plane, this.rotate));
   }
 
-  createLoop() {
+  onLoop() {
     this.createTiles();
 
     this.canvas.setColors("rgba(235,255,113,1)");

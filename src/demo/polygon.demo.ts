@@ -23,7 +23,7 @@ export class PolygonDemo extends Program {
     });
   }
 
-  createLoop() {
+  onLoop() {
     this.canvas.setLineWidth(1);
 
     if (this.polygon) {
