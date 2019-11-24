@@ -27,6 +27,9 @@ header-includes: |
 - [Projekt systemu](#projekt-systemu)
   - [Cykl pracy silnika](#cykl-pracy-silnika)
   - [Klasy obiektów](#klasy-obiekt%c3%b3w)
+    - [Klasa Line](#klasa-line)
+    - [Klasa Point](#klasa-point)
+    - [Klasa Plane](#klasa-plane)
 - [Implementacja systemu](#implementacja-systemu)
   - [Opis technologii](#opis-technologii)
 - [Instalacja i wdrożenie](#instalacja-i-wdro%c5%bcenie)
@@ -100,7 +103,7 @@ Geometria nieeuklidesowa to każda geometria, która nie spełnia przynajmniej j
 
 ### Geometria Riemanna (eliptyczna)
 
-  Geometria eliptyczna jest geometrią nieeuklidesową o dodatniej krzywiźnie, która zastępuje postulat równoległy stwierdzeniem 'przez dowolny punkt na płaszczyźnie, nie ma linii równoległych do danej linii'. Geometria liptyczna jest czasem nazywana również geometrią Riemannowską. Model można zwizualizować jako powierzchnię kuli, na której linie przyjmowane są jako wielkie koła. W geometrii eliptycznej suma kątów trójkąta wynosi >180 stopni.
+  Geometria eliptyczna jest geometrią nieeuklidesową o dodatniej krzywiźnie, która zastępuje postulat równoległy stwierdzeniem "przez dowolny punkt na płaszczyźnie, nie ma linii równoległych do danej linii". Geometria liptyczna jest czasem nazywana również geometrią Riemannowską. Model można zwizualizować jako powierzchnię kuli, na której linie przyjmowane są jako wielkie koła. W geometrii eliptycznej suma kątów trójkąta wynosi >180 stopni.
   
   W modelu eliptycznym dla dowolnej linii $L$ i punktu $X$, który nie jest na $L$, wszystkie linie przechodzące przez $X$ przecinają się $L$.
 
@@ -155,6 +158,8 @@ Model dysku Poincaré wykorzystuje wnętrze dysku jako model płaszczyzny hiperb
 
 $$ {\displaystyle \delta (u,v)=2{\frac {\lVert u-v\rVert ^{2}}{(1-\lVert u\rVert ^{2})(1-\lVert v\rVert ^{2})}}} $$
 
+![Linie w modelu dysku Poincare](figures/poincare_disc_lines.png){ width=250px }
+
 Ponieważ rozpatrywany jest dysk jednostkowy, formuła nie zawiera w zmiennej dla promienia.
 
 ![Tesselacja w modelu dysku Poincare](figures/poincare_disk_tesselation.png){ width=250px }
@@ -176,6 +181,8 @@ Wadą tego rozwiązania, jest dodatkowy wymiar, jaki należy rozpatrywać przy p
 
 Jak stwierdzono na początku tego rozdziału, kolejne rozdziały, a także opisane implementacje będą prawie wyłącznie korzystać z modelu dysku Poincaré. Podczas renderowania geometrii hiperbolicznej wydaje się to być właściwym wyborem, z uwagi na wartości estetyczne i zgodność modelu.
 
+![Porównanie modeli Kleina, dysku Poincare i półpłaszczyzny Poincare](figures/models_comparision.png)
+
 \newpage
 
 # Projekt systemu
@@ -192,7 +199,7 @@ Moduł odpowiedzialny za renderowanie obrazu znajduje się w pliku `canvas.ts`. 
 
 ![Diagram klasy Engine](figures/program_engine.png)
 
-Klasa `Engine` przyjmuje pobiera z pliku `/assets/config.json`, która ustala ilość klatek na sekunde, wywołuje metodę `drawOverlay()` klasy `Canvas`, następnie odpala funkcję `onLoop()` z programu, konfigurację którego dostaje przed `dependency injection` w parametrach konstruktora.
+Klasa `Engine` przyjmuje konfigurację z pliku `/assets/config.json`, która ustala ilość FPS, wywołuje następnie metodę `drawOverlay()` klasy `Canvas` i odpala funkcję `onLoop()` z programu, konfigurację którego dostaje za pomocą _dependency injection_ w parametrach konstruktora.
 
 ![Diagram klasy Program](figures/program_program.png)
 
@@ -201,6 +208,22 @@ Odtwarzany program tworzony jest poprzez wywołanie instancji klasy programu, dz
 ## Klasy obiektów
 
 Każdy możliwy do narysowania obiekt jest instancją jednej z klas. W kodzie silnika istnieje wyraźny podział na klasy udostępniające obiekty rysowane w przestrzeni euklidesowej i hiperbolicznej. Kolejne rodziały są poświęcone opisie i matematycznej interpretacji poszczególnych klas.
+
+### Klasa Line
+
+![Diagram klasy Line](figures/program_line.png)
+
+Konstruktor klasy `Line` przyjmuje dwie zmienne typu `number`. Programista może skorzystać z metody `at(x: number): number`, która zwraca wartość w punkcie `x` oraz `intersectPoint(line: Line): Point`, która zwraca punkt przecięcia tejże linii z inną linią.
+
+### Klasa Point
+
+![Diagram klasy Point](figures/program_point.png)
+
+Konstruktor klasy `Point` przyjmuje dwie zmienne typu `number`, które są reprezentacją bezwzględnych koordynatów puntu na płótnie. Programista może skorzystać z metody `toHypPoint(plane: Plane): HypPoint`, która przyjmuje instancję klasy `Plane` i zwraca dla niej koordynaty punktu w interfejsie `HypPoint`.
+
+### Klasa Plane
+
+Najważniejszą pośród omawianych jest klasa `Plane`, będąca singletonem i punktem odniesienia do 
 
 \newpage
 
@@ -254,8 +277,8 @@ npm run build-watch
 
 - Caroline Series With assistance from Sara Maloni, Hyperbolic geometry MA448
 - Bjørn Jahren, An introduction to hyperbolic geometry, MAT4510/3510
-- Martin Freiherr von Gagern, Creation of Hyperbolic OrnamentsAlgorithmic and Interactive Methods, Technischen Universitat Munchen
+- Martin Freiherr von Gagern, Creation of Hyperbolic Ornaments Algorithmic and Interactive Methods, Technischen Universitat Munchen
 - Izabela Przezdzink, Geometria Poincarego i Kleina. Skrypt do zajęć: Podstawy geometrii i elementy geometrii nieeuklidesowej, Wrocław 2010, Uniwersytet Wrocławski Wydział Matematyki i Informatyki Instytut Matematyczny
 - Mateusz Kłeczek, Geometria hiperboliczna, Chrzanów 2016
-- Steve Szydlik, Hyperbolic Constructions inGeometer’s Sketchpad, December 21, 2001
+- Steve Szydlik, Hyperbolic Constructions in Geometer’s Sketchpad, December 21, 2001
 - Marek Kordos, Geometria Bolyaia–Łobaczewskiego, http://www.deltami.edu.pl, Sierpień 2018
