@@ -82,7 +82,7 @@ export class TesselationDemo extends Program {
   }
 
   onLoop() {
-    this.canvas.setColors("rgba(0,255,126,1)");
+    this.canvas.setColors("rgba(224,61,13,1)");
     this.tiles.forEach(element => {
       this.canvas.drawHypPolygon(element.polygon, true);
     });

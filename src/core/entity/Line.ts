@@ -1,3 +1,4 @@
+import { slope } from "../geometry";
 import { Point } from "./Point";
 
 /**
@@ -7,6 +8,17 @@ import { Point } from "./Point";
 export class Line {
   a: number;
   b: number;
+
+  static fromPoints(p: Point, q: Point): Line {
+    const m = slope(p, q);
+    const b = -m * p.x + p.y;
+    return new Line(m, b);
+  }
+
+  static fromPointSlope(p: Point, m: number): Line {
+    const b = -m * p.x + p.y;
+    return new Line(m, b);
+  }
 
   constructor(a: number, b: number) {
     this.a = a;

@@ -1,13 +1,8 @@
+import { atan2ToRad, euclidean } from "../../geometry";
 import { head, last } from "ramda";
 import { Circle } from "../Circle";
 import { Plane } from "../Plane";
 import { Point } from "../Point";
-import {
-  circleFromPoints,
-  atan2ToRad,
-  inversion,
-  euclidean
-} from "../../geometry";
 
 /**
  * Line in Poincare concept.
@@ -29,7 +24,7 @@ export class HypLine {
   }
 
   calculateArc() {
-    this.arc = circleFromPoints(this.p, this.q, inversion(this.plane, this.p));
+    this.arc = Circle.fromPoints(this.p, this.q, this.p.inversion(this.plane));
     this.p = this.cutIfSticksOut(this.p);
     this.q = this.cutIfSticksOut(this.q);
     this.countAngle();

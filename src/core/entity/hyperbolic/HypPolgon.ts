@@ -8,6 +8,12 @@ export class HypPolygon {
   verticles: Point[] = [];
   lines: HypLine[] = [];
   plane: Plane;
+  
+  static fromVerticles(verts: Point[], plane: Plane): HypPolygon {
+    const polygon = new HypPolygon(verts[0], verts[1], plane);
+    verts.slice(2, verts.length).forEach((v: Point) => polygon.addVerticle(v));
+    return polygon;
+  }
 
   constructor(p1: Point, p2: Point, plane: Plane) {
     const line = new HypLine(p1, p2, plane);
@@ -50,11 +56,5 @@ export class HypPolygon {
         .toCanvasCoords();
     });
     return HypPolygon.fromVerticles(verticles, this.plane);
-  }
-
-  static fromVerticles(verts: Point[], plane: Plane): HypPolygon {
-    const polygon = new HypPolygon(verts[0], verts[1], plane);
-    verts.slice(2, verts.length).forEach((v: Point) => polygon.addVerticle(v));
-    return polygon;
   }
 }

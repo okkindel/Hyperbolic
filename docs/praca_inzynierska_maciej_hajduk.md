@@ -6,38 +6,12 @@ indent: true
 header-includes: |
   \usepackage{tcolorbox}
   \newcommand\qed{\hfill\rule{1em}{1em}}
+  
 ---
-# Spis treści
 
-- [Spis treści](#spis-tre%c5%9bci)
-- [Wstęp](#wst%c4%99p)
-  - [Kontekst historyczny](#kontekst-historyczny)
-  - [Wybrane zagadnienie](#wybrane-zagadnienie)
-- [Analiza problemu](#analiza-problemu)
-  - [Podstawowy podział](#podstawowy-podzia%c5%82)
-    - [Geometria Łobaczewskiego-Bólyaia (hiperboliczna)](#geometria-%c5%81obaczewskiego-b%c3%b3lyaia-hiperboliczna)
-    - [Geometria Riemanna (eliptyczna)](#geometria-riemanna-eliptyczna)
-    - [Różnice pomiędzy geometriami](#r%c3%b3%c5%bcnice-pomi%c4%99dzy-geometriami)
-  - [Najpopularniejsze modele](#najpopularniejsze-modele)
-    - [Model Kleina](#model-kleina)
-    - [Model półpłaszczyzny Poincaré](#model-p%c3%b3%c5%82p%c5%82aszczyzny-poincar%c3%a9)
-    - [Model dysku Poincaré](#model-dysku-poincar%c3%a9)
-    - [Model Hemisfery](#model-hemisfery)
-  - [Uzasadnienie wybory modelu dysku Poincare](#uzasadnienie-wybory-modelu-dysku-poincare)
-- [Projekt systemu](#projekt-systemu)
-  - [Cykl pracy silnika](#cykl-pracy-silnika)
-  - [Klasy obiektów](#klasy-obiekt%c3%b3w)
-    - [Klasa Line](#klasa-line)
-    - [Klasa Point](#klasa-point)
-    - [Klasa Plane](#klasa-plane)
-- [Implementacja systemu](#implementacja-systemu)
-  - [Opis technologii](#opis-technologii)
-- [Instalacja i wdrożenie](#instalacja-i-wdro%c5%bcenie)
-  - [Serwer deweloperski](#serwer-deweloperski)
-- [Podsumowanie](#podsumowanie)
-- [Bibliografia](#bibliografia)
+\tableofcontents
 
-\newpage
+\newpage\null\newpage
 
 # Wstęp
 
@@ -59,7 +33,7 @@ Jednym z pierwszych zajmujących się tym problemem uczonych, był żyjący w V 
 
 > Nie jest możliwe, aby uczony tej miary co Euklides godził się na obecność tak długiego postulatu w aksjomatyce – obecność postulatu wzięła się z pospiesznego kończenia przez niego Elementów, tak aby zdążyć przed nadejściem słusznie oczekiwanej rychłej śmierci; my zatem – czcząc jego pamięć – powinniśmy ten postulat usunąć lub co najmniej znacznie uprościć.
 
-Wyzwanie usunięcia piątego aksjomatu podjęło wielu matematyków w kolejnych wiekach, znane są dowody Ibn al-Haythama (Alhazen, XI wiek), Omar Khayyáma (XII wiek), Nasir al-Din al-Tūsīa (XIII wiek) i Giovanni Girolamo Saccheriego (XVIII wiek), wszystkie jednak, jak się później okazywało, były błędne. Fakt, że mimo prostych błędów funkcjonowały i były nawet nauczane, wskazuje na kłopot, jakim dla uczonych było przyjęcie do wiadomości, że mogą istnieć dwie różne a wręcz wykluczające się, ale jednocześnie poprawne geometrie, a więc dwie teorie opisujące w różny sposób ten sam obiekt. W szczególności Immanuel Kant w swoim dziele _Krytyka czystego rozumu_ stwierdził, że intuicja geometryczna jest wrodzona, więc nie może istnieć wiele równoległych geometrii, a każdy kto chciałby zajmować się alternatywnymi geometriami nie nadaje się do nauki. Spotkało się to ze sprzeciwem. Johann Heinrich Lambert, zająwszy się taką alternatywną geometrią, ogłosił, że jeśli to nie jest nauka, to on chce uprawiać nienaukę. Udano się do największego w tamtym czasie autorytetu - Carla Friedricha Gaussa, ten jednak wycofał się, bojąc się - jak pisał - wrzasku Boetów. Problem jednak był i należało się do niego jakoś odnieść. Odważyło się na to dwóch młodych ludzi, którzy uparli się nie tylko na uprawianie tej geometrii, ale wręcz głosili jej równoprawność. Rosjanin,  Nikołaj Łobaczewski oraz Węgier - Janos Bolyai, niezależnie od siebie opublikowali prace w których - chociaż odmiennie - nowa geometria była konsekwentnie wyprowadzona. Obu odkrywców spotkała też za to kara, Łobaczewski został wręcz zmuszony do opuszczenia uczelni.
+Wyzwanie usunięcia piątego aksjomatu podjęło wielu matematyków w kolejnych wiekach, znane są dowody Ibn al-Haythama (Alhazen, XI wiek), Omar Khayyáma (XII wiek), Nasir al-Din al-Tūsīa (XIII wiek) i Giovanni Girolamo Saccheriego (XVIII wiek), wszystkie jednak, jak się później okazywało, były błędne. Fakt, że mimo prostych błędów funkcjonowały i były nawet nauczane, wskazuje na kłopot, jakim dla uczonych było przyjęcie do wiadomości, że mogą istnieć dwie różne a wręcz wykluczające się, ale jednocześnie poprawne geometrie, a więc dwie teorie opisujące w różny sposób ten sam obiekt. W szczególności Immanuel Kant w swoim dziele _Krytyka czystego rozumu_ stwierdził, że intuicja geometryczna jest wrodzona, więc nie może istnieć wiele równoległych geometrii, a każdy kto chciałby zajmować się alternatywnymi geometriami nie nadaje się do nauki. Spotkało się to ze sprzeciwem. Johann Heinrich Lambert, zająwszy się taką alternatywną geometrią, ogłosił, że jeśli to nie jest nauka, to on chce uprawiać nienaukę. Udano się do największego w tamtym czasie autorytetu - Carla Friedricha Gaussa, ten jednak wycofał się, bojąc się - jak pisał - wrzasku Boetów. Problem jednak był i należało się do niego jakoś odnieść. Odważyło się na to dwóch młodych ludzi, którzy uparli się nie tylko na uprawianie tej geometrii, ale wręcz głosili jej równoprawność. Rosjanin,  Nikołaj Łobaczewski oraz Węgier - Janos Bolyai, niezależnie od siebie opublikowali prace w których - chociaż odmiennie - nowa geometria była konsekwentnie wyprowadzona. Obu odkrywców spotkała też za to kara, Łobaczewski został wręcz zmuszony do opuszczenia katedry.
 
 Sprawę nowej geometrii (nazywanej już geometrią Bolyaia-Łobaczewskiego) przejął Felix Klein. Postawił on tezę, że jeżeli za pomocą geometrii euklidesowej jesteśmy w stanie przedstawić tę nieeuklidesową - i odwrotnie, to oba modele są sobie w istocie równoważne. Opublikował też w 1870 roku dzieło, w którym dowiódł równoprawności obu modeli.
 
@@ -69,24 +43,30 @@ Dosadnie do nowego modelu odniósł się fizyk - Hermann Helmholtz, publikując 
 
 W niniejszej pracy zaimplementowany zostanie prosty silnik graficzny skupiający się na renderowaniu wizualizjacji płaszczyny dysku w modelu Poincarégo geometrii hiperbolitycznej.
 
-Praca swoim zakresem objemie obsługę rysowania lini, okręgów, wielokątów na tejże płaszczyźnie oraz implementacje przykładowych programów objemujących wizualizacje bardziej skomplikowanych struktur. Na tle innych implementacji, aplikacja wyróżnia się dostarczanymi możliwościami i realizacją problemu z pomocą matematycznego opisu pewnego modelu. Przykładowe demonstracje możliwości aplikacji są dostarczone razem z kodem źródłowym, jest to, poza możliwością narysowania dowolnego wielokątu, rysowaniem figur foremnych czy prostych animacji, także interakcja z urządzeniami peryferyjnymi i tesselacja przestrzeni hiperbolicznej. Niewątpliwą zaletą dostarczonej aplikacji jest prostota implementacja własnych rozwiązań, na co składa się silne typowanie języka Typescript wraz z dokładnymi interfejsami dla klas oraz funkcje dostarczone przez silnik, pozwalające na łatwie manipulowanie wyświetlającymi się obiektami, nie wymagające przy tym zrozumienia modelu.
+Praca swoim zakresem objemie obsługę rysowania lini, okręgów, wielokątów na tejże płaszczyźnie oraz implementacje przykładowych programów objemujących wizualizacje bardziej skomplikowanych struktur. Na tle innych implementacji, aplikacja wyróżnia się dostarczanymi możliwościami i realizacją problemu z pomocą matematycznego opisu pewnego modelu. Przykładowe demonstracje możliwości aplikacji są dostarczone razem z kodem źródłowym, jest to, poza możliwością narysowania dowolnego wielokątu, rysowaniem figur foremnych czy prostych animacji, także interakcja z urządzeniami peryferyjnymi i tesselacja przestrzeni hiperbolicznej. Niewątpliwą zaletą dostarczonej aplikacji jest prostota implementacji własnych rozwiązań, na co składa się silne typowanie języka Typescript wraz z dokładnymi interfejsami dla klas oraz funkcje dostarczone przez silnik, pozwalające na łatwie manipulowanie wyświetlającymi się obiektami, nie wymagające przy tym zrozumienia modelu.
 
-Praca składa się z czterech rozdziałów:
+\vspace{3mm}
+__Praca składa się z czterech rozdziałów:__
 
-__Rozdział pierwszy__: W rozdziale omówiono analizę wybranego problemu, przedstawiono motywacje podjęcia tego tematu oraz uzasadniono wybór modelu płaszczyzny Poincarégo. Rozdział zawiera poza tym komentarz do różnych rodzajów geometrii nieeuklidesowych, oraz krótki opis i porównanie innych modeli geometrii hiperbolicznej.
+\vspace{3mm}
+__Rozdział pierwszy__: W rozdziale omówiono analizę wybranego problemu, przedstawiono motywacje podjęcia tego tematu oraz uzasadniono wybór modelu płaszczyzny Poincarég. Rozdział zawiera poza tym komentarz do różnych rodzajów geometrii nieeuklidesowych, oraz krótki opis i porównanie innych modeli geometrii hiperbolicznej.
 
+\vspace{3mm}
 __Rozdział drugi__: Rozdział zawiera szczegółową charakterystykę systemu wraz z opisem poszczególnych plików oraz przeznaczeniem klas i funkcji składających się na program. Opisane w nim zostały algorytmy przekształcające byty w geometrii Euklidesowe na odpowiadające im elementy geometrii hiperbolicznej, funkcje pomocnicze, reprezentacje punktów i linii w obu modelach.
 
+\vspace{3mm}
 __Rozdział trzeci__: W rodziale wymieniono technologie użyte do implementacji projektu: wybrany język programowania, środowisko składające się na aplikację oraz biblioteki wykorzystane w programie.
 
+\vspace{3mm}
 __Rozdział czwarty__: Rozdział zawiera instrukcje instalacji i wdrożenia systemu w środowisku docelowym. Końcowy rozdział stanowi podsumowanie uzyskanych wyników i ewentualne możliwości rozwoju projektu.
 
-\newpage
+\newpage\null\newpage
 
 # Analiza problemu
 
 __W niniejszym rozdziale przedstawiona będzie analiza problemu, opis matematyczny modelu płaszczyny dysku Poincarégo oraz przegląd kilku wybranych modeli geometrii nieeuklicesowej.__
 
+\vspace{3mm}
 Odkrycie, że piątego aksjomatu nigdy nie można udowodnić na podstawie pozostałych czterech aksjomatów, było dla naukowców niespodzianką. Zrobiono to, demonstrując istnienie geometrii, w której pierwsze cztery aksjomaty utrzymywały się, ale piąty nie. Debata nad piątym postulatem Euklidesa stworzyła problem, jak alternatywna geometria powinna wyglądać. Umiano pokazać zaledwie poszczególne właściwości takich geometrii. Pierwszy model geometrii nieeuklidesowej został stworzony przez Kleina. W sprawę zaangażowało się wielu matematyków, w tym również Bernard Rieman. Stwierdził on, że można opisać nieskończenie wiele struktur matematycznych, które nie będą spełniały postulatów Euklidesa, będąc dalej geometriami.
 
 ## Podstawowy podział
@@ -139,13 +119,13 @@ Linie w modelu pozostają proste, a cały model można łatwo osadzić w ramach 
 
 ### Model półpłaszczyzny Poincaré
 
-Model półpłaszczysny Poincare to płaszczyzna:
+Model półpłaszczysny Poincaré to płaszczyzna:
 $$ {\{(x, y) \mid y > 0; x, y \in \mathbb {R} \}} $$
 Jest to model dwuwymiarowej geometrii hiperbolicznej (geometrii Lobaczewskiego).
 
 ![Tesselacja w modelu półpłaszczyzny Poincaré](figures/halfplane_tesselation.png){ width=250px }
 
-Model nosi imię Henri Poincare, ale został stworzony przez Eugenio Beltramiego, który użył go wraz z modelem Klein i modelem Poincare, aby pokazać, że geometria hiperboliczna jest równie spójna, jak spójna jest geometria euklidesowa. Ten model jest zgodny, co oznacza, że kąty zmierzone w punkcie modelu są równe kątom na płaszczyźnie hiperbolicznej.
+Model nosi imię Henri Poincaré, ale został stworzony przez Eugenio Beltramiego, który użył go wraz z modelem Klein i modelem Poincaré, aby pokazać, że geometria hiperboliczna jest równie spójna, jak spójna jest geometria euklidesowa. Ten model jest zgodny, co oznacza, że kąty zmierzone w punkcie modelu są równe kątom na płaszczyźnie hiperbolicznej.
 
 ### Model dysku Poincaré
 
@@ -158,11 +138,11 @@ Model dysku Poincaré wykorzystuje wnętrze dysku jako model płaszczyzny hiperb
 
 $$ {\displaystyle \delta (u,v)=2{\frac {\lVert u-v\rVert ^{2}}{(1-\lVert u\rVert ^{2})(1-\lVert v\rVert ^{2})}}} $$
 
-![Linie w modelu dysku Poincare](figures/poincare_disc_lines.png){ width=250px }
+![Linie w modelu dysku Poincaré](figures/poincare_disc_lines.png){ width=250px }
 
 Ponieważ rozpatrywany jest dysk jednostkowy, formuła nie zawiera w zmiennej dla promienia.
 
-![Tesselacja w modelu dysku Poincare](figures/poincare_disk_tesselation.png){ width=250px }
+![Tesselacja w modelu dysku Poincaré](figures/poincare_disk_tesselation.png){ width=250px }
 
 Model jest zgodny, to znaczy, że zachowuje kąty. Oznacza to, że kąty hiperboliczne między krzywymi są równe kątom euklidesowym w punkcie przecięcia. Wadą jest fakt, że ponieważ linia hiperboliczna jest modelowana przez łuk koła euklidesowego, linie proste wydają się zakrzywione.
 
@@ -173,17 +153,17 @@ Hemisfera nie jest często używana jako model płaszczyzny hiperbolicznej jako 
 - __Punkty hiperboliczne__ to punkty na półkuli południowej.
 - __Linie hiperboliczne__ to półkola powstałe z przecięcia półkuli południowej z płaszczyznami prostopadłymi do równika.
 
-![Rzut na dysk Poincarégo (a) i projekcja do modelu Klein-Beltrami (b)](figures/hemisphere.png){ width=800px }
+![Rzut na dysk Poincarégo (a) i projekcja do modelu Klein-Beltrami (b)](figures/hemisphere.png){ width=500px }
 
 Wadą tego rozwiązania, jest dodatkowy wymiar, jaki należy rozpatrywać przy pracy z tym modelem.
 
-## Uzasadnienie wybory modelu dysku Poincare
+## Uzasadnienie wyboru modelu dysku Poincaré
 
 Jak stwierdzono na początku tego rozdziału, kolejne rozdziały, a także opisane implementacje będą prawie wyłącznie korzystać z modelu dysku Poincaré. Podczas renderowania geometrii hiperbolicznej wydaje się to być właściwym wyborem, z uwagi na wartości estetyczne i zgodność modelu.
 
-![Porównanie modeli Kleina, dysku Poincare i półpłaszczyzny Poincare](figures/models_comparision.png)
+![Porównanie modeli Kleina, dysku Poincaré i półpłaszczyzny Poincaré](figures/models_comparision.png)
 
-\newpage
+\newpage\null\newpage
 
 # Projekt systemu
 
@@ -207,25 +187,31 @@ Odtwarzany program tworzony jest poprzez wywołanie instancji klasy programu, dz
 
 ## Klasy obiektów
 
-Każdy możliwy do narysowania obiekt jest instancją jednej z klas. W kodzie silnika istnieje wyraźny podział na klasy udostępniające obiekty rysowane w przestrzeni euklidesowej i hiperbolicznej. Kolejne rodziały są poświęcone opisie i matematycznej interpretacji poszczególnych klas.
+Każdy możliwy do narysowania obiekt jest instancją jednej z klas. W kodzie silnika istnieje wyraźny podział na klasy udostępniające obiekty rysowane w przestrzeni euklidesowej i hiperbolicznej. Wszystkie byty znajdują się w katalogu `/src/core/entity`. Kolejne rodziały są poświęcone opisie i interpretacji poszczególnych klas.
 
 ### Klasa Line
 
 ![Diagram klasy Line](figures/program_line.png)
 
-Konstruktor klasy `Line` przyjmuje dwie zmienne typu `number`. Programista może skorzystać z metody `at(x: number): number`, która zwraca wartość w punkcie `x` oraz `intersectPoint(line: Line): Point`, która zwraca punkt przecięcia tejże linii z inną linią.
+Konstruktor klasy `Line` przyjmuje dwie zmienne typu `number`. Programista może skorzystać z metody `at(x: number): number`, która zwraca wartość w punkcie `x` oraz `intersectPoint(line: Line): Point`, która zwraca punkt przecięcia tejże linii z inną linią. Alternatywnymi sposobami na stworzenie instancji klasy `Line` jest skorzystanie ze statycznych metody `fromPoints(p: Point, q: Point)`, która tworzy linię z dwóch punktów lub `fromPointSlope(p: Point, q: number)`, która do stworzenia linii potrzebuje podania punktu i kąta wyrażonego w radianach.
 
 ### Klasa Point
 
 ![Diagram klasy Point](figures/program_point.png)
 
-Konstruktor klasy `Point` przyjmuje dwie zmienne typu `number`, które są reprezentacją bezwzględnych koordynatów puntu na płótnie. Programista może skorzystać z metody `toHypPoint(plane: Plane): HypPoint`, która przyjmuje instancję klasy `Plane` i zwraca dla niej koordynaty punktu w interfejsie `HypPoint`.
+Konstruktor klasy `Point` przyjmuje dwie zmienne typu `number`, które są reprezentacją bezwzględnych koordynatów puntu na płótnie. Programista może skorzystać z metody `toHypPoint(plane: Plane): HypPoint`, która przyjmuje instancję klasy `Plane` i zwraca dla niej koordynaty punktu w interfejsie `HypPoint`, oraz z metody `inversion(plane: Plane)`, zwracającej punkt odbity względem centralnego punktu obiektu klasy `Plane`.
+
+### Klasa Circle
+
+![Diagram klasy Circle](figures/program_circle.png)
+
+Konstruktor klasy `Circle` przyjmuje punkt centralny będący instancją klasy `Point` i średnicę typu `number`, oraz udostępnia metodę `intersectPoints(circle: Circle): [Point, Point]`, przyjmującą drugi okrąg i zwracającą parę punktów, w których przecinają się oba obiekty. Funkcja `fromPoints(p: Point, q: Point, r: Point)` umożliwia alternatywny sposób stworzenia okręgu z trzech obiektów klasy `Point`.
 
 ### Klasa Plane
 
-Najważniejszą pośród omawianych jest klasa `Plane`, będąca singletonem i punktem odniesienia do 
+Najważniejszym z pośród omawianych dotycznas bytów jest instancja klasy `Plane`, będąca singletonem i punktem odniesienia do wszystkich obiektów dla geometrii hiperbolicznej. Klasa `Plane` dziedziczy po klasie `Circle`, podobnie jak ona posiada centrum i średnicę, liczone automatycznie na podstawie szerokości i wysokości ekranu przy pobraniu instancji klasy.
 
-\newpage
+\newpage\null\newpage
 
 # Implementacja systemu
 
@@ -267,18 +253,22 @@ Wywołanie trybu odbywa się komendą:
 npm run build-watch
 ```
 
-\newpage
+\newpage\null\newpage
 
 # Podsumowanie
 
-\newpage
+\newpage\null\newpage
 
 # Bibliografia
 
 - Caroline Series With assistance from Sara Maloni, Hyperbolic geometry MA448
 - Bjørn Jahren, An introduction to hyperbolic geometry, MAT4510/3510
 - Martin Freiherr von Gagern, Creation of Hyperbolic Ornaments Algorithmic and Interactive Methods, Technischen Universitat Munchen
-- Izabela Przezdzink, Geometria Poincarego i Kleina. Skrypt do zajęć: Podstawy geometrii i elementy geometrii nieeuklidesowej, Wrocław 2010, Uniwersytet Wrocławski Wydział Matematyki i Informatyki Instytut Matematyczny
+- Izabela Przezdzink, Geometria Poincarégo i Kleina. Skrypt do zajęć: Podstawy geometrii i elementy geometrii nieeuklidesowej, Wrocław 2010, Uniwersytet Wrocławski Wydział Matematyki i Informatyki Instytut Matematyczny
 - Mateusz Kłeczek, Geometria hiperboliczna, Chrzanów 2016
 - Steve Szydlik, Hyperbolic Constructions in Geometer’s Sketchpad, December 21, 2001
 - Marek Kordos, Geometria Bolyaia–Łobaczewskiego, http://www.deltami.edu.pl, Sierpień 2018
+
+\newpage\null\newpage
+
+# Zawartość płyty CD
