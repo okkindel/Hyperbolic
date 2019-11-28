@@ -17,9 +17,11 @@ header-includes: |
 
 ## Kontekst historyczny
 
-We wszystkich szkołach od 2500 lat nauczana jest geometria. Sama nazwa - geometria - kojarzyć się może z nauką przyrodniczą, z rzeczą poznawaną na codzień z doświaczenia. Taka właśnie geometria jest również czymś bardzo instynktownym i dobrze wydawałoby się poznanym. Nasuwa się pytanie, czy może istnieć jakaś konkurencyjna do niej teoria.
+__Geometria jest nauką o mierze. Nazwa ta narzuca silne skojarzenia z nauką niemalże przyrodniczą. Nauczana we wszystkich szkołach od dwóch i pół tysiaca lat - wydawałoby się jest już czymś bardzo dobrze poznanym. Nowe teorie matematyczne doprowadziły jednak do podważenia tej pewności i powstania geometrii alternatywnych.__
 
-Sama nazwa tej geometrii - geometria euklidesowa, bierze się z faktu, że została ona sformułowana aksjomatycznie w dziele _Elementy_ około 300 roku przed naszą erą, przez dyrektora Biblioteki Aleksandryjsciej - Euklidesa. Euklides przedstawił 5 postulatów z których wyprowadził całą geometrię, jaką przez kolejne wieki znano:
+\vspace{3mm}
+
+O życiu Euklidesa wiemy bardzo niewiele, a przecież to jemu zawdzięczamy nazwę _naszej_ geometrii. Ani data urodzenia, ani pochodzenie nie są nam znane, a wszystkie informacje o nim czerpiemy z antycznych dzieł w których opisana jest matematyka. Około 300 roku przed naszą erą, Euklides - dyrektor Biblioteki Aleksandryjskiej, wydał swoje największe dzieło - _Elementy Geometrii_, na które składa się 13 ksiąg zawierających właściwie całą wiedzę matematyczną tamtych czasów. Początkowe definicje pierwszej księgi posiadają 5 stwierdzeń, które wedlug Euklidesa są tak proste, że nie wymagają uzasadnienia. Euklides nazwał je aksjomatami:
 
 > 1. Dowolne dwa punkty można połączyć odcinkiem.
 > 2. Dowolny odcinek można przedłużyć nieograniczenie (uzyskując prostą).
@@ -27,13 +29,13 @@ Sama nazwa tej geometrii - geometria euklidesowa, bierze się z faktu, że zosta
 > 4. Wszystkie kąty proste są przystające.
 > 5. Dwie proste, które przecinają trzecią w taki sposób, że suma kątów wewnętrznych po jednej stronie jest mniejsza od dwóch kątów prostych, przetną się z tej właśnie strony.
 
-Piąty aksjomat wywołał wiele wątpliwości. Nawet Euklides unikał używania go w swoim dziele tak długo, jak to było możliwe. Przez kolejne 1500 lat kolejni matematycy próbowali udowodnić, że o wiele bardziej skomplikowany postulat musi wynikać z pozostałych czterech.
+Piąty akjomat mówi o tym, że z jednej strony przecinanej linii dwie proste będą się przybliżać. Zaczał on dość szybko wzbudzać podejrzenia. Jest znacznie bardziej skomplikwany od pozostałych, a już na pewno nie tak intuicyjny. Nawet Euklides unikał używania go w swoim dziele tak długo, jak to było możliwe i użył go dopiero w dowodzie własności 29.
 
-Jednym z pierwszych zajmujących się tym problemem uczonych, był żyjący w V wieku naszej ery Proklos. Stwierdził on w swoim komentarzu do dzieł Euklidesa:
+Można śmiało powiedzieć, że piąty aksjomat w kolejnych wiekach spędał uczonym sen z powiek. Przez kolejne 1500 lat matematycy próbowali udowodnić, że o wiele bardziej skomplikowany postulat musi wynikać z pozostałych czterech. Jednym z pierwszych zajmujących się tym problemem uczonych, był żyjący w V wieku naszej ery Proklos. Stwierdził on w swoim komentarzu do dzieł Euklidesa:
 
 > Nie jest możliwe, aby uczony tej miary co Euklides godził się na obecność tak długiego postulatu w aksjomatyce – obecność postulatu wzięła się z pospiesznego kończenia przez niego Elementów, tak aby zdążyć przed nadejściem słusznie oczekiwanej rychłej śmierci; my zatem – czcząc jego pamięć – powinniśmy ten postulat usunąć lub co najmniej znacznie uprościć.
 
-Wyzwanie usunięcia piątego aksjomatu podjęło wielu matematyków w kolejnych wiekach, znane są dowody Ibn al-Haythama (Alhazen, XI wiek), Omar Khayyáma (XII wiek), Nasir al-Din al-Tūsīa (XIII wiek) i Giovanni Girolamo Saccheriego (XVIII wiek), wszystkie jednak, jak się później okazywało, były błędne. Fakt, że mimo prostych błędów funkcjonowały i były nawet nauczane, wskazuje na kłopot, jakim dla uczonych było przyjęcie do wiadomości, że mogą istnieć dwie różne a wręcz wykluczające się, ale jednocześnie poprawne geometrie, a więc dwie teorie opisujące w różny sposób ten sam obiekt. W szczególności Immanuel Kant w swoim dziele _Krytyka czystego rozumu_ stwierdził, że intuicja geometryczna jest wrodzona, więc nie może istnieć wiele równoległych geometrii, a każdy kto chciałby zajmować się alternatywnymi geometriami nie nadaje się do nauki. Spotkało się to ze sprzeciwem. Johann Heinrich Lambert, zająwszy się taką alternatywną geometrią, ogłosił, że jeśli to nie jest nauka, to on chce uprawiać nienaukę. Udano się do największego w tamtym czasie autorytetu - Carla Friedricha Gaussa, ten jednak wycofał się, bojąc się - jak pisał - wrzasku Boetów. Problem jednak był i należało się do niego jakoś odnieść. Odważyło się na to dwóch młodych ludzi, którzy uparli się nie tylko na uprawianie tej geometrii, ale wręcz głosili jej równoprawność. Rosjanin,  Nikołaj Łobaczewski oraz Węgier - Janos Bolyai, niezależnie od siebie opublikowali prace w których - chociaż odmiennie - nowa geometria była konsekwentnie wyprowadzona. Obu odkrywców spotkała też za to kara, Łobaczewski został wręcz zmuszony do opuszczenia katedry.
+Wyzwanie usunięcia piątego aksjomatu podjęło wielu matematyków w kolejnych wiekach. Prowadziło to do postania wielu nowych twierdzeń, które w istocie były piątemu aksjomatowi równoważne. Prowadziło to do sprzeciwu innych uczonych. W szczególności Immanuel Kant w swoim dziele _Krytyka czystego rozumu_ stwierdził, że intuicja geometryczna jest wrodzona, więc nie może istnieć wiele równoległych geometrii, a każdy kto chciałby zajmować się alternatywnymi geometriami nie nadaje się do nauki. Nie wszyscy zgodzili się z tym stwierdzeniem. Udano się do największego w tamtym czasie autorytetu - Carla Friedricha Gaussa, który jednak wycofał się, bojąc się - jak pisał - wrzasku Boetów. Do problemu należało się jednak odnieść. Odważyło się na to dwóch młodych ludzi, którzy uparli się nie tylko na uprawianie tej geometrii, ale wręcz głosili jej równoprawność. Rosjanin,  Nikołaj Łobaczewski oraz Węgier - Janos Bolyai, niezależnie od siebie opublikowali prace w których - chociaż odmiennie - nowa geometria była konsekwentnie wyprowadzona. Obu odkrywców spotkała też za to kara, Łobaczewski został wręcz zmuszony do opuszczenia katedry.
 
 Sprawę nowej geometrii (nazywanej już geometrią Bolyaia-Łobaczewskiego) przejął Felix Klein. Postawił on tezę, że jeżeli za pomocą geometrii euklidesowej jesteśmy w stanie przedstawić tę nieeuklidesową - i odwrotnie, to oba modele są sobie w istocie równoważne. Opublikował też w 1870 roku dzieło, w którym dowiódł równoprawności obu modeli.
 
@@ -64,10 +66,10 @@ __Rozdział czwarty__: Rozdział zawiera instrukcje instalacji i wdrożenia syst
 
 # Analiza problemu
 
-__W niniejszym rozdziale przedstawiona będzie analiza problemu, opis matematyczny modelu płaszczyny dysku Poincarégo oraz przegląd kilku wybranych modeli geometrii nieeuklicesowej.__
+__W niniejszym rozdziale przedstawiona będzie analiza problemu, opis matematyczny modelu płaszczyny dysku Poincarégo oraz przegląd kilku wybranych modeli geometrii nieeuklidesowej.__
 
 \vspace{3mm}
-Odkrycie, że piątego aksjomatu nigdy nie można udowodnić na podstawie pozostałych czterech aksjomatów, było dla naukowców niespodzianką. Zrobiono to, demonstrując istnienie geometrii, w której pierwsze cztery aksjomaty utrzymywały się, ale piąty nie. Debata nad piątym postulatem Euklidesa stworzyła problem, jak alternatywna geometria powinna wyglądać. Umiano pokazać zaledwie poszczególne właściwości takich geometrii. Pierwszy model geometrii nieeuklidesowej został stworzony przez Kleina. W sprawę zaangażowało się wielu matematyków, w tym również Bernard Rieman. Stwierdził on, że można opisać nieskończenie wiele struktur matematycznych, które nie będą spełniały postulatów Euklidesa, będąc dalej geometriami.
+Odkrycie, że piątego aksjomatu nie można udowodnić na podstawie pozostałych czterech aksjomatów, było dla naukowców niespodzianką. Zrobiono to, demonstrując istnienie geometrii, w której pierwsze cztery aksjomaty utrzymywały się, ale piąty nie. Debata nad piątym postulatem Euklidesa stworzyła problem, jak alternatywna geometria powinna wyglądać. Umiano pokazać zaledwie poszczególne właściwości takich geometrii. Pierwszy model geometrii nieeuklidesowej został stworzony przez Kleina. W sprawę zaangażowało się wielu matematyków, w tym również Bernard Rieman. Stwierdził on, że można opisać nieskończenie wiele struktur matematycznych, które nie będą spełniały postulatów Euklidesa, będąc dalej geometriami.
 
 ## Podstawowy podział
 
@@ -99,7 +101,7 @@ Sposobem opisania różnic między tymi geometriami jest rozważenie dwóch lini
 
 Ta praca skupia się na geometrii hiperbolicznej. Istnieje kilka możliwych sposobów wykorzystania części przestrzeni euklidesowej jako modelu płaszczyzny hiperbolicznej. Wszystkie te modele spełniają ten sam zestaw aksjomatów i wyrażają tę samą abstrakcyjną płaszczyznę hiperboliczną. Dlatego wybór modelu nie ma znaczenia dla twierdzeń czysto hiperbolicznych, jednak robi to różnicę podczas wizualizacji geometrii hiperbolicznej. Następne podrozdziały są poświęcone krótkiemu omówieniu najpopularniejszych z nich.
 
-## Najpopularniejsze modele
+## Popularne modele geometrii hiperbolicznej
 
 Geometria hiperboliczna została opisana za pomocą wielu modeli. Najpopularniejsze przedstawiono poniżej.
 
@@ -111,7 +113,7 @@ Model Kleina - a w zaszadzie model dysku Beltrami–Kleina jest modelem geometri
 
 - __Płaszczyną hiperboliczną__ jest wnętrze koła bez krawędzi.
 - __Prostymi hiperbolicznymi__ są cięciwy tego koła (końce prostej).
-<!-- - __Proste będą prostopadłe__ wtedy, gdy przedłużenie jednej z nich przechodzi przez punkt przecięcia stycznych do  w końcach drugiej. -->
+- __Proste będą prostopadłe__ wtedy, gdy przedłużenie jednej z nich przechodzi przez punkt przecięcia stycznych do obu linii.
 
 ![Koła w modelu Kleina](figures/klein_circles.png){ width=250px }
 
@@ -121,11 +123,11 @@ Linie w modelu pozostają proste, a cały model można łatwo osadzić w ramach 
 
 Model półpłaszczysny Poincaré to płaszczyzna:
 $$ {\{(x, y) \mid y > 0; x, y \in \mathbb {R} \}} $$
-Jest to model dwuwymiarowej geometrii hiperbolicznej (geometrii Lobaczewskiego).
+Jest to model dwuwymiarowej geometrii hiperbolicznej.
 
 ![Tesselacja w modelu półpłaszczyzny Poincaré](figures/halfplane_tesselation.png){ width=250px }
 
-Model nosi imię Henri Poincaré, ale został stworzony przez Eugenio Beltramiego, który użył go wraz z modelem Klein i modelem Poincaré, aby pokazać, że geometria hiperboliczna jest równie spójna, jak spójna jest geometria euklidesowa. Ten model jest zgodny, co oznacza, że kąty zmierzone w punkcie modelu są równe kątom na płaszczyźnie hiperbolicznej.
+Model nosi imię Henri Poincaré, ale został stworzony przez Eugenio Beltramiego, który użył go wraz z modelem Kleina i modelem dysku Poincaré, aby pokazać, że geometria hiperboliczna jest równie spójna, jak spójna jest geometria euklidesowa. Ten model jest zgodny, co oznacza, że kąty zmierzone w punkcie modelu są równe kątom na płaszczyźnie hiperbolicznej.
 
 ### Model dysku Poincaré
 
@@ -138,7 +140,7 @@ Model dysku Poincaré wykorzystuje wnętrze dysku jako model płaszczyzny hiperb
 
 $$ {\displaystyle \delta (u,v)=2{\frac {\lVert u-v\rVert ^{2}}{(1-\lVert u\rVert ^{2})(1-\lVert v\rVert ^{2})}}} $$
 
-![Linie w modelu dysku Poincaré](figures/poincare_disc_lines.png){ width=250px }
+![Wszystkie powyższe linie w dysku Poincaré są równoległe do siebie](figures/poincare_disc_lines.png){ width=250px }
 
 Ponieważ rozpatrywany jest dysk jednostkowy, formuła nie zawiera w zmiennej dla promienia.
 
@@ -188,6 +190,8 @@ Odtwarzany program tworzony jest poprzez wywołanie instancji klasy programu, dz
 ## Klasy obiektów
 
 Każdy możliwy do narysowania obiekt jest instancją jednej z klas. W kodzie silnika istnieje wyraźny podział na klasy udostępniające obiekty rysowane w przestrzeni euklidesowej i hiperbolicznej. Wszystkie byty znajdują się w katalogu `/src/core/entity`. Kolejne rodziały są poświęcone opisie i interpretacji poszczególnych klas.
+
+![Diagram UML głównych składowych aplikacji](figures/diagram.png)
 
 ### Klasa Line
 
@@ -261,11 +265,12 @@ npm run build-watch
 
 # Bibliografia
 
-- Caroline Series With assistance from Sara Maloni, Hyperbolic geometry MA448
-- Bjørn Jahren, An introduction to hyperbolic geometry, MAT4510/3510
 - Martin Freiherr von Gagern, Creation of Hyperbolic Ornaments Algorithmic and Interactive Methods, Technischen Universitat Munchen
+- Tam, gdzie proste są krzywe, Geometrnie enieuklidesowe, Joan Gómez, RBA, 2010
+- Bjørn Jahren, An introduction to hyperbolic geometry, MAT4510/3510
 - Izabela Przezdzink, Geometria Poincarégo i Kleina. Skrypt do zajęć: Podstawy geometrii i elementy geometrii nieeuklidesowej, Wrocław 2010, Uniwersytet Wrocławski Wydział Matematyki i Informatyki Instytut Matematyczny
 - Mateusz Kłeczek, Geometria hiperboliczna, Chrzanów 2016
+- Caroline Series With assistance from Sara Maloni, Hyperbolic geometry MA448
 - Steve Szydlik, Hyperbolic Constructions in Geometer’s Sketchpad, December 21, 2001
 - Marek Kordos, Geometria Bolyaia–Łobaczewskiego, http://www.deltami.edu.pl, Sierpień 2018
 
