@@ -54,7 +54,7 @@ export class HypPoint {
     return numerator.over(denominator);
   }
 
-  times(point: HypPoint | number): HypPoint {
+  private times(point: HypPoint | number): HypPoint {
     if (point instanceof HypPoint) {
       return new HypPoint(
         this.x * point.x - this.y * point.y,
@@ -66,12 +66,12 @@ export class HypPoint {
     }
   }
 
-  over(point: HypPoint | number): HypPoint {
+  private over(point: HypPoint | number): HypPoint {
     if (point instanceof HypPoint) {
-      const deniminator = point.norm2;
+      const denominator = point.norm2;
       return new HypPoint(
-        (this.x * point.x + this.y * point.y) / deniminator,
-        (this.y * point.x - this.x * point.y) / deniminator,
+        (this.x * point.x + this.y * point.y) / denominator,
+        (this.y * point.x - this.x * point.y) / denominator,
         this.plane
       );
     } else {

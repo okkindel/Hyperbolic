@@ -8,7 +8,7 @@ import { Point } from "../Point";
  * Line in Poincare concept.
  */
 export class HypLine {
-  antyclokwise = false;
+  anticlockwise = false;
   startAngle: number;
   endAngle: number;
   plane: Plane;
@@ -17,22 +17,35 @@ export class HypLine {
   q: Point;
 
   constructor(p: Point, q: Point, plane: Plane) {
+    this.arc = this.calculateArc(p, q, plane);
+    this.countAngle(this.arc);
     this.plane = plane;
-    this.p = p;
-    this.q = q;
-    this.calculateArc();
   }
 
-  calculateArc() {
-    this.arc = Circle.fromPoints(this.p, this.q, this.p.inversion(this.plane));
-    this.p = this.cutIfSticksOut(this.p);
-    this.q = this.cutIfSticksOut(this.q);
-    this.countAngle();
+  private calculateArc(p: Point, q: Point, plane: Plane): Circle {
+    let arc = null;
+
+    // ALTERNATIVE WAY
+    // const den = p.x * q.y - q.x * p.y;
+    // const s1 = (1.0 + p.x * p.x + p.y * p.y) / 2.0;
+    // const s2 = (1.0 + q.x * q.x + q.y * q.y) / 2.0;
+    // const C = new Point(
+    //   (s1 * q.y - s2 * p.y) / den,
+    //   (p.x * s2 - q.x * s1) / den
+    // );
+    // const r = Math.sqrt(C.x * C.x + C.y * C.y - 1.0);
+    // arc = new Circle(C, r);
+
+    arc = Circle.fromPoints(p, q, p.inversion(plane));
+
+    this.p = this.cutIfSticksOut(p, arc, plane);
+    this.q = this.cutIfSticksOut(q, arc, plane);
+    return arc;
   }
 
-  cutIfSticksOut(point: Point): Point {
-    if (euclidean(point, this.plane.center) > this.plane.radius) {
-      const intersection = this.plane.intersectPoints(this.arc);
+  private cutIfSticksOut(point: Point, circle: Circle, plane: Plane): Point {
+    if (euclidean(point, plane.center) > plane.radius) {
+      const intersection = plane.intersectPoints(circle);
       return euclidean(point, head(intersection)) <
         euclidean(point, last(intersection))
         ? head(intersection)
@@ -41,14 +54,14 @@ export class HypLine {
     return point;
   }
 
-  countAngle() {
+  private countAngle(circle: Circle) {
     this.startAngle = Math.atan2(
-      this.p.y - this.arc.center.y,
-      this.p.x - this.arc.center.x
+      this.p.y - circle.center.y,
+      this.p.x - circle.center.x
     );
     this.endAngle = Math.atan2(
-      this.q.y - this.arc.center.y,
-      this.q.x - this.arc.center.x
+      this.q.y - circle.center.y,
+      this.q.x - circle.center.x
     );
 
     const radStartAngle = atan2ToRad(this.startAngle);
@@ -66,6 +79,6 @@ export class HypLine {
       radStartAngle < Math.PI &&
       Math.abs(radStartAngle - radEndAngle) > Math.PI;
 
-    this.antyclokwise = (isRotated && !rotatesBackward) || rotatesForward;
+    this.anticlockwise = (isRotated && !rotatesBackward) || rotatesForward;
   }
 }

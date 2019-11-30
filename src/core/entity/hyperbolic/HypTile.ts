@@ -77,7 +77,7 @@ export class HypTile {
     return lines[i % lines.length];
   }
 
-  createRegularPolygon() {
+  private createRegularPolygon() {
     for (let i = 0; i < this.numOfVerts; i++) {
       const point = new HypPoint(
         this.center.x +
@@ -98,8 +98,8 @@ export class HypTile {
       .reflect(this.center);
   }
 
-  generateNKTile = (n: number, k: number, quasiregular: boolean) => {
-    // Let ABC be a triangle in a regular (n,k - tiling, where
+  private generateNKTile = (n: number, k: number, quasiregular: boolean) => {
+    // Let ABC be a triangle in a regular (n,k - tiling), where
     //    A is the center of an n-gon (also center of the disk),
     //    B is a vertex of the n-gon, and
     //    C is the midpoint of a side of the n-gon adjacent to B.

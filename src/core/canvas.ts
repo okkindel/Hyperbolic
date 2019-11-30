@@ -91,7 +91,7 @@ export class Canvas {
       line.arc.radius,
       line.startAngle,
       line.endAngle,
-      line.antyclokwise
+      line.anticlockwise
     );
   }
 

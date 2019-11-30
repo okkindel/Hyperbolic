@@ -48,7 +48,7 @@ export class HypPolygon {
     return HypPolygon.fromVerticles(verticles, this.plane);
   }
 
-  reflect(point: HypPoint) {
+  reflect(point: HypPoint): HypPolygon {
     let verticles: Point[] = [];
     this.verticles.forEach((vert: Point, index: number) => {
       verticles[index] = point

@@ -52,10 +52,6 @@ export const euclidean = (p: Point, q: Point): number => {
 };
 
 export const perpLine = (l: number): number => {
-  if (l === 0) {
-    // FIXME: Numeric way
-    return 10000;
-  }
   return -1 / l;
 };
 

@@ -2,6 +2,7 @@
 title: "Wydział Podstawowych Problemów Techniki"
 author: [Maciej Hajduk, Politechnika Wrocławska]
 date: "Wrocław 2019"
+geometry: margin=4cm
 indent: true
 header-includes: |
   \usepackage{tcolorbox}
@@ -10,6 +11,10 @@ header-includes: |
   \newcommand\qed{\hfill\rule{1em}{1em}}
   
 ---
+
+\newtheorem{theorem}{Twierdzenie}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemat}
 
 \tableofcontents
 
@@ -25,23 +30,26 @@ __Geometria jest nauką o mierze. Nazwa ta narzuca silne skojarzenia z nauką ni
 
 O życiu Euklidesa wiemy bardzo niewiele, a przecież to jemu zawdzięczamy nazwę _naszej_ geometrii. Ani data urodzenia, ani pochodzenie nie są nam znane, a wszystkie informacje o nim czerpiemy z antycznych dzieł w których opisana jest matematyka. Około 300 roku przed naszą erą, Euklides - dyrektor Biblioteki Aleksandryjskiej, wydał swoje największe dzieło - _Elementy Geometrii_, na które składa się 13 ksiąg zawierających właściwie całą wiedzę matematyczną tamtych czasów. Początkowe definicje pierwszej księgi posiadają 5 stwierdzeń, które według Euklidesa są tak proste, że nie wymagają uzasadnienia. Euklides nazwał je aksjomatami:
 
-> 1. Dowolne dwa punkty można połączyć odcinkiem.
-> 2. Dowolny odcinek można przedłużyć nieograniczenie (uzyskując prostą).
-> 3. Dla danego odcinka można zaznaczyć okrąg o środku w jednym z jego końcowych punktów i promieniu równym jego długości.
-> 4. Wszystkie kąty proste są przystające.
-> 5. Dwie proste, które przecinają trzecią w taki sposób, że suma kątów wewnętrznych po jednej stronie jest mniejsza od dwóch kątów prostych, przetną się z tej właśnie strony.
+> 1. Od dowolnego punktu do dowolnego innego można poprowadzić prostą.
+> 2. Ograniczoną prostą można dowolnie przedłużyć.
+> 3. Z dowolnego środka dowolnym promieniem można opisać okrąg.
+> 4. Wszystkie kąty proste są równe (przystające).
+> 5. Jeśli 2 proste na płaszczyźnie tworzą z trzecią kąty jednostronne wewnętrzne o sumie mniejszej od 2 kątów prostych, to proste te, po przedłużeniu, przetną się i to z tej właśnie strony. [^axioms]
 
 Piąty aksjomat mówi o tym, że z jednej strony przecinanej linii dwie proste będą się przybliżać. Zaczął on dość szybko wzbudzać podejrzenia. Jest znacznie bardziej skomplikowany od pozostałych, a już na pewno nie tak intuicyjny. Nawet Euklides unikał używania go w swoim dziele tak długo, jak to było możliwe i użył go dopiero w dowodzie własności 29.
 
 Można śmiało powiedzieć, że piąty aksjomat w kolejnych wiekach spędzał uczonym sen z powiek. Przez kolejne 1500 lat matematycy próbowali udowodnić, że o wiele bardziej skomplikowany postulat musi wynikać z pozostałych czterech. Jednym z pierwszych zajmujących się tym problemem uczonych, był żyjący w V wieku naszej ery Proklos. Stwierdził on w swoim komentarzu do dzieł Euklidesa:
 
-> Nie jest możliwe, aby uczony tej miary co Euklides godził się na obecność tak długiego postulatu w aksjomatyce – obecność postulatu wzięła się z pospiesznego kończenia przez niego Elementów, tak aby zdążyć przed nadejściem słusznie oczekiwanej rychłej śmierci; my zatem – czcząc jego pamięć – powinniśmy ten postulat usunąć lub co najmniej znacznie uprościć.
+> Nie jest możliwe, aby uczony tej miary co Euklides godził się na obecność tak długiego postulatu w aksjomatyce – obecność postulatu wzięła się z pospiesznego kończenia przez niego Elementów, tak aby zdążyć przed nadejściem słusznie oczekiwanej rychłej śmierci; my zatem – czcząc jego pamięć – powinniśmy ten postulat usunąć lub co najmniej znacznie uprościć. [^proklos_annotation]
 
 Wyzwanie usunięcia piątego aksjomatu podjęło wielu matematyków w kolejnych wiekach. Prowadziło to do postania wielu nowych twierdzeń, które w istocie były piątemu aksjomatowi równoważne. Prowadziło to do sprzeciwu innych uczonych. W szczególności Immanuel Kant w swoim dziele _Krytyka czystego rozumu_ stwierdził, że intuicja geometryczna jest wrodzona, więc nie może istnieć wiele równoległych geometrii, a każdy kto chciałby zajmować się alternatywnymi geometriami nie nadaje się do nauki. Nie wszyscy zgodzili się z tym stwierdzeniem. Udano się do największego w tamtym czasie autorytetu - Carla Friedricha Gaussa, który jednak wycofał się, bojąc się - jak pisał - wrzasku Beotów. Do problemu należało się jednak odnieść. Odważyło się na to dwóch młodych ludzi, którzy uparli się nie tylko na uprawianie tej geometrii, ale wręcz głosili jej równoprawność. Rosjanin,  Nikołaj Łobaczewski oraz Węgier - Janos Bolyai, niezależnie od siebie opublikowali prace w których - chociaż odmiennie - nowa geometria była konsekwentnie wyprowadzona. Obu odkrywców spotkała też za to kara, Łobaczewski został wręcz zmuszony do opuszczenia katedry.
 
 Sprawę nowej geometrii (nazywanej już geometrią Bolyaia-Łobaczewskiego) przejął Felix Klein. Postawił on tezę, że jeżeli za pomocą geometrii euklidesowej jesteśmy w stanie przedstawić tę nieeuklidesową - i odwrotnie, to oba modele są sobie w istocie równoważne. Opublikował też w 1870 roku dzieło, w którym dowiódł równoprawności obu modeli.
 
 Dosadnie do nowego modelu odniósł się fizyk - Hermann Helmholtz, publikując pracę, w której określił matematykę jako skrzynkę z narzędziami dla nauk przyrodniczych, czym odebrał jej walor nauki przyrodniczej jako takiej.
+
+[^axioms]: [Geometria euklidesowa. Encyklopedia PWN](https://encyklopedia.pwn.pl/haslo/geometria-euklidesowa;3904959.html)
+[^proklos_annotation]: [Najgłupiej postawiony problem matematyki. Marek Kordos - Delta, maj 2012](http://www.deltami.edu.pl/temat/matematyka/geometria/planimetria/2012/04/25/Dowody_V_postulatu_Euklidesa/)
 
 ## Wybrane zagadnienie
 
@@ -83,12 +91,14 @@ Geometria nieeuklidesowa to każda geometria, która nie spełnia przynajmniej j
 
   Geometria hiperboliczna jest bliżej związana z geometrią euklidesową, niż się wydaje: jedyną różnicą aksjomatyczną jest postulat równoległy. Po usunięciu postulatu równoległego z geometrii euklidesowej geometria wynikowa jest geometrią absolutną. Wszystkie twierdzenia o geometrii absolutnej, w tym pierwsze 28 twierdzeń zaprezentowanych przez Euklidesa, obowiązują w geometrii i euklidesowej i hiperbolicznej.
 
+  \vspace{3mm}
   W modelu hiperbolicznym, w płaszczyźnie dwuwymiarowej, dla dowolnej linii $L$ i punktu $X$, który nie jest na $L$, istnieje nieskończenie wiele linii przechodzących przez $X$, które się nie przecinają $L$.
 
 ### Geometria Riemanna (eliptyczna)
 
   Geometria eliptyczna jest geometrią nieeuklidesową o dodatniej krzywiźnie, która zastępuje postulat równoległy stwierdzeniem "przez dowolny punkt na płaszczyźnie, nie ma linii równoległych do danej linii". Geometria eliptyczna jest czasem nazywana również geometrią Riemannowską. Model można wizualizować jako powierzchnię kuli, na której linie przyjmowane są jako wielkie koła. W geometrii eliptycznej suma kątów trójkąta wynosi >180 stopni.
   
+  \vspace{3mm}
   W modelu eliptycznym dla dowolnej linii $L$ i punktu $X$, który nie jest na $L$, wszystkie linie przechodzące przez $X$ przecinają się $L$.
 
 ### Różnice pomiędzy geometriami
@@ -96,7 +106,11 @@ Geometria nieeuklidesowa to każda geometria, która nie spełnia przynajmniej j
 Sposobem opisania różnic między tymi geometriami jest rozważenie dwóch linii prostych rozciągniętych w nieskończoność w płaszczyźnie dwuwymiarowej, które są prostopadłe do trzeciej linii:
 
 - W geometrii euklidesowej linie pozostają w stałej odległości od siebie (co oznacza, że linia narysowana prostopadle do jednej linii w dowolnym punkcie przecina drugą linię, a długość odcinka linii łączącego punkty przecięcia pozostaje stała) i są znane jako równoległe.
-- W geometrii hiperbolicznej linie _zakrzywiają się_ od siebie, zwiększając odległość w miarę przesuwania się dalej od punktów przecięcia ze wspólną prostopadłą; linie te są często nazywane ultraparallelami .
+\vspace{3mm}
+
+- W geometrii hiperbolicznej linie _zakrzywiają się_ od siebie, zwiększając odległość w miarę przesuwania się dalej od punktów przecięcia ze wspólną prostopadłą; linie te są często nazywane ultraparallelami.
+\vspace{3mm}
+
 - W geometrii eliptycznej linie _zakrzywiają się_ do siebie i w końcu przecinają.
 
 ![Zachowanie linii ze wspólną prostopadłą w każdym z trzech rodzajów geometrii](figures/noneuclid.png)
@@ -189,41 +203,49 @@ Klasa `Engine` przyjmuje konfigurację z pliku `/assets/config.json`, która ust
 
 Odtwarzany program tworzony jest poprzez wywołanie instancji klasy programu, dziedziczącej po abstrakcyjnej klasie `Program`, udostępniającej metody takie jak `onLoop()`.
 
-## Klasy obiektów
+## Typy obiektów renderowanych przez silnik
 
 Każdy możliwy do narysowania obiekt jest instancją jednej z klas. W kodzie silnika istnieje wyraźny podział na klasy udostępniające obiekty rysowane w przestrzeni euklidesowej i hiperbolicznej. Wszystkie byty znajdują się w katalogu `/src/core/entity`. Kolejne rozdziały są poświęcone opisie i interpretacji poszczególnych klas.
 
 <!-- ![Diagram UML głównych składowych aplikacji](figures/diagram.png) -->
 \includepdf{figures/diagram.pdf}
 
-### Klasa Line
+## Obiekty geometrii Euklidesowej
 
-![Diagram klasy Line](figures/program_line.png){ width=200px }
+Instancje klas opisanych poniżej są obiektami rysowanymi finalnie przez silnik, na płaskim ekranie całość sprowadza się do linii, łuków, kół i punktow w przestrzeni Euklidesowej.
 
-Konstruktor klasy `Line` przyjmuje dwie zmienne typu `number`. Programista może skorzystać z metody `at(x: number): number`, która zwraca wartość w punkcie `x` oraz `intersectPoint(line: Line): Point`, która zwraca punkt przecięcia tejże linii z inną linią. Alternatywnymi sposobami na stworzenie instancji klasy `Line` jest skorzystanie ze statycznych metody `fromPoints(p: Point, q: Point)`, która tworzy linię z dwóch punktów lub `fromPointSlope(p: Point, q: number)`, która do stworzenia linii potrzebuje podania punktu i kąta wyrażonego w radianach.
 
 ### Klasa Point
 
-![Diagram klasy Point](figures/program_point.png){ width=200px }
+Konstruktor klasy `Point` przyjmuje dwie zmienne typu `number`, które są reprezentacją bezwzględnych koordynatów puntu na płótnie. Programista może skorzystać z metody `toHypPoint(plane: Plane): HypPoint`, która przyjmuje instancję klasy `Plane` i zwraca dla niej koordynaty punktu w interfejsie klasy `HypPoint`, oraz z metody `inversion(plane: Plane)`, zwracającej punkt odbity względem centralnego punktu obiektu klasy `Plane` (centrum sfery hiperbolicznej).
 
-Konstruktor klasy `Point` przyjmuje dwie zmienne typu `number`, które są reprezentacją bezwzględnych koordynatów puntu na płótnie. Programista może skorzystać z metody `toHypPoint(plane: Plane): HypPoint`, która przyjmuje instancję klasy `Plane` i zwraca dla niej koordynaty punktu w interfejsie `HypPoint`, oraz z metody `inversion(plane: Plane)`, zwracającej punkt odbity względem centralnego punktu obiektu klasy `Plane`.
+### Klasa Line
+
+Konstruktor klasy `Line` przyjmuje dwie zmienne typu `number`. Programista może skorzystać z metody `at(x: number): number`, która zwraca wartość w punkcie `x` oraz `intersectPoint(line: Line): Point`, która zwraca punkt przecięcia tejże linii z inną linią.  
+
+Alternatywnymi sposobami na stworzenie instancji klasy `Line` jest skorzystanie ze statycznych metody `fromPoints(p: Point, q: Point)`, która tworzy linię z dwóch punktów lub `fromPointSlope(p: Point, q: number)`, która do stworzenia linii potrzebuje podania punktu i kąta wyrażonego w radianach.
 
 ### Klasa Circle
-
-![Diagram klasy Circle](figures/program_circle.png){ width=200px }
 
 Konstruktor klasy `Circle` przyjmuje punkt centralny będący instancją klasy `Point` i średnicę typu `number`, oraz udostępnia metodę `intersectPoints(circle: Circle): [Point, Point]`, przyjmującą drugi okrąg i zwracającą parę punktów, w których przecinają się oba obiekty. Funkcja `fromPoints(p: Point, q: Point, r: Point)` umożliwia alternatywny sposób stworzenia okręgu z trzech obiektów klasy `Point`.
 
 ### Klasa Plane
 
-Najważniejszym z pośród omawianych dotychczas bytów jest instancja klasy `Plane`, będąca singletonem i punktem odniesienia do wszystkich obiektów dla geometrii hiperbolicznej. Klasa `Plane` dziedziczy po klasie `Circle`, podobnie jak ona posiada centrum i średnicę, liczone automatycznie na podstawie szerokości i wysokości ekranu przy pobraniu instancji klasy.
+Najważniejszym z pośród omawianych dotychczas bytów jest instancja klasy `Plane`, będąca singletonem i punktem odniesienia do wszystkich obiektów dla geometrii hiperbolicznej.  
+
+Klasa `Plane` dziedziczy po klasie `Circle`, podobnie jak ona posiada centrum i średnicę, liczone automatycznie na podstawie szerokości i wysokości ekranu przy pobraniu instancji klasy.
+
+## Obiekty geometrii hiperbolicznej
+
+Kod źródłowy klas opisanych poniżej znajduje się w oddzielnym katalogu silnika: `/src/core/entity/hyperbolic`. Każdy z tych obiektów opisuje byt geometrii hiperbolicznej, rysowany następnie przez silnik w formie prostych linii, czy łuków.
 
 ### Klasa HypLine
 
-Klasa HypLine jest pierwszą z pośród klas obiektów hiperbolicznych. Konstruktor klasy przyjmuje, podobnie jak klasa Line, dwa punkty oraz dodatkowo instancję klasy `Plane`. Pierwszym krokiem konstruktora jest wywołanie metody `calculateArc(p: Point, q: Point, plane: Plane): Circle`, która z pomocą algorytmu opisanego poniżej, zwraca instancję klasy `Circle`, będącą okręgiem, na obwodzie którego leży dana prosta hiperboliczna, jednocześnie ustalając punkty `p` i `q` wyznaczające końce odcinka, posługując się przy tym metodą `cutIfSticksOut(point: Point, circle: Circle, plane: Plane): Point`, sprawdzającą, czy punkt nie leży poza granicą koła wyznaczonego przez obiekt klasy `Plane` i ewentualnie przesuwającą go na punkt przecięcia.  
+Klasa `HypLine` jest pierwszą z pośród klas obiektów hiperbolicznych. Konstruktor klasy przyjmuje, podobnie jak klasa Line, dwa punkty oraz dodatkowo instancję klasy `Plane`.  
 
-#### Algorytm wyznaczania okręgu z dwóch punktów
+Pierwszym krokiem konstruktora jest wywołanie metody `calculateArc(p: Point, q: Point, plane: Plane): Circle`, która z pomocą algorytmu opisanego poniżej, zwraca instancję klasy `Circle`, będącą okręgiem, na obwodzie którego leży dana prosta hiperboliczna. Ustala jednocześnie punkty `p` i `q` wyznaczające końce odcinka, posługując się przy tym metodą `cutIfSticksOut(point: Point, circle: Circle, plane: Plane): Point`, sprawdzającą, czy punkt nie leży poza granicą koła wyznaczonego przez obiekt klasy `Plane` i ewentualnie przesuwającą go na punkt przecięcia.  
 
+\vspace{3mm}
 \begin{algorithm}[H]
  \KwData{this text}
  \KwResult{how to write algorithm with \LaTeX2e }
@@ -237,10 +259,66 @@ Klasa HypLine jest pierwszą z pośród klas obiektów hiperbolicznych. Konstruk
    go back to the beginning of current section\;
   }
  }
- \caption{How to write algorithms}
+ \caption{Algorytm wyznaczania okręgu na podstawie dwóch punktów i płaszczyny }
 \end{algorithm}
+\vspace{3mm}
 
-Ostatnią nieomówioną funcją jest `countAngle(circle: Circle)`
+Ostatnią nieomówioną funcją jest `countAngle(circle: Circle)`, określającą na podstawie wsześniej obliczonych punktów, początkowy i końcowy kąt łuku oraz kierunek, w jakim rysowany będzie ten łuk.
+
+### Klasa HypPoint
+
+Klasa HypPoint to w rzeczywistości reprezentacja punktu wględem płaszczyzny hiperbolicznej w dziedzinie $(-1, 1) \times (-1, 1) \in \mathbb {R} \times \mathbb {R}$.  
+
+Klasa udostępnia metodę `toCanvasCoords(): Point`, zwracającą instancję tego samego punktu, zdolną do wyświetlenia przez aplikację, funcję `reflect(point: HypPoint): HypPoint` - zwracającą odbicie tegoż punktu względem innego i dwie prywatne, pomocnicze funkcje `times(point: HypPoint | number): HypPoint` oraz `over(point: HypPoint | number): HypPoint` służące kolejno do mnożenia lub dzielenia danego punktu przez stałą lub inny punkt.  
+
+Najważniejszą metodą tej klasy jest `moebius(point: HypPoint, t: number): HypPoint`. Aby zrozumieć jej działanie potrzebne będzie zdefiniowanie _Transformacji Möbiusa_ i jej udziału w obliczaniu punktu na przestrzeni dysku Poincaré. Zdefiniowana jest ona na końcu tego rozdziału.
+
+### Klasa HypPolygon
+
+Konstruktor klasy `HypPolygon` przyjmuje dwie zmienne typu `Point` oraz instację klasy `Plane` i tworzy z nich wielokąt na przestrzeni hiperbolicznej.  
+
+Wielokąt może zostać rozszerzony o kolejne punkty z pomocą metody `addVerticle(point: Point)`. Funkcja `getCompletePolygonLines(): HypLine[]` zwraca wszystkie odcinki wchodzące w skład wielokąta, wraz z jednym dodatkowym odcinkiem, łączącym pierwszy i ostatni wierzchołek. Funkcje `moebius(point: HypPoint, t: number): HypPolygon` oraz `reflect(point: HypPoint): HypPolygon` wykonują kolejno transformację Möbiusa oraz odbicie względem punktu na wszystkich wierzchołkach wielokąta.  
+
+Programista może skorzystać ze statycznej metody `fromVerticles(verts: Point[], plane: Plane): HypPolygon`, która przyjmuje tablicę punków oraz instację klasy `Plane` i zwraca gotowy wielokąt.
+
+### Klasa HypTile
+
+Klasa `HypTile` jest nietypowa na tle swoich poprzedniczek. Konstruktor tej klasy jest prywatny, a stworzenie jej instancji odbywa się za pomocą jednej z trzech metod statycznych:
+
+- `fromPolygon(polygon: HypPolygon, center: HypPoint, plane: Plane): HypTile` - funkcja tworzy obiekt klasy `HypTile` wykorzystując do tego instancję obiekty klasy `HypPolygon`
+\vspace{3mm}
+
+- `createNKPolygon(n: number, k: number, center: HypPoint, plane: Plane, quasiregular = false): HypTile` - Niech ABC będzie trójkątem w regularnym (n, k - kafelkowy), gdzie:
+  - A jest środkiem n-gona (również środkiem dysku),
+  - B jest wierzchołkiem n-gonu,
+  - C jest punktem środkowym boku n-gonu sąsiadującego z B.
+\vspace{3mm}
+
+- `createRegularPolygon(numOfVerts: number, distance: number, center: HypPoint, plane: Plane, startAngle = 0): HypTile` - funkcja tworzy wielokąt foremnty o podanych parametrach.
+\vspace{3mm}
+
+## Funkcje dodatkowe
+
+Plik `geometry.ts` zawiera zestaw funkcji wspólnych dla wielu obiektów, lub nie powiązanych bezpośrednio z żadnym z nich. Są to głównie funkcje czysto matematyczno - geometryczne, takie jak odległość Euklidesowa lub szukanie dwusiecznej dwóch punktów.
+
+## Transformacja Möbiusa
+
+\begin{theorem}
+Transformacja Möbiusa jest funkcją na rozszerzonej płaszczyźnie zespolonej określoną równaniem
+
+$$ f(z)={\frac{az+b}{cz+d}}, \: gdzie \: ad - bc \neq 0 $$
+\end{theorem}
+
+$$ transformacja \: Möbiusa = złożenie \: inwersji = izometrie \: hiperboliczne $$
+
+__Hiperboliczne symetrie są modelowane jako przekształcenia Möbiusa:__ [^moebius]
+\vspace{3mm}
+
+Transformacje Möbiusa (zwane również homografiami) tworzą grupę geometryczną. Odwrócenie przestrzeni przez sferę ze środkiem w punkcie $O$ i promieniu $r$, odwzorowuje na siebie wszystkie promienie pochodzące z tego, że iloczyn punktu na tym promieniu wraz z jego obrazem jest równy $r^2$. Transformacje Möbiusa zachowują również kąty. Izometria geometrii hiperbolicznych to własnie transformacje Möbiusa. W ten sposób, z ich pomocą możemy nawigować po przestrzeni hiperbolicznej, płynnie przesuwając punkt widzenia modelu dysku Poincaré.
+
+![Transformacja Möbiusa](figures/moebius.png){ width=250px }
+
+[^moebius]: [HyperbolicTransformations, Chapter 17](http://homepages.gac.edu/~hvidsten/geom-text/web-chapters/hyper-transf.pdf)
 
 \newpage\null\newpage
 
@@ -250,7 +328,13 @@ __W niniejszym rozdziale omówiona zostanie technologia, konfiguracja oraz wdro�
 
 ## Opis technologii
 
-Do implementacji systemu użyto języka `TypeScript` w wersji `3.6.3`, bundlera (transpilatora nowoczesnych wersji języka `JavaScript` do wersji zrozumiałych dla przeglądarek) `webpack` w wersji `2.3.3` oraz `CSS3` i  `HTML5` wraz z elementem `<canvas>` odpowiedzialnym za rysowanie grafiki na ekranie. Pełna lista wszystkich bibliotek wraz z ich wersjcami znajduje się w pliku `package.json`, w katalogu głównym projektu.
+Do implementacji systemu użyto języka `TypeScript` w wersji `3.6.3`, bundlera (transpilatora nowoczesnych wersji języka `JavaScript` do wersji zrozumiałych dla przeglądarek) `webpack` w wersji `2.3.3` oraz `SCSS` i  `HTML5` wraz z elementem `<canvas>` odpowiedzialnym za rysowanie grafiki na ekranie. Użyta została również funkcyjna biblioteka `ramda` w formie pomocniczej biblioteki _utilsowej_. Pełna lista wszystkich bibliotek wraz z ich wersjcami znajduje się w pliku `package.json`, w katalogu głównym projektu.
+
+## Poszczególne składowe systemu
+
+Kolejne paragrafy zawierają opisy i przeznaczenie poszczególnych plików. 
+
+\newpage\null\newpage
 
 # Instalacja i wdrożenie
 
@@ -284,6 +368,8 @@ Wywołanie trybu odbywa się komendą:
 npm run build-watch
 ```
 
+## Wdrożenie na serwerze WWW
+
 \newpage\null\newpage
 
 # Podsumowanie
@@ -292,15 +378,46 @@ npm run build-watch
 
 # Bibliografia
 
+- Joan Gómez, Tam, gdzie proste są krzywe, Geometrnie enieuklidesowe, RBA, 2010
+\vspace{3mm}
+
 - Martin Freiherr von Gagern, Creation of Hyperbolic Ornaments Algorithmic and Interactive Methods, Technischen Universitat Munchen
-- Tam, gdzie proste są krzywe, Geometrnie enieuklidesowe, Joan Gómez, RBA, 2010
-- Bjørn Jahren, An introduction to hyperbolic geometry, MAT4510/3510
-- Izabela Przezdzink, Geometria Poincarégo i Kleina. Skrypt do zajęć: Podstawy geometrii i elementy geometrii nieeuklidesowej, Wrocław 2010, Uniwersytet Wrocławski Wydział Matematyki i Informatyki Instytut Matematyczny
+\vspace{3mm}
+
 - Mateusz Kłeczek, Geometria hiperboliczna, Chrzanów 2016
+\vspace{3mm}
+
+- Bjørn Jahren, An introduction to hyperbolic geometry, MAT4510/3510
+\vspace{3mm}
+
+- Izabela Przezdzink, Geometria Poincaré i Kleina. Skrypt do zajęć: Podstawy geometrii i elementy geometrii nieeuklidesowej, Wrocław 2010, Uniwersytet Wrocławski Wydział Matematyki i Informatyki Instytut Matematyczny
+\vspace{3mm}
+
+- Stefan Kulczycki Biblioteka Problemów Geometria NieeuklidesowaWarszawa 1960,  Państwowe Wydawnictwo Naukowe
+\vspace{3mm}
+
+- Marek Kordos, O różnych geometriach,  Warszawa 1987, Wydawnictwa Alfa
+\vspace{3mm}
+
 - Caroline Series With assistance from Sara Maloni, Hyperbolic geometry MA448
+\vspace{3mm}
+
+- Marshall Bern, Optimal Möbius Transformationfor Information Visualization and Meshing
+\vspace{3mm}
+
 - Steve Szydlik, Hyperbolic Constructions in Geometer’s Sketchpad, December 21, 2001
+\vspace{3mm}
+
+- Douglas N. Arnold and Jonathan Rogness, Möbius Transformations Revealed
+\vspace{3mm}
+
+- Frank Nielsen1and, Richard Nock, Hyperbolic Voronoi diagrams made easy
+\vspace{3mm}
+
 - Marek Kordos, Geometria Bolyaia–Łobaczewskiego, http://www.deltami.edu.pl, Sierpień 2018
 
 \newpage\null\newpage
 
 # Zawartość płyty CD
+
+Płyta CD zawiera cały kod źródłowy programu, zbudowany w katalogu `/dist` projekt oraz katalog `/docs` zawierający źródła tej pracy oraz jej końcową wersję w postaci pliku `pdf`.
