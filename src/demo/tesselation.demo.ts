@@ -8,7 +8,7 @@ export class TesselationDemo extends Program {
   y = new HypPoint(0, 0, this.plane).y;
 
   n = 8;
-  k = 3;
+  k = 4;
   q = true;
 
   tiles: HypTile[] = [];

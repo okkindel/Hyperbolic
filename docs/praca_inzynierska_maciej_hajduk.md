@@ -44,6 +44,7 @@ Można śmiało powiedzieć, że piąty aksjomat w kolejnych wiekach spędzał u
 
 Wyzwanie usunięcia piątego aksjomatu podjęło wielu matematyków w kolejnych wiekach. Prowadziło to do postania wielu nowych twierdzeń, które w istocie były piątemu aksjomatowi równoważne. Prowadziło to do sprzeciwu innych uczonych. W szczególności Immanuel Kant w swoim dziele _Krytyka czystego rozumu_ stwierdził, że intuicja geometryczna jest wrodzona, więc nie może istnieć wiele równoległych geometrii, a każdy kto chciałby zajmować się alternatywnymi geometriami nie nadaje się do nauki. Nie wszyscy zgodzili się z tym stwierdzeniem. Udano się do największego w tamtym czasie autorytetu - Carla Friedricha Gaussa, który jednak wycofał się, bojąc się - jak pisał - wrzasku Beotów. Do problemu należało się jednak odnieść. Odważyło się na to dwóch młodych ludzi, którzy uparli się nie tylko na uprawianie tej geometrii, ale wręcz głosili jej równoprawność. Rosjanin,  Nikołaj Łobaczewski oraz Węgier - Janos Bolyai, niezależnie od siebie opublikowali prace w których - chociaż odmiennie - nowa geometria była konsekwentnie wyprowadzona. Obu odkrywców spotkała też za to kara, Łobaczewski został wręcz zmuszony do opuszczenia katedry.
 
+\vspace{3mm}
 Sprawę nowej geometrii (nazywanej już geometrią Bolyaia-Łobaczewskiego) przejął Felix Klein. Postawił on tezę, że jeżeli za pomocą geometrii euklidesowej jesteśmy w stanie przedstawić tę nieeuklidesową - i odwrotnie, to oba modele są sobie w istocie równoważne. Opublikował też w 1870 roku dzieło, w którym dowiódł równoprawności obu modeli.
 
 Dosadnie do nowego modelu odniósł się fizyk - Hermann Helmholtz, publikując pracę, w której określił matematykę jako skrzynkę z narzędziami dla nauk przyrodniczych, czym odebrał jej walor nauki przyrodniczej jako takiej.
@@ -214,7 +215,6 @@ Każdy możliwy do narysowania obiekt jest instancją jednej z klas. W kodzie si
 
 Instancje klas opisanych poniżej są obiektami rysowanymi finalnie przez silnik, na płaskim ekranie całość sprowadza się do linii, łuków, kół i punktow w przestrzeni Euklidesowej.
 
-
 ### Klasa Point
 
 Konstruktor klasy `Point` przyjmuje dwie zmienne typu `number`, które są reprezentacją bezwzględnych koordynatów puntu na płótnie. Programista może skorzystać z metody `toHypPoint(plane: Plane): HypPoint`, która przyjmuje instancję klasy `Plane` i zwraca dla niej koordynaty punktu w interfejsie klasy `HypPoint`, oraz z metody `inversion(plane: Plane)`, zwracającej punkt odbity względem centralnego punktu obiektu klasy `Plane` (centrum sfery hiperbolicznej).
@@ -245,6 +245,7 @@ Klasa `HypLine` jest pierwszą z pośród klas obiektów hiperbolicznych. Konstr
 
 Pierwszym krokiem konstruktora jest wywołanie metody `calculateArc(p: Point, q: Point, plane: Plane): Circle`, która z pomocą algorytmu opisanego poniżej, zwraca instancję klasy `Circle`, będącą okręgiem, na obwodzie którego leży dana prosta hiperboliczna. Ustala jednocześnie punkty `p` i `q` wyznaczające końce odcinka, posługując się przy tym metodą `cutIfSticksOut(point: Point, circle: Circle, plane: Plane): Point`, sprawdzającą, czy punkt nie leży poza granicą koła wyznaczonego przez obiekt klasy `Plane` i ewentualnie przesuwającą go na punkt przecięcia.  
 
+<!-- TODO: -->
 \vspace{3mm}
 \begin{algorithm}[H]
  \KwData{this text}
@@ -288,10 +289,7 @@ Klasa `HypTile` jest nietypowa na tle swoich poprzedniczek. Konstruktor tej klas
 - `fromPolygon(polygon: HypPolygon, center: HypPoint, plane: Plane): HypTile` - funkcja tworzy obiekt klasy `HypTile` wykorzystując do tego instancję obiekty klasy `HypPolygon`
 \vspace{3mm}
 
-- `createNKPolygon(n: number, k: number, center: HypPoint, plane: Plane, quasiregular = false): HypTile` - Niech ABC będzie trójkątem w regularnym (n, k - kafelkowy), gdzie:
-  - A jest środkiem n-gona (również środkiem dysku),
-  - B jest wierzchołkiem n-gonu,
-  - C jest punktem środkowym boku n-gonu sąsiadującego z B.
+- `createNKPolygon(n: number, k: number, center: HypPoint, plane: Plane, quasiregular = false): HypTile` - Tworzy n-kąt o wielkości i kątach dobranych w ten sposób, by przy układaniu ich obok siebie, tworzyły przestrzeń będączą k-kątem.
 \vspace{3mm}
 
 - `createRegularPolygon(numOfVerts: number, distance: number, center: HypPoint, plane: Plane, startAngle = 0): HypTile` - funkcja tworzy wielokąt foremnty o podanych parametrach.
@@ -332,7 +330,60 @@ Do implementacji systemu użyto języka `TypeScript` w wersji `3.6.3`, bundlera 
 
 ## Poszczególne składowe systemu
 
-Kolejne paragrafy zawierają opisy i przeznaczenie poszczególnych plików. 
+Aplikacja budowana jest ze źródeł z pomocą konfiguracji webpackowej. Kolejne paragrafy zawierają opisy i przeznaczenie poszczególnych plików oraz ogolny projekt całej aplikacji.
+
+## Konfiguracja systemu
+
+Konfiguracja systemu potrzebna do zbudowania silnika znajduje się w całości w katalogu głównym.
+
+### Biblioteki projektu
+
+Biblioteki potrzebne do zbudowania aplikacji wraz z ich wersjami znajdują się w pliku `package.json`. Instalują się one do katalogu `node_modules` po wpisaniu komendy `npm install`. Aby zbudować aplikacje potrzebne jest połączenie z internetem.
+
+### Bundlowanie aplikacji
+
+Do bundolwania aplikacji użyty został framework `webpack`. Jego konfiguarcja znajduje się w pliku `webpack.config.js` w katalogu głównym. Określa ona, gdzie znajdują się pliki źródłowe, jakie mają rozszerzenia i w jaki sposób powinny być kompilowane. Do konfiguracji dołączone jest również rozszerzenie `style-loader`, które kompiluje pliki stylów o formacie `scss`.
+
+### Konfiguracja języka
+
+Język `Typescript` wymaga pliku `tsconfig.json` w katalogu głównym projektu. Plik tsconfig.json określa pliki główne i opcje kompilatora wymagane do skompilowania projektu.
+
+## Pliki źródłowe silnika
+
+![Schemat katalogów plików źródłowych](figures/files.png){ width=200px }
+
+Źródła systemu znajdują się w całości w katalogu `/src/core`. Opis poszczególnych klas i przepływ pracy programu znajduje się w poprzednim rozdziale. Katalog `styles` zawiera plik styli, który budowany jest razem z resztą aplikacji z pomocą `webpacka`, natomiast folder `demo` zawiera programy demonstracyjne. Opis niektórych programów, co za tym idzie - możliwości silnika znajduje się poniżej. W katalogu `assets` znajduje się plik konfiguracyny dla klasy `Canvas`.
+\vspace{3mm}
+
+Każdy program demonstracyjny dziedziczy po klasie `Program`. Klasa bazowa udostępnia metodę `onLoop()`, w której umieszcza się intrukcje do wykonania przez silnik oraz zmienna point definiująca położenie wzkaźnika myszy. Instancja klasy `Canvas` dostarczana jest poprzez wzorzec `dependecy injection`.
+
+### Polygon Demo
+
+Program `Polygon Demo` przezentuje możliwości rysowania linii i wielokątów na dysku Poincare. Klasa zawiera zmienną globalną `polygon` typu `HypPolygon`, która definiowana jest po wybraniu dwóch punków na dysku. Wybór punktu odbywa się poprzez klinięcie lewym przyciskiem myszy na ekranie.
+\vspace{3mm}
+
+Funkcja `onLoop()` zawiera instrukcje rysowania wielokątu, co ogranicza się do wywołania metody `canvas.drawHypPolygon(this.polygon)`. Podobnie działa rysowanie punktów i linii. Programista nie musi znać wewnętrznych implementacji, jedynie api udostępniane przez klasy silnika.
+\vspace{3mm}
+
+Program `Polygon` pokazuje również możliwości manipulowania grubością linii oraz kolorami płótna. W przykładzie jest to osiągnięte za pomocą wywołania funkcji klasy `Canvas` - `canvas.setColors("#FFF")`.
+
+![Wielokąt narysowany przy użyciu programu Polygon Demo](figures/polygon_demo.png){ width=200px }
+
+### Interaction Demo
+
+Program `Interaction Demo` zawiera wykorzystanie klasy `HypTile`. W każdym przebiegu pętli silnika, dookoła wskaźnika myszy zdefiniowanego zmienną `point`, z pomocą statycznej metody `createRegularPolygon()` tworzone są wielokąty foremne. Zmienna globalna `rotate`, definiuje kąt obrotu każdej z figur. Po narysowaniu wszystkich figur, zmienna ta jest inkrementowana, po czym wyświetlana jest następna klatka obrazu.
+
+![Przykład działania programu Interaction Demo](figures/interaction_demo.png){ width=200px }
+
+### Tesselation Demo
+
+Program `Tesselation Demo` różni się od innych demonstracji. Pętla silnika wyświetla raz już zdefiniowany obraz, rysując wszystkie kafelki umieszczone w tablicy `tiles` interfejsu `HypTile[]`. Konstruktor klasy wywołuje metodę `determineTiles()`, która tworzy pierwszy kafelek za pomocą statycznej metody `createNKPolygon()` a następnie, określoną ilość razy odbija jego obraz, co skutkuje wypełnieniem dysku przylegającymi do siebie kafelkami. Do tego celu została użyta opisana w poprzednim rozdziale funkcja `reflect()`.
+
+!['Kafelkowanie' dysku wykonane przez program Tesselation Demo](figures/tesselation_demo.png){ width=200px }
+
+## Pliki źródłowe pracy
+
+Katalog `/docs` zawiera źródła tej pracy, budowane za pomocą sktyptu zamieszczonego w pliku `makefile` z wykorzystaniem programu `pandoc` i biblioteki `texlive`. Praca napisana jest w języku `markdown`. Katalog `/docs/figures` zawiera statyczne pliki. Strona tytułowa napisana jest w języku `latex` budowana jest osobno.
 
 \newpage\null\newpage
 
@@ -353,6 +404,8 @@ npm run build
 ```
 
 Po zbudowaniu aplikacji, w katalogu głównym pojawi się folder `dist` z plikami, które wraz z plikem `index.html` składają się na gotowy program możliwy do uruchomiania w przeglądarce.
+
+![Wygląd aplikacji po uruchomieniu](figures/app_view.png)
 
 ## Serwer deweloperski
 
