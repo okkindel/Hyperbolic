@@ -29,11 +29,10 @@ export class HypTile {
     n: number,
     k: number,
     center: HypPoint,
-    plane: Plane,
-    quasiregular = false
+    plane: Plane
   ): HypTile {
     const tile = new HypTile(plane, center);
-    tile.generateNKTile(n, k, quasiregular);
+    tile.generateNKTile(n, k);
     tile.numOfVerts = n;
     return tile;
   }
@@ -98,7 +97,7 @@ export class HypTile {
       .reflect(this.center);
   }
 
-  private generateNKTile = (n: number, k: number, quasiregular: boolean) => {
+  private generateNKTile = (n: number, k: number) => {
     // Let ABC be a triangle in a regular (n,k - tiling), where
     //    A is the center of an n-gon (also center of the disk),
     //    B is a vertex of the n-gon, and
@@ -111,11 +110,8 @@ export class HypTile {
     let s =
       Math.sin(angleC - angleB - angleA) /
       Math.sqrt(1.0 - sinB * sinB - sinA * sinA);
-    // But for a quasiregular tiling, we need the distance s from A to C.
-    if (quasiregular) {
-      s = (s * s + 1.0) / (2.0 * s * Math.cos(angleA));
-      s = s - Math.sqrt(s * s - 1.0);
-    }
+    s = (s * s + 1.0) / (2.0 * s * Math.cos(angleA));
+    s = s - Math.sqrt(s * s - 1.0);
 
     for (let i = 0; i < n; i++) {
       const point = new HypPoint(

@@ -289,7 +289,7 @@ Klasa `HypTile` jest nietypowa na tle swoich poprzedniczek. Konstruktor tej klas
 - `fromPolygon(polygon: HypPolygon, center: HypPoint, plane: Plane): HypTile` - funkcja tworzy obiekt klasy `HypTile` wykorzystując do tego instancję obiekty klasy `HypPolygon`
 \vspace{3mm}
 
-- `createNKPolygon(n: number, k: number, center: HypPoint, plane: Plane, quasiregular = false): HypTile` - Tworzy n-kąt o wielkości i kątach dobranych w ten sposób, by przy układaniu ich obok siebie, tworzyły przestrzeń będączą k-kątem.
+- `createNKPolygon(n: number, k: number, center: HypPoint, plane: Plane): HypTile` - Tworzy n-kąt o wielkości i kątach dobranych w ten sposób, by przy układaniu ich obok siebie, tworzyły przestrzeń będączą k-kątem (liczba n-gonów 'spotykających się' na każdym wierzchołku).
 \vspace{3mm}
 
 - `createRegularPolygon(numOfVerts: number, distance: number, center: HypPoint, plane: Plane, startAngle = 0): HypTile` - funkcja tworzy wielokąt foremnty o podanych parametrach.
