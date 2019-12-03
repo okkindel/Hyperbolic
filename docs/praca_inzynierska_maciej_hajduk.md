@@ -2,19 +2,17 @@
 title: "Wydział Podstawowych Problemów Techniki"
 author: [Maciej Hajduk, Politechnika Wrocławska]
 date: "Wrocław 2019"
-geometry: margin=4cm
+geometry: margin=3cm
 indent: true
 header-includes: |
   \usepackage{tcolorbox}
   \usepackage{pdfpages}
   \usepackage[]{algorithm2e}
   \newcommand\qed{\hfill\rule{1em}{1em}}
-  
 ---
 
-\newtheorem{theorem}{Twierdzenie}[section]
-\newtheorem{corollary}{Corollary}[theorem]
-\newtheorem{lemma}[theorem]{Lemat}
+\newtheorem{theorem}{Twierdzenie}
+<!-- -------------------------------- -->
 
 \tableofcontents
 
@@ -129,7 +127,9 @@ Model Kleina - a w zasadzie model dysku Beltrami–Kleina jest modelem geometrii
 ![Model Kleina](figures/klein_model.png){ width=250px }
 
 - __Płaszczyzną hiperboliczną__ jest wnętrze koła bez krawędzi.
+\vspace{1mm}
 - __Prostymi hiperbolicznymi__ są cięciwy tego koła (końce prostej).
+\vspace{1mm}
 - __Proste będą prostopadłe__ wtedy, gdy przedłużenie jednej z nich przechodzi przez punkt przecięcia stycznych do obu linii.
 
 ![Koła w modelu Kleina](figures/klein_circles.png){ width=250px }
@@ -150,15 +150,20 @@ Model nosi imię Henri Poincaré, ale został stworzony przez Eugenio Beltrami, 
 
 Model dysku Poincaré wykorzystuje wnętrze dysku jako model płaszczyzny hiperbolicznej. Najbardziej oczywistym wyborem dla dysku jest dysk jednostkowy, który będzie również przedmiotem dalszych rozważań.
 
+![Wszystkie powyższe linie w dysku Poincaré są równoległe do siebie](figures/poincare_disc_lines.png){ width=250px }
+
 - __Punkty hiperboliczne__ to punkty wewnątrz dysku jednostkowego.
+\vspace{1mm}
 - __Linie hiperboliczne__ to łuki koła prostopadłe do dysku. Linie hiperboliczne przechodzące przez początek degenerują się do średnic, o których można pomyśleć jako łuki kół o nieskończonym promieniu.
+\vspace{1mm}
 - __Kąty__ są mierzone jako kąt euklidesowy między stycznymi w punkcie przecięcia.
+\vspace{1mm}
+
 - __Odległości__ między punktami hiperbolicznymi można mierzyć w oparciu o normę euklidesową:
 
 $$ {\displaystyle \delta (u,v)=2{\frac {\lVert u-v\rVert ^{2}}{(1-\lVert u\rVert ^{2})(1-\lVert v\rVert ^{2})}}} $$
 
-![Wszystkie powyższe linie w dysku Poincaré są równoległe do siebie](figures/poincare_disc_lines.png){ width=250px }
-
+\vspace{3mm}
 Ponieważ rozpatrywany jest dysk jednostkowy, formuła nie zawiera w zmiennej dla promienia.
 
 ![Tesselacja w modelu dysku Poincaré](figures/poincare_disk_tesselation.png){ width=250px }
@@ -170,9 +175,10 @@ Model jest zgodny, to znaczy, że zachowuje kąty. Oznacza to, że kąty hiperbo
 Hemisfera nie jest często używana jako model płaszczyzny hiperbolicznej jako taka. Jest to jednak bardzo przydatna w łączeniu różnych innych modeli za pomocą różnych rzutów, jak pokazano na poniższym rysunki.
 
 - __Punkty hiperboliczne__ to punkty na półkuli południowej.
+vspace{1mm}
 - __Linie hiperboliczne__ to półkola powstałe z przecięcia półkuli południowej z płaszczyznami prostopadłymi do równika.
 
-![Rzut na dysk Poincarégo (a) i projekcja do modelu Klein-Beltrami (b)](figures/hemisphere.png){ width=500px }
+![Rzut na dysk Poincaré (a) i projekcja do modelu Klein-Beltrami (b)](figures/hemisphere.png){ width=500px }
 
 Wadą tego rozwiązania, jest dodatkowy wymiar, jaki należy rozpatrywać przy pracy z tym modelem.
 
@@ -213,7 +219,7 @@ Każdy możliwy do narysowania obiekt jest instancją jednej z klas. W kodzie si
 
 ## Obiekty geometrii Euklidesowej
 
-Instancje klas opisanych poniżej są obiektami rysowanymi finalnie przez silnik, na płaskim ekranie całość sprowadza się do linii, łuków, kół i punktow w przestrzeni Euklidesowej.
+Instancje klas opisanych poniżej są obiektami rysowanymi finalnie przez silnik, na płaskim ekranie całość sprowadza się do linii, łuków, kół i punktów w przestrzeni Euklidesowej.
 
 ### Klasa Point
 
@@ -268,19 +274,19 @@ Ostatnią nieomówioną funcją jest `countAngle(circle: Circle)`, określając�
 
 ### Klasa HypPoint
 
-Klasa HypPoint to w rzeczywistości reprezentacja punktu wględem płaszczyzny hiperbolicznej w dziedzinie $(-1, 1) \times (-1, 1) \in \mathbb {R} \times \mathbb {R}$.  
+Klasa HypPoint to w rzeczywistości reprezentacja punktu względem płaszczyzny hiperbolicznej w dziedzinie $(-1, 1) \times (-1, 1) \in \mathbb {R} \times \mathbb {R}$.  
 
-Klasa udostępnia metodę `toCanvasCoords(): Point`, zwracającą instancję tego samego punktu, zdolną do wyświetlenia przez aplikację, funcję `reflect(point: HypPoint): HypPoint` - zwracającą odbicie tegoż punktu względem innego i dwie prywatne, pomocnicze funkcje `times(point: HypPoint | number): HypPoint` oraz `over(point: HypPoint | number): HypPoint` służące kolejno do mnożenia lub dzielenia danego punktu przez stałą lub inny punkt.  
+Klasa udostępnia metodę `toCanvasCoords(): Point`, zwracającą instancję tego samego punktu, zdolną do wyświetlenia przez aplikację, funkcję `reflect(point: HypPoint): HypPoint` - zwracającą odbicie tegoż punktu względem innego i dwie prywatne, pomocnicze funkcje `times(point: HypPoint | number): HypPoint` oraz `over(point: HypPoint | number): HypPoint` służące kolejno do mnożenia lub dzielenia danego punktu przez stałą lub inny punkt.  
 
 Najważniejszą metodą tej klasy jest `moebius(point: HypPoint, t: number): HypPoint`. Aby zrozumieć jej działanie potrzebne będzie zdefiniowanie _Transformacji Möbiusa_ i jej udziału w obliczaniu punktu na przestrzeni dysku Poincaré. Zdefiniowana jest ona na końcu tego rozdziału.
 
 ### Klasa HypPolygon
 
-Konstruktor klasy `HypPolygon` przyjmuje dwie zmienne typu `Point` oraz instację klasy `Plane` i tworzy z nich wielokąt na przestrzeni hiperbolicznej.  
+Konstruktor klasy `HypPolygon` przyjmuje dwie zmienne typu `Point` oraz instancję klasy `Plane` i tworzy z nich wielokąt na przestrzeni hiperbolicznej.  
 
 Wielokąt może zostać rozszerzony o kolejne punkty z pomocą metody `addVerticle(point: Point)`. Funkcja `getCompletePolygonLines(): HypLine[]` zwraca wszystkie odcinki wchodzące w skład wielokąta, wraz z jednym dodatkowym odcinkiem, łączącym pierwszy i ostatni wierzchołek. Funkcje `moebius(point: HypPoint, t: number): HypPolygon` oraz `reflect(point: HypPoint): HypPolygon` wykonują kolejno transformację Möbiusa oraz odbicie względem punktu na wszystkich wierzchołkach wielokąta.  
 
-Programista może skorzystać ze statycznej metody `fromVerticles(verts: Point[], plane: Plane): HypPolygon`, która przyjmuje tablicę punków oraz instację klasy `Plane` i zwraca gotowy wielokąt.
+Programista może skorzystać ze statycznej metody `fromVerticles(verts: Point[], plane: Plane): HypPolygon`, która przyjmuje tablicę punków oraz instancję klasy `Plane` i zwraca gotowy wielokąt.
 
 ### Klasa HypTile
 
@@ -292,7 +298,7 @@ Klasa `HypTile` jest nietypowa na tle swoich poprzedniczek. Konstruktor tej klas
 - `createNKPolygon(n: number, k: number, center: HypPoint, plane: Plane): HypTile` - Tworzy n-kąt o wielkości i kątach dobranych w ten sposób, by przy układaniu ich obok siebie, tworzyły przestrzeń będączą k-kątem (liczba n-gonów 'spotykających się' na każdym wierzchołku).
 \vspace{3mm}
 
-- `createRegularPolygon(numOfVerts: number, distance: number, center: HypPoint, plane: Plane, startAngle = 0): HypTile` - funkcja tworzy wielokąt foremnty o podanych parametrach.
+- `createRegularPolygon(numOfVerts: number, distance: number, center: HypPoint, plane: Plane, startAngle = 0): HypTile` - funkcja tworzy wielokąt foremny o podanych parametrach.
 \vspace{3mm}
 
 ## Funkcje dodatkowe
@@ -312,7 +318,7 @@ $$ transformacja \: Möbiusa = złożenie \: inwersji = izometrie \: hiperbolicz
 __Hiperboliczne symetrie są modelowane jako przekształcenia Möbiusa:__ [^moebius]
 \vspace{3mm}
 
-Transformacje Möbiusa (zwane również homografiami) tworzą grupę geometryczną. Odwrócenie przestrzeni przez sferę ze środkiem w punkcie $O$ i promieniu $r$, odwzorowuje na siebie wszystkie promienie pochodzące z tego, że iloczyn punktu na tym promieniu wraz z jego obrazem jest równy $r^2$. Transformacje Möbiusa zachowują również kąty. Izometria geometrii hiperbolicznych to własnie transformacje Möbiusa. W ten sposób, z ich pomocą możemy nawigować po przestrzeni hiperbolicznej, płynnie przesuwając punkt widzenia modelu dysku Poincaré.
+Transformacje Möbiusa (zwane również homografiami) tworzą grupę geometryczną. Odwrócenie przestrzeni przez sferę ze środkiem w punkcie $O$ i promieniu $r$, odwzorowuje na siebie wszystkie promienie pochodzące z tego, że iloczyn punktu na tym promieniu wraz z jego obrazem jest równy $r^2$. Transformacje Möbiusa zachowują również kąty. Izometria geometrii hiperbolicznych to właśnie transformacje Möbiusa. W ten sposób, z ich pomocą możemy nawigować po przestrzeni hiperbolicznej, płynnie przesuwając punkt widzenia modelu dysku Poincaré.
 
 ![Transformacja Möbiusa](figures/moebius.png){ width=250px }
 
@@ -326,11 +332,11 @@ __W niniejszym rozdziale omówiona zostanie technologia, konfiguracja oraz wdro�
 
 ## Opis technologii
 
-Do implementacji systemu użyto języka `TypeScript` w wersji `3.6.3`, bundlera (transpilatora nowoczesnych wersji języka `JavaScript` do wersji zrozumiałych dla przeglądarek) `webpack` w wersji `2.3.3` oraz `SCSS` i  `HTML5` wraz z elementem `<canvas>` odpowiedzialnym za rysowanie grafiki na ekranie. Użyta została również funkcyjna biblioteka `ramda` w formie pomocniczej biblioteki _utilsowej_. Pełna lista wszystkich bibliotek wraz z ich wersjcami znajduje się w pliku `package.json`, w katalogu głównym projektu.
+Do implementacji systemu użyto języka `TypeScript` w wersji `3.6.3`, bundlera (transpilatora nowoczesnych wersji języka `JavaScript` do wersji zrozumiałych dla przeglądarek) `webpack` w wersji `2.3.3` oraz `SCSS` i  `HTML5` wraz z elementem `<canvas>` odpowiedzialnym za rysowanie grafiki na ekranie. Użyta została również funkcyjna biblioteka `ramda` w formie pomocniczej biblioteki _utilsowej_. Pełna lista wszystkich bibliotek wraz z ich wersjami znajduje się w pliku `package.json`, w katalogu głównym projektu.
 
 ## Poszczególne składowe systemu
 
-Aplikacja budowana jest ze źródeł z pomocą konfiguracji webpackowej. Kolejne paragrafy zawierają opisy i przeznaczenie poszczególnych plików oraz ogolny projekt całej aplikacji.
+Aplikacja budowana jest ze źródeł z pomocą konfiguracji webpackowej. Kolejne paragrafy zawierają opisy i przeznaczenie poszczególnych plików oraz ogólny projekt całej aplikacji.
 
 ## Konfiguracja systemu
 
@@ -342,7 +348,7 @@ Biblioteki potrzebne do zbudowania aplikacji wraz z ich wersjami znajdują się 
 
 ### Bundlowanie aplikacji
 
-Do bundolwania aplikacji użyty został framework `webpack`. Jego konfiguarcja znajduje się w pliku `webpack.config.js` w katalogu głównym. Określa ona, gdzie znajdują się pliki źródłowe, jakie mają rozszerzenia i w jaki sposób powinny być kompilowane. Do konfiguracji dołączone jest również rozszerzenie `style-loader`, które kompiluje pliki stylów o formacie `scss`.
+Do bundolwania aplikacji użyty został framework `webpack`. Jego konfiguracja znajduje się w pliku `webpack.config.js` w katalogu głównym. Określa ona, gdzie znajdują się pliki źródłowe, jakie mają rozszerzenia i w jaki sposób powinny być kompilowane. Do konfiguracji dołączone jest również rozszerzenie `style-loader`, które kompiluje pliki stylów o formacie `scss`.
 
 ### Konfiguracja języka
 
@@ -350,16 +356,16 @@ Język `Typescript` wymaga pliku `tsconfig.json` w katalogu głównym projektu. 
 
 ## Pliki źródłowe silnika
 
-![Schemat katalogów plików źródłowych](figures/files.png){ width=200px }
+![Schemat katalogów i plików źródłowych](figures/files.png){ width=300px }
 
-Źródła systemu znajdują się w całości w katalogu `/src/core`. Opis poszczególnych klas i przepływ pracy programu znajduje się w poprzednim rozdziale. Katalog `styles` zawiera plik styli, który budowany jest razem z resztą aplikacji z pomocą `webpacka`, natomiast folder `demo` zawiera programy demonstracyjne. Opis niektórych programów, co za tym idzie - możliwości silnika znajduje się poniżej. W katalogu `assets` znajduje się plik konfiguracyny dla klasy `Canvas`.
+Źródła systemu umieszczone są w całości w katalogu `/src/core`. Opis poszczególnych klas i przepływ pracy programu znajduje się w poprzednim rozdziale. Katalog `styles` zawiera plik styli, który budowany jest razem z resztą aplikacji z pomocą `webpacka`, natomiast folder `demo` zawiera programy demonstracyjne. Opis niektórych programów, co za tym idzie - możliwości silnika znajduje się poniżej. W katalogu `assets` znajduje się plik konfiguracyjny dla klasy `Canvas`.
 \vspace{3mm}
 
-Każdy program demonstracyjny dziedziczy po klasie `Program`. Klasa bazowa udostępnia metodę `onLoop()`, w której umieszcza się intrukcje do wykonania przez silnik oraz zmienna point definiująca położenie wzkaźnika myszy. Instancja klasy `Canvas` dostarczana jest poprzez wzorzec `dependecy injection`.
+Każdy program demonstracyjny dziedziczy po klasie `Program`. Klasa bazowa udostępnia metodę `onLoop()`, w której umieszcza się instrukcje do wykonania przez silnik oraz zmienna point definiująca położenie wskaźnika myszy. Instancja klasy `Canvas` dostarczana jest poprzez wzorzec `dependecy injection`.
 
 ### Polygon Demo
 
-Program `Polygon Demo` przezentuje możliwości rysowania linii i wielokątów na dysku Poincare. Klasa zawiera zmienną globalną `polygon` typu `HypPolygon`, która definiowana jest po wybraniu dwóch punków na dysku. Wybór punktu odbywa się poprzez klinięcie lewym przyciskiem myszy na ekranie.
+Program `Polygon Demo` prezentuje możliwości rysowania linii i wielokątów na dysku Poincaré. Klasa zawiera zmienną globalną `polygon` typu `HypPolygon`, która definiowana jest po wybraniu dwóch punków na dysku. Wybór punktu odbywa się poprzez klikniecie lewym przyciskiem myszy na ekranie.
 \vspace{3mm}
 
 Funkcja `onLoop()` zawiera instrukcje rysowania wielokątu, co ogranicza się do wywołania metody `canvas.drawHypPolygon(this.polygon)`. Podobnie działa rysowanie punktów i linii. Programista nie musi znać wewnętrznych implementacji, jedynie api udostępniane przez klasy silnika.
@@ -391,7 +397,7 @@ Katalog `/docs` zawiera źródła tej pracy, budowane za pomocą sktyptu zamiesz
 
 __Rozdział ten zawiera informacje o sposobie zbudowania aplikacji w celu jej uruchomienia i opcjonalnie - wdrożenia na serwerze WWW.__
 
-Do zbudowania aplikacji konieczny będzie menager pakietów `npm` w wersji przynajmniej `6.5.0` oraz środowisko uruchomieniowe języka `JavaScript` - `node.js` w wersji  `10.6.0` lub nowszej. Instalacja wymaganych pakietów odbywa się poprzez wpisanie w konsoli polecenia
+Do zbudowania aplikacji konieczny będzie menadżer pakietów `npm` w wersji przynajmniej `6.5.0` oraz środowisko uruchomieniowe języka `JavaScript` - `node.js` w wersji  `10.6.0` lub nowszej. Instalacja wymaganych pakietów odbywa się poprzez wpisanie w konsoli polecenia
 
 ``` BASH
 npm install
@@ -403,7 +409,7 @@ w katalogu głównym projektu. Następnie należy zbudować aplikację polecenie
 npm run build
 ```
 
-Po zbudowaniu aplikacji, w katalogu głównym pojawi się folder `dist` z plikami, które wraz z plikem `index.html` składają się na gotowy program możliwy do uruchomiania w przeglądarce.
+Po zbudowaniu aplikacji, w katalogu głównym pojawi się folder `dist` z plikami, które wraz z plikiem `index.html` składają się na gotowy program możliwy do uruchomiania w przeglądarce.
 
 ![Wygląd aplikacji po uruchomieniu](figures/app_view.png)
 
@@ -423,13 +429,22 @@ npm run build-watch
 
 ## Wdrożenie na serwerze WWW
 
+Projekt można wystawić na serwerze WWW. Sposób wdrożenia zależy od posiadanego serwera. Nie należy jednak umieszczać na serwerze całego katalogu z projektem. Zalecane jest przede wszystkim usunięcie katalogu `node_modules`. Do poprawnego działania projektu wystarczy plik `index.html` oraz katalog `/dist` pojawiający się po zbudowaniu aplikacji.
+
 \newpage\null\newpage
 
 # Podsumowanie
 
+Praca została napisana w oparciu o analizę zagadnienia. Zamierzony efekt pracy, to jest skonstrułowanie silnika graficznego renderującego geometrię dysku Poincare udało się osiągnąć, na co wskazują programy demonstracyjne dla owego silnika. Jest to autorskie, unikalne rozwiązanie, pozwalające na kompleksową obsługę zadanego modelu. Użycie nadal niestandardowych technologi webowych takich jak silnie typowany język `Typescript` umożliwia przyjemną pracę z silnikiem, na co składa się również dobrze napisana warstwa renderująca grafikę, pozwalająca w sposób bezpośredni wyświetlić dowolny, wspierany byt czy figurę.
+\vspace{3mm}
+
+Projekt można w przyszłości rozszerzyć o wsparcie dla grafik, co umożliwiłoby łatwą implementację grafik Eschera, aczkolwiek już teraz jest to możliwe z wykorzystaniem odbijanych względem siebie wielokątów, podobnie, jak zostało to osiągnięte w programie `Tesselation Demo`.
+
 \newpage\null\newpage
 
 # Bibliografia
+
+Podczas pracy nad silnikiem posiłkowano się następującymi źródłami:
 
 - Joan Gómez, Tam, gdzie proste są krzywe, Geometrnie enieuklidesowe, RBA, 2010
 \vspace{3mm}
