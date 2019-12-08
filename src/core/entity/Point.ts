@@ -21,7 +21,7 @@ export class Point {
     );
   }
 
-  inversion = (plane: Plane): Point => {
+  inversion(plane: Plane): Point {
     // https://en.wikipedia.org/wiki/Inversive_geometry#inverse_of_a_point
     const c = plane.center;
     const r = plane.radius;
@@ -30,5 +30,5 @@ export class Point {
       c.x + (r * r * (this.x - c.x)) / denominator,
       c.y + (r * r * (this.y - c.y)) / denominator
     );
-  };
+  }
 }

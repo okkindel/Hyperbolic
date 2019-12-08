@@ -175,7 +175,7 @@ Model jest zgodny, to znaczy, że zachowuje kąty. Oznacza to, że kąty hiperbo
 Hemisfera nie jest często używana jako model płaszczyzny hiperbolicznej jako taka. Jest to jednak bardzo przydatna w łączeniu różnych innych modeli za pomocą różnych rzutów, jak pokazano na poniższym rysunki.
 
 - __Punkty hiperboliczne__ to punkty na półkuli południowej.
-vspace{1mm}
+\vspace{1mm}
 - __Linie hiperboliczne__ to półkola powstałe z przecięcia półkuli południowej z płaszczyznami prostopadłymi do równika.
 
 ![Rzut na dysk Poincaré (a) i projekcja do modelu Klein-Beltrami (b)](figures/hemisphere.png){ width=500px }
@@ -219,66 +219,67 @@ Każdy możliwy do narysowania obiekt jest instancją jednej z klas. W kodzie si
 
 ## Obiekty geometrii Euklidesowej
 
-Instancje klas opisanych poniżej są obiektami rysowanymi finalnie przez silnik, na płaskim ekranie całość sprowadza się do linii, łuków, kół i punktów w przestrzeni Euklidesowej.
+Instancje klas opisanych poniżej są obiektami rysowanymi finalnie przez silnik. Zdefiniowanie ich jest konieczne, gdyż na płaskim ekranie całość sprowadza się do rysowania linii, łuków, kół i punktów w przestrzeni Euklidesowej. Każdy byt przestrzeni hiperbolicznej zawiera instancję przynajmniej jednej z poniższych klas i to właśnie one są interpretowane i rysowane przez klasę `Canvas`.
 
 ### Klasa Point
 
-Konstruktor klasy `Point` przyjmuje dwie zmienne typu `number`, które są reprezentacją bezwzględnych koordynatów puntu na płótnie. Programista może skorzystać z metody `toHypPoint(plane: Plane): HypPoint`, która przyjmuje instancję klasy `Plane` i zwraca dla niej koordynaty punktu w interfejsie klasy `HypPoint`, oraz z metody `inversion(plane: Plane)`, zwracającej punkt odbity względem centralnego punktu obiektu klasy `Plane` (centrum sfery hiperbolicznej).
+Konstruktor klasy `Point` przyjmuje dwie zmienne typu `number`, które są reprezentacją bezwzględnych koordynatów puntu na płótnie. Programista może skorzystać z metody `toHypPoint(plane: Plane): HypPoint`, która przyjmuje instancję klasy `Plane` i zwraca dla niej koordynaty punktu w interfejsie klasy `HypPoint`, oraz z metody `inversion(plane: Plane)`, zwracającej punkt będący inwersją wezględem płaszyzny `Plane` (sfery hiperbolicznej). Funkcja `inversion` odgrywa ważną rolę w obliczaniu zakrzywień linii na przestrzeni hiperbolicznej.
+
+![Inwersja punktu P względem okręgu](figures/inversion.png){ width=200px }
 
 ### Klasa Line
 
-Konstruktor klasy `Line` przyjmuje dwie zmienne typu `number`. Programista może skorzystać z metody `at(x: number): number`, która zwraca wartość w punkcie `x` oraz `intersectPoint(line: Line): Point`, która zwraca punkt przecięcia tejże linii z inną linią.  
+Konstruktor klasy `Line` przyjmuje dwie zmienne typu `number`. Programista może skorzystać z metody `at(x: number): number`, która zwraca wartość w punkcie `x` oraz `intersectPoint(line: Line): Point`, która zwraca punkt przecięcia tej linii z inną linią.  
 
-Alternatywnymi sposobami na stworzenie instancji klasy `Line` jest skorzystanie ze statycznych metody `fromPoints(p: Point, q: Point)`, która tworzy linię z dwóch punktów lub `fromPointSlope(p: Point, q: number)`, która do stworzenia linii potrzebuje podania punktu i kąta wyrażonego w radianach.
+Alternatywnymi sposobami na stworzenie instancji klasy `Line` jest skorzystanie ze statycznych metod: `fromPoints(p: Point, q: Point)` tworzy linię z dwóch punktów, natomiast `fromPointSlope(p: Point, q: number)` do stworzenia linii potrzebuje podania punktu i kąta wyrażonego w radianach.
 
 ### Klasa Circle
 
-Konstruktor klasy `Circle` przyjmuje punkt centralny będący instancją klasy `Point` i średnicę typu `number`, oraz udostępnia metodę `intersectPoints(circle: Circle): [Point, Point]`, przyjmującą drugi okrąg i zwracającą parę punktów, w których przecinają się oba obiekty. Funkcja `fromPoints(p: Point, q: Point, r: Point)` umożliwia alternatywny sposób stworzenia okręgu z trzech obiektów klasy `Point`.
+Konstruktor klasy `Circle` przyjmuje punkt centralny będący instancją klasy `Point` i średnicę typu `number`, oraz udostępnia metodę `intersectPoints(circle: Circle): [Point, Point]`, przyjmującą drugi okrąg i zwracającą parę punktów, w których przecinają się oba obiekty. Funkcja `fromPoints(p: Point, q: Point, r: Point)` umożliwia alternatywny sposób tworzenia okręgu z trzech obiektów klasy `Point`. Algorytm za to odpowiedzialny opisany jest poniżej.
 
 ### Klasa Plane
 
 Najważniejszym z pośród omawianych dotychczas bytów jest instancja klasy `Plane`, będąca singletonem i punktem odniesienia do wszystkich obiektów dla geometrii hiperbolicznej.  
 
-Klasa `Plane` dziedziczy po klasie `Circle`, podobnie jak ona posiada centrum i średnicę, liczone automatycznie na podstawie szerokości i wysokości ekranu przy pobraniu instancji klasy.
+Klasa `Plane` dziedziczy po klasie `Circle`, podobnie jak ona posiada centrum i średnicę, liczone jednak są automatycznie na podstawie szerokości i wysokości ekranu przy pierwszym wywołaniu instancji klasy.
 
 ## Obiekty geometrii hiperbolicznej
 
-Kod źródłowy klas opisanych poniżej znajduje się w oddzielnym katalogu silnika: `/src/core/entity/hyperbolic`. Każdy z tych obiektów opisuje byt geometrii hiperbolicznej, rysowany następnie przez silnik w formie prostych linii, czy łuków.
+Kod źródłowy klas opisanych poniżej znajduje się w oddzielnym katalogu silnika - `/hyperbolic`. Każdy z tych obiektów opisuje byt geometrii hiperbolicznej rysowany następnie przez silnik w formie prostych linii, okręgów i łuków.
 
 ### Klasa HypLine
 
-Klasa `HypLine` jest pierwszą z pośród klas obiektów hiperbolicznych. Konstruktor klasy przyjmuje, podobnie jak klasa Line, dwa punkty oraz dodatkowo instancję klasy `Plane`.  
+Klasa `HypLine` jest pierwszą z pośród klas obiektów hiperbolicznych. Konstruktor klasy przyjmuje - podobnie jak ten klasy `Line`, dwa punkty oraz dodatkowo instancję klasy `Plane`.  
 
-Pierwszym krokiem konstruktora jest wywołanie metody `calculateArc(p: Point, q: Point, plane: Plane): Circle`, która z pomocą algorytmu opisanego poniżej, zwraca instancję klasy `Circle`, będącą okręgiem, na obwodzie którego leży dana prosta hiperboliczna. Ustala jednocześnie punkty `p` i `q` wyznaczające końce odcinka, posługując się przy tym metodą `cutIfSticksOut(point: Point, circle: Circle, plane: Plane): Point`, sprawdzającą, czy punkt nie leży poza granicą koła wyznaczonego przez obiekt klasy `Plane` i ewentualnie przesuwającą go na punkt przecięcia.  
+Konstruktor klasy wywołuje metodę `calculateArc(p: Point, q: Point, plane: Plane): Circle`, która z pomocą algorytmu opisanego poniżej, zwraca instancję klasy `Circle`, będącą okręgiem, na obwodzie którego leży dana prosta hiperboliczna. Ustala jednocześnie punkty `p` i `q` wyznaczające końce odcinka, posługując się przy tym metodą `cutIfSticksOut(point: Point, circle: Circle, plane: Plane): Point`, sprawdzającą, czy punkt nie leży poza granicą koła wyznaczonego przez obiekt klasy `Plane` i ewentualnie przesuwającą go na punkt przecięcia obu okręgów używając do tego wpomnianej już metody `intersectPoints(circle: Circle): [Point, Point]`.  
 
-<!-- TODO: -->
+  > Niech A i B będą punktami na dysku Poincarégo, a punkty $A'$ i $B'$ będą ich inwersjami na płaszczyźnie `Plane`. Potrzebujemy okręgu przez A i B, który jest prostopadły do `Plane`.
+  
+![Kontrukcja linii w przestrzeni hiperbolicznej](figures/line_contruction.png){ width=250px }
+
+  > Podczas konstruowania okręgu przez A i B, dowolny z odbijanych punktów $A'$ lub $B'$ może być użyty do zdefiniowania okręgu. Jeśli jeden z punktów ma współrzędne $(0,0)$, należy użyć drugiego punktu. ($(0,0)$ odzwierciedla nieskończoność, która w tym kontekście jest niezdefiniowanym punktem).
+
+__Algorytm wyznaczania okręgu na podstawie dwóch punktów i płaszczyny:__
+
+1. Sprawdź współrzędne punktu `p`: jeżeli są takie same jak współrzędnę centrum Plane, przypisz `q` do zmiennej `validPoint`, w przeciwnym wypadku przypisz `p`.  
+
+2. Oblicz dwusieczną punktów `p` i `q` oraz `q` i `validPoint.inversion(plane)`.
+
+3. Znajdź centrum nowego okręgu będące punktem przecięcia obu linii z pomocą funcji `Line.intersectPoint(Line)`  
+
+4. Znadź promień nowego okręgu licząc odległość euklidesową pomiędzy jednym z początkowych punków a punktem przecięcia dwusiecznych.
+
 \vspace{3mm}
-\begin{algorithm}[H]
- \KwData{this text}
- \KwResult{how to write algorithm with \LaTeX2e }
- initialization\;
- \While{not at end of this document}{
-  read current\;
-  \eIf{understand}{
-   go to next section\;
-   current section becomes this one\;
-   }{
-   go back to the beginning of current section\;
-  }
- }
- \caption{Algorytm wyznaczania okręgu na podstawie dwóch punktów i płaszczyny }
-\end{algorithm}
-\vspace{3mm}
 
-Ostatnią nieomówioną funcją jest `countAngle(circle: Circle)`, określającą na podstawie wsześniej obliczonych punktów, początkowy i końcowy kąt łuku oraz kierunek, w jakim rysowany będzie ten łuk.
+Ostatnią nieomówioną funcją jest `countAngle(circle: Circle)`, określającą na podstawie wsześniej obliczonych punktów, początkowy i końcowy kąt łuku oraz kierunek, w jakim rysowany będzie ten łuk. Ma to znaczenie dla klasy `Canvas` i pomaga w ustaleniu, gdzie znajduje się wnętrze rysowanej figury.
 
 ### Klasa HypPoint
 
 Klasa HypPoint to w rzeczywistości reprezentacja punktu względem płaszczyzny hiperbolicznej w dziedzinie $(-1, 1) \times (-1, 1) \in \mathbb {R} \times \mathbb {R}$.  
 
-Klasa udostępnia metodę `toCanvasCoords(): Point`, zwracającą instancję tego samego punktu, zdolną do wyświetlenia przez aplikację, funkcję `reflect(point: HypPoint): HypPoint` - zwracającą odbicie tegoż punktu względem innego i dwie prywatne, pomocnicze funkcje `times(point: HypPoint | number): HypPoint` oraz `over(point: HypPoint | number): HypPoint` służące kolejno do mnożenia lub dzielenia danego punktu przez stałą lub inny punkt.  
+Klasa udostępnia metodę `toCanvasCoords(): Point`, zwracającą instancję tego samego punktu, zdolną do wyświetlenia przez aplikację, funkcję `reflect(point: HypPoint): HypPoint` - zwracającą odbicie tego punktu względem innego, podanego w argumentach, co jest wymagane do poprawnego rysowania obiektów na przestrzeni i dwie prywatne, pomocnicze funkcje `times(point: HypPoint | number): HypPoint` oraz `over(point: HypPoint | number): HypPoint` służące kolejno do mnożenia lub dzielenia danego punktu przez stałą lub inny punkt.  
 
-Najważniejszą metodą tej klasy jest `moebius(point: HypPoint, t: number): HypPoint`. Aby zrozumieć jej działanie potrzebne będzie zdefiniowanie _Transformacji Möbiusa_ i jej udziału w obliczaniu punktu na przestrzeni dysku Poincaré. Zdefiniowana jest ona na końcu tego rozdziału.
+Najważniejszą metodą tej klasy jest `moebius(point: HypPoint, t: number): HypPoint`. Aby zrozumieć jej działanie potrzebne będzie zdefiniowanie _Transformacji Möbiusa_ i jej udziału w obliczaniu punktu na przestrzeni dysku Poincaré. Opisana jest ona na końcu tego rozdziału.
 
 ### Klasa HypPolygon
 
@@ -295,7 +296,7 @@ Klasa `HypTile` jest nietypowa na tle swoich poprzedniczek. Konstruktor tej klas
 - `fromPolygon(polygon: HypPolygon, center: HypPoint, plane: Plane): HypTile` - funkcja tworzy obiekt klasy `HypTile` wykorzystując do tego instancję obiekty klasy `HypPolygon`
 \vspace{3mm}
 
-- `createNKPolygon(n: number, k: number, center: HypPoint, plane: Plane): HypTile` - Tworzy n-kąt o wielkości i kątach dobranych w ten sposób, by przy układaniu ich obok siebie, tworzyły przestrzeń będączą k-kątem (liczba n-gonów 'spotykających się' na każdym wierzchołku).
+- `createNKPolygon(n: number, k: number, center: HypPoint, plane: Plane): HypTile` - Tworzy n-kąt o wielkości i kątach dobranych w ten sposób, by przy układaniu ich obok siebie, tworzyły przestrzeń będączą k-kątem (k = liczba n-gonów 'spotykających się' na każdym wierzchołku).
 \vspace{3mm}
 
 - `createRegularPolygon(numOfVerts: number, distance: number, center: HypPoint, plane: Plane, startAngle = 0): HypTile` - funkcja tworzy wielokąt foremny o podanych parametrach.
@@ -303,7 +304,7 @@ Klasa `HypTile` jest nietypowa na tle swoich poprzedniczek. Konstruktor tej klas
 
 ## Funkcje dodatkowe
 
-Plik `geometry.ts` zawiera zestaw funkcji wspólnych dla wielu obiektów, lub nie powiązanych bezpośrednio z żadnym z nich. Są to głównie funkcje czysto matematyczno - geometryczne, takie jak odległość Euklidesowa lub szukanie dwusiecznej dwóch punktów.
+Plik `geometry.ts` zawiera zestaw funkcji wspólnych dla wielu obiektów, lub nie powiązanych bezpośrednio z żadnym z nich. Są to głównie funkcje czysto matematyczno - geometryczne, takie jak odległość Euklidesowa lub liczenie dwusiecznej.
 
 ## Transformacja Möbiusa
 
@@ -361,7 +362,7 @@ Język `Typescript` wymaga pliku `tsconfig.json` w katalogu głównym projektu. 
 Źródła systemu umieszczone są w całości w katalogu `/src/core`. Opis poszczególnych klas i przepływ pracy programu znajduje się w poprzednim rozdziale. Katalog `styles` zawiera plik styli, który budowany jest razem z resztą aplikacji z pomocą `webpacka`, natomiast folder `demo` zawiera programy demonstracyjne. Opis niektórych programów, co za tym idzie - możliwości silnika znajduje się poniżej. W katalogu `assets` znajduje się plik konfiguracyjny dla klasy `Canvas`.
 \vspace{3mm}
 
-Każdy program demonstracyjny dziedziczy po klasie `Program`. Klasa bazowa udostępnia metodę `onLoop()`, w której umieszcza się instrukcje do wykonania przez silnik oraz zmienna point definiująca położenie wskaźnika myszy. Instancja klasy `Canvas` dostarczana jest poprzez wzorzec `dependecy injection`.
+Każdy program demonstracyjny dziedziczy po klasie `Program`. Klasa bazowa udostępnia metodę `onLoop()`, w której umieszcza się instrukcje do wykonania przez silnik oraz zmienna point definiująca aktualne położenie wskaźnika myszy. Instancja klasy `Canvas` dostarczana jest poprzez wzorzec `dependecy injection`.
 
 ### Polygon Demo
 
@@ -389,7 +390,7 @@ Program `Tesselation Demo` różni się od innych demonstracji. Pętla silnika w
 
 ## Pliki źródłowe pracy
 
-Katalog `/docs` zawiera źródła tej pracy, budowane za pomocą sktyptu zamieszczonego w pliku `makefile` z wykorzystaniem programu `pandoc` i biblioteki `texlive`. Praca napisana jest w języku `markdown`. Katalog `/docs/figures` zawiera statyczne pliki. Strona tytułowa napisana jest w języku `latex` budowana jest osobno.
+Katalog `/docs` zawiera źródła tej pracy, budowane za pomocą sktyptu zamieszczonego w pliku `makefile` z wykorzystaniem programu `pandoc` i biblioteki `texlive`. Praca napisana jest w języku `markdown`. Katalog `/docs/figures` zawiera statyczne pliki. Strona tytułowa napisana jest w języku `latex` i budowana jest osobno.
 
 \newpage\null\newpage
 
@@ -435,16 +436,14 @@ Projekt można wystawić na serwerze WWW. Sposób wdrożenia zależy od posiadan
 
 # Podsumowanie
 
-Praca została napisana w oparciu o analizę zagadnienia. Zamierzony efekt pracy, to jest skonstrułowanie silnika graficznego renderującego geometrię dysku Poincare udało się osiągnąć, na co wskazują programy demonstracyjne dla owego silnika. Jest to autorskie, unikalne rozwiązanie, pozwalające na kompleksową obsługę zadanego modelu. Użycie nadal niestandardowych technologi webowych takich jak silnie typowany język `Typescript` umożliwia przyjemną pracę z silnikiem, na co składa się również dobrze napisana warstwa renderująca grafikę, pozwalająca w sposób bezpośredni wyświetlić dowolny, wspierany byt czy figurę.
+Praca została napisana w oparciu o analizę zagadnienia. Zamierzony efekt pracy - to jest skonstrułowanie silnika graficznego renderującego geometrię dysku Poincare udało się osiągnąć, na co wskazują programy demonstracyjne dla silnika. Jest to autorskie, unikalne rozwiązanie, pozwalające na kompleksową obsługę zadanego modelu. Użycie nadal niestandardowych technologi webowych takich jak silnie typowany język `Typescript` umożliwia przyjemną pracę z silnikiem, na co składa się również dobrze napisana warstwa renderująca grafikę, pozwalająca w sposób bezpośredni wyświetlić dowolny, wspierany interfejsami silnika byt lub figurę.
 \vspace{3mm}
 
-Projekt można w przyszłości rozszerzyć o wsparcie dla grafik, co umożliwiłoby łatwą implementację grafik Eschera, aczkolwiek już teraz jest to możliwe z wykorzystaniem odbijanych względem siebie wielokątów, podobnie, jak zostało to osiągnięte w programie `Tesselation Demo`.
+Projekt można w przyszłości rozszerzyć o wsparcie dla obrazków, co umożliwiłoby łatwą implementację grafik Eschera, co jednak jest możliwe nawet teraz z wykorzystaniem odbijanych względem siebie wielokątów, podobnie, jak zostało to osiągnięte w programie `Tesselation Demo`.
 
 \newpage\null\newpage
 
 # Bibliografia
-
-Podczas pracy nad silnikiem posiłkowano się następującymi źródłami:
 
 - Joan Gómez, Tam, gdzie proste są krzywe, Geometrnie enieuklidesowe, RBA, 2010
 \vspace{3mm}

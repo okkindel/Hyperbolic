@@ -23,6 +23,8 @@ export class HypLine {
   }
 
   private calculateArc(p: Point, q: Point, plane: Plane): Circle {
+    const validPoint = p.x === plane.center.x && p.y === plane.center.y ? q : p;
+
     let arc = null;
 
     // ALTERNATIVE WAY
@@ -36,7 +38,7 @@ export class HypLine {
     // const r = Math.sqrt(C.x * C.x + C.y * C.y - 1.0);
     // arc = new Circle(C, r);
 
-    arc = Circle.fromPoints(p, q, p.inversion(plane));
+    arc = Circle.fromPoints(p, q, validPoint.inversion(plane));
 
     this.p = this.cutIfSticksOut(p, arc, plane);
     this.q = this.cutIfSticksOut(q, arc, plane);
