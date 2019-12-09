@@ -3,6 +3,7 @@ title: "Wydział Podstawowych Problemów Techniki"
 author: [Maciej Hajduk, Politechnika Wrocławska]
 date: "Wrocław 2019"
 geometry: margin=3cm
+numbersections: true
 indent: true
 header-includes: |
   \usepackage{tcolorbox}
@@ -66,7 +67,7 @@ __Rozdział pierwszy__: Omówienie analizy wybranego problemu, przedstawienie mo
 __Rozdział drugi__: Szczegółowa charakterystyka systemu wraz z opisem poszczególnych plików oraz przeznaczeniem klas i funkcji składających się na program. Opisanie algorytmów przekształcających byty w geometrii Euklidesowej na odpowiadające im elementy geometrii hiperbolicznej, funkcji pomocniczych, reprezentacji punktów i linii w obu modelach.
 
 \vspace{3mm}
-__Rozdział trzeci__: Wymieniona technologii użytych do implementacji projektu: wybranego języka programowania, środowiska składającego się na aplikację oraz bibliotek wykorzystanych w programie.
+__Rozdział trzeci__: Opis technologii użytych do implementacji projektu: wybranego języka programowania, środowiska składającego się na aplikację oraz bibliotek wykorzystanych w programie.
 
 \vspace{3mm}
 __Rozdział czwarty__: Instrukcje instalacji i wdrożenia systemu w środowisku docelowym. Końcowy rozdział stanowi podsumowanie uzyskanych wyników i ewentualne możliwości rozwoju projektu.
@@ -143,9 +144,8 @@ Linie w modelu pozostają proste, a cały model można łatwo osadzić w ramach 
 
 ### Model półpłaszczyzny Poincaré
 
-Model półpłaszczyzny Poincaré to płaszczyzna:
+Model półpłaszczyzny Poincaré to model dwuwymiarowej geometrii hiperbolicznej, jest to płaszczyzna:
 $$ {\{(x, y) \mid y > 0; x, y \in \mathbb {R} \}} $$
-Jest to model dwuwymiarowej geometrii hiperbolicznej.
 
 ![Przykład tesselacji w modelu półpłaszczyzny Poincaré](figures/halfplane_tesselation.png){ width=250px }
 
@@ -162,14 +162,12 @@ W poniższych przykładach omawiany będzie dysk jednostkowy, który będzie ró
 \vspace{1mm}
 - __Kąty__ są mierzone jako kąt euklidesowy między stycznymi w punkcie przecięcia.
 \vspace{1mm}
-
-
 - __Odległości__ między punktami hiperbolicznymi można mierzyć w oparciu o normę euklidesową:
 
 $$ {\displaystyle \delta (u,v)=2{\frac {\lVert u-v\rVert ^{2}}{(1-\lVert u\rVert ^{2})(1-\lVert v\rVert ^{2})}}} $$
 
 \vspace{3mm}
-Ponieważ rozpatrywany jest dysk jednostkowy, formuła nie zawiera w zmiennej dla promienia.
+Ponieważ rozpatrywany jest dysk jednostkowy, powyższy wzór nie zawiera w zmiennej dla promienia.
 
 ![Przykład kilkunastu linii w modelu dysku Poincaré](figures/poincare_disc_lines.png){ width=250px }
 
@@ -179,7 +177,7 @@ Model jest zgodny, to znaczy, że zachowuje kąty. Oznacza to, że kąty hiperbo
 
 ### Model Hemisfery
 
-Hemisfera nie jest często używana jako model płaszczyzny hiperbolicznej jako taka. Jest to jednak bardzo przydatna w łączeniu różnych innych modeli za pomocą różnych rzutów, jak pokazano na poniższym rysunki.
+Hemisfera nie jest często używana jako model płaszczyzny hiperbolicznej. Jest jednak bardzo przydatna w łączeniu różnych innych modeli za pomocą różnych rzutów, jak pokazano na poniższym rysunku.
 
 - __Punkty hiperboliczne__ to punkty na półkuli południowej.
 \vspace{1mm}
@@ -187,11 +185,11 @@ Hemisfera nie jest często używana jako model płaszczyzny hiperbolicznej jako 
 
 ![Rzut na dysk Poincaré (a) i projekcja do modelu Klein-Beltrami (b)](figures/hemisphere.png){ width=500px }
 
-Wadą tego rozwiązania, jest dodatkowy wymiar, jaki należy rozpatrywać przy pracy z tym modelem.
+Wadą omawianego rozwiązania, jest dodatkowy wymiar, jaki należy rozpatrzeć podczas implementacji, co komplikuje pracę z tym modelem.
 
 ## Uzasadnienie wyboru modelu dysku Poincaré
 
-Jak stwierdzono na początku tego rozdziału, kolejne rozdziały, a także opisane implementacje będą prawie wyłącznie korzystać z modelu dysku Poincaré. Podczas renderowania geometrii hiperbolicznej wydaje się to być właściwym wyborem, z uwagi na wartości estetyczne i zgodność modelu.
+Jak zaznaczono na wstępie, kolejne rozdziały, a także opisane implementacje będą prawie wyłącznie korzystać z modelu dysku Poincaré. Wydaje się to być właściwym wyborem, z uwagi na wartości estetyczne i wspomnianą zgodność tego modelu.
 
 ![Porównanie modeli Kleina, dysku Poincaré i półpłaszczyzny Poincaré](figures/models_comparision.png)
 
