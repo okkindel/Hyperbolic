@@ -64,7 +64,7 @@ __Praca składa się z czterech rozdziałów:__
 __Rozdział pierwszy__: Omówienie analizy wybranego problemu, przedstawienie motywacji podjęcia tego tematu oraz uzasadnionienie wybór modelu płaszczyzny Poincaré. Rozdział zawiera poza tym komentarz do różnych rodzajów geometrii nieeuklidesowych, oraz krótki opis i porównanie innych modeli geometrii hiperbolicznej.
 
 \vspace{3mm}
-__Rozdział drugi__: Szczegółowa charakterystyka systemu wraz z opisem poszczególnych plików oraz przeznaczeniem klas i funkcji składających się na program. Opisanie algorytmów przekształcających byty w geometrii Euklidesowej na odpowiadające im elementy geometrii hiperbolicznej, funkcji pomocniczych, reprezentacji punktów i linii w obu modelach.
+__Rozdział drugi__: Szczegółowa charakterystyka systemu wraz z opisem poszczególnych plików oraz przeznaczeniem klas i funkcji składających się na program. Opisanie algorytmów przekształcających byty w geometrii euklidesowej na odpowiadające im elementy geometrii hiperbolicznej, funkcji pomocniczych, reprezentacji punktów i linii w obu modelach.
 
 \vspace{3mm}
 __Rozdział trzeci__: Opis technologii użytych do implementacji projektu: wybranego języka programowania, środowiska składającego się na aplikację oraz bibliotek wykorzystanych w programie.
@@ -173,7 +173,7 @@ Ponieważ rozpatrywany jest dysk jednostkowy, powyższy wzór nie zawiera w zmie
 
 Model jest zgodny, to znaczy, że zachowuje kąty. Oznacza to, że kąty hiperboliczne między krzywymi są równe kątom euklidesowym w punkcie przecięcia. Wadą jest, że linie hiperboliczne są modelowane poprzez łuki koła euklidesowego, przez co wydają się zakrzywione.
 
-![Przykłąd tesselacji w modelu dysku Poincaré](figures/poincare_disk_tesselation.png){ width=250px }
+![Przykład tesselacji w modelu dysku Poincaré](figures/poincare_disk_tesselation.png){ width=250px }
 
 ### Model Hemisfery
 
@@ -197,56 +197,66 @@ Jak zaznaczono na wstępie, kolejne rozdziały, a także opisane implementacje b
 
 # Projekt systemu
 
-__W niniejszym rozdziale przedstawiony zostanie szczegółowy projekt systemu, jego matematyczną interpretacje, zależności pomiędzy klasami oraz podstawowe algorytmy składające się na logikę funkcjonowania silnika.__
+__W niniejszym rozdziale przedstawiony zostanie szczegółowy projekt systemu, jego matematyczna interpretacja, zależności pomiędzy klasami oraz podstawowe algorytmy składające się na logikę funkcjonowania silnika.__
 
 ## Cykl pracy silnika
 
-Głównym plikiem silnika jest `main.ts` znajdujący się w katalogu `/src`. Po załadowaniu programu, tworzy on instancje klasy `Canvas` odpowiedzialnej za rysowanie elementów na ekranie, ładuje konfiguracje wyświetlanego programu i tworzy pętlę silnika poprzez wywołanie metody `createLoop()` klasy `Engine`.
+Głównym plikiem silnika jest `main.ts` znajdujący się w katalogu `/src`. Po uruchomieniu programu, tworzy on instancje klasy `Canvas` odpowiedzialnej za rysowanie elementów na ekranie, ładuje konfiguracje wyświetlanego programu i tworzy pętlę silnika poprzez wywołanie metody `createLoop()` klasy `Engine`.
+
+\vspace{3mm}
+
+Moduł odpowiedzialny za renderowanie obrazu znajduje się w pliku `canvas.ts`. Konstruktor klasy `Canvas` przyjmuje element `canvas` ze strony `index.html` oraz jego kontekst. Następie inicjuje się poprzez wywołanie funkcji `setupCanvas()`, która ustala szerokość i wysokość elementu. W każdym cyklu silnika, wywoływana jest funkcja `drawOverlay()`, która resetuje element do podstawowego widoku. Kolejne funkcje klasy odpowiadają za rysowanie punktów, linii, łuków i wielokątów. Poza tym klasa udostępnia też funcje zmiany koloru rysowanych elementów i grubości linii.
 
 ![Diagram klasy Canvas](figures/program_canvas.png){ width=200px }
 
-Moduł odpowiedzialny za renderowanie obrazu znajduje się w pliku `canvas.ts`. Konstruktor klasy `Canvas` przyjmuje element `canvas` ze strony oraz jego kontekst, oraz inicjuje się poprzez wywołanie funkcji `setupCanvas()`, która ustala szerokość i wysokość elementu. W każdym cyklu silnika, wywoływana jest funkcja `drawOverlay()`, która resetuje element do podstawowego widoku. Kolejne funkcje klasy odpowiadają za rysowanie punktów, liń, łuków i wielokątów. Poza tym klasa udostępnia też funcje zmiany koloru rysowanych elementów i grubości linii.
+
+Klasa `Engine` przyjmuje konfigurację z pliku `/assets/config.json`, która ustala ilość FPS. Jednocześnie wywołuje metodę `drawOverlay()` klasy `Canvas` i uruchamia funkcję `onLoop()` z programu. Konfiguracja programu dostarczona jest z pomocą wzorca _dependency injection_ w parametrach konstruktora.
 
 ![Diagram klasy Engine](figures/program_engine.png){ width=200px }
 
-Klasa `Engine` przyjmuje konfigurację z pliku `/assets/config.json`, która ustala ilość FPS, wywołuje następnie metodę `drawOverlay()` klasy `Canvas` i odpala funkcję `onLoop()` z programu, konfigurację którego dostaje za pomocą _dependency injection_ w parametrach konstruktora.
+Odtwarzany program tworzony jest poprzez wywołanie instancji klasy, dziedziczącej po abstrakcyjnej klasie `Program`, która udostępnia metody takie jak `onLoop()`.
 
 ![Diagram klasy Program](figures/program_program.png){ width=200px }
 
-Odtwarzany program tworzony jest poprzez wywołanie instancji klasy programu, dziedziczącej po abstrakcyjnej klasie `Program`, udostępniającej metody takie jak `onLoop()`.
-
 ## Typy obiektów renderowanych przez silnik
 
-Każdy możliwy do narysowania obiekt jest instancją jednej z klas. W kodzie silnika istnieje wyraźny podział na klasy udostępniające obiekty rysowane w przestrzeni euklidesowej i hiperbolicznej. Wszystkie byty znajdują się w katalogu `/src/core/entity`. Kolejne rozdziały są poświęcone opisie i interpretacji poszczególnych klas.
+Każdy możliwy do narysowania obiekt jest instancją jednej z klas. W kodzie silnika istnieje wyraźny podział na klasy udostępniające obiekty rysowane w przestrzeni euklidesowej i hiperbolicznej. Źródła wszystkich elementów znajdują się w katalogu `/src/core/entity`.  
+Kolejne rozdziały są poświęcone opisie i interpretacji poszczególnych klas.
 
 <!-- ![Diagram UML głównych składowych aplikacji](figures/diagram.png) -->
 \includepdf{figures/diagram.pdf}
 
 ## Obiekty geometrii Euklidesowej
 
-Instancje klas opisanych poniżej są obiektami rysowanymi finalnie przez silnik. Zdefiniowanie ich jest konieczne, gdyż na płaskim ekranie całość sprowadza się do rysowania linii, łuków, kół i punktów w przestrzeni Euklidesowej. Każdy byt przestrzeni hiperbolicznej zawiera instancję przynajmniej jednej z poniższych klas i to właśnie one są interpretowane i rysowane przez klasę `Canvas`.
+Instancje klas opisanych poniżej są obiektami rysowanymi finalnie przez silnik. Zdefiniowanie ich jest konieczne, gdyż na płaskim ekranie całość sprowadza się do rysowania linii, łuków, kół i punktów w przestrzeni euklidesowej. Każdy element przestrzeni hiperbolicznej zawiera instancję przynajmniej jednej z poniższych klas. Właśnie one są interpretowane i rysowane przez klasę `Canvas`.
 
 ### Klasa Point
 
-Konstruktor klasy `Point` przyjmuje dwie zmienne typu `number`, które są reprezentacją bezwzględnych koordynatów puntu na płótnie. Programista może skorzystać z metody `toHypPoint(plane: Plane): HypPoint`, która przyjmuje instancję klasy `Plane` i zwraca dla niej koordynaty punktu w interfejsie klasy `HypPoint`, oraz z metody `inversion(plane: Plane)`, zwracającej punkt będący inwersją wezględem płaszyzny `Plane` (sfery hiperbolicznej). Funkcja `inversion` odgrywa ważną rolę w obliczaniu zakrzywień linii na przestrzeni hiperbolicznej.
+Konstruktor klasy `Point` przyjmuje dwie zmienne typu `number`, które są reprezentacją bezwzględnych koordynatów punktu na płótnie. Programista może skorzystać z metod `toHypPoint(plane: Plane): HypPoint` oraz `inversion(plane: Plane)`.  
 
-![Inwersja punktu P względem okręgu](figures/inversion.png){ width=200px }
+Funkcja `inversion(plane: Plane)` przyjmuje instancję klasy `Plane` (sfery hiperbolicznej) i zwraca dla niej koordynaty punktu w interfejsie klasy `HypPoint`, natomiast funkcja `inversion(plane: Plane)` zwraca punkt będący inwersją tego punktu wezględem płaszyzny `Plane`. Funkcja `inversion` odgrywa ważną rolę w obliczaniu zakrzywień linii na przestrzeni hiperbolicznej.
+
+![Przykłąd inwersji punktu P względem okręgu](figures/inversion.png){ width=200px }
 
 ### Klasa Line
 
-Konstruktor klasy `Line` przyjmuje dwie zmienne typu `number`. Programista może skorzystać z metody `at(x: number): number`, która zwraca wartość w punkcie `x` oraz `intersectPoint(line: Line): Point`, która zwraca punkt przecięcia tej linii z inną linią.  
+Konstruktor klasy `Line` przyjmuje dwie zmienne typu `number`. Programista może skorzystać z metody `at(x: number): number`, która zwraca wartość w punkcie `x` oraz `intersectPoint(line: Line): Point`, która zwraca punkt przecięcia tej lini z inną linią.  
 
-Alternatywnymi sposobami na stworzenie instancji klasy `Line` jest skorzystanie ze statycznych metod: `fromPoints(p: Point, q: Point)` tworzy linię z dwóch punktów, natomiast `fromPointSlope(p: Point, q: number)` do stworzenia linii potrzebuje podania punktu i kąta wyrażonego w radianach.
+Alternatywnymi sposobami na stworzenie instancji klasy `Line` jest skorzystanie ze statycznych metod:  
+
+- `fromPoints(p: Point, q: Point)` - Metoda tworzy linię z dwóch punktów.  
+
+- `fromPointSlope(p: Point, q: number)` - Metoda do stworzenia linii potrzebuje podania punktu i kąta wyrażonego w radianach.
 
 ### Klasa Circle
 
-Konstruktor klasy `Circle` przyjmuje punkt centralny będący instancją klasy `Point` i średnicę typu `number`, oraz udostępnia metodę `intersectPoints(circle: Circle): [Point, Point]`, przyjmującą drugi okrąg i zwracającą parę punktów, w których przecinają się oba obiekty. Funkcja `fromPoints(p: Point, q: Point, r: Point)` umożliwia alternatywny sposób tworzenia okręgu z trzech obiektów klasy `Point`. Algorytm za to odpowiedzialny opisany jest poniżej.
+Konstruktor klasy `Circle` przyjmuje punkt centralny będący instancją klasy `Point` i średnicę typu `number` oraz udostępnia metodę `intersectPoints(circle: Circle): [Point, Point]`, przyjmującą drugi okrąg i zwracającą parę punktów, w których przecinają się oba obiekty. Funkcja `fromPoints(p: Point, q: Point, r: Point)` udostępnia alternatywny sposób tworzenia okręgu z trzech obiektów klasy `Point`. Algorytm za to odpowiedzialny opisany jest poniżej.
 
 ### Klasa Plane
 
-Najważniejszym z pośród omawianych dotychczas bytów jest instancja klasy `Plane`, będąca singletonem i punktem odniesienia do wszystkich obiektów dla geometrii hiperbolicznej.  
+Najważniejszym z pośród omawianych dotychczas elementów jest klasa `Plane`, będąca singletonem i 'punktem odniesienia' do wszystkich obiektów dla geometrii hiperbolicznej.  
 
-Klasa `Plane` dziedziczy po klasie `Circle`, podobnie jak ona posiada centrum i średnicę, liczone jednak są automatycznie na podstawie szerokości i wysokości ekranu przy pierwszym wywołaniu instancji klasy.
+Klasa `Plane` dziedziczy po klasie `Circle`. Podobnie jak ona - posiada centrum i średnicę, które liczone są jednak automatycznie na podstawie szerokości i wysokości ekranu przy pierwszym wywołaniu instancji klasy.
 
 ## Obiekty geometrii hiperbolicznej
 
@@ -254,15 +264,23 @@ Kod źródłowy klas opisanych poniżej znajduje się w oddzielnym katalogu siln
 
 ### Klasa HypLine
 
-Klasa `HypLine` jest pierwszą z pośród klas obiektów hiperbolicznych. Konstruktor klasy przyjmuje - podobnie jak ten klasy `Line`, dwa punkty oraz dodatkowo instancję klasy `Plane`.  
+Klasa `HypLine` jest pierwszą z pośród klas obiektów hiperbolicznych. Konstruktor klasy przyjmuje - podobnie jak klasy `Line` - dwa punkty oraz dodatkowo instancję klasy `Plane`.  
 
-Konstruktor klasy wywołuje metodę `calculateArc(p: Point, q: Point, plane: Plane): Circle`, która z pomocą algorytmu opisanego poniżej, zwraca instancję klasy `Circle`, będącą okręgiem, na obwodzie którego leży dana prosta hiperboliczna. Ustala jednocześnie punkty `p` i `q` wyznaczające końce odcinka, posługując się przy tym metodą `cutIfSticksOut(point: Point, circle: Circle, plane: Plane): Point`, sprawdzającą, czy punkt nie leży poza granicą koła wyznaczonego przez obiekt klasy `Plane` i ewentualnie przesuwającą go na punkt przecięcia obu okręgów używając do tego wpomnianej już metody `intersectPoints(circle: Circle): [Point, Point]`.  
+Klasa zezwala na następujące operacje:
+
+- Funkcja `calculateArc(p: Point, q: Point, plane: Plane): Circle` za pomocą algorytmu opisanego poniżej, zwraca instancję klasy `Circle`. Jest ona w istocie opisem okręgu, na obwodzie którego leży dana prosta hiperboliczna.
+
+- Funkcja `cutIfSticksOut(point: Point, circle: Circle, plane: Plane): Point` ustala punkty `p` i `q` wyznaczające końce odcinka oraz sprawdza, czy punkt nie leży poza granicą koła wyznaczonego przez obiekt klasy `Plane`. W takim przypadku przesuwa dany punkt na punkt przecięcia obu okręgów używając do tego wpomnianej już metody `intersectPoints(circle: Circle): [Point, Point]`.  
+
+\vspace{1mm}
+__Konstrukcja lnii hiperbolicznej na podstawie dwóch punków:__
+\vspace{1mm}
 
   > Niech A i B będą punktami na dysku Poincarégo, a punkty $A'$ i $B'$ będą ich inwersjami na płaszczyźnie `Plane`. Potrzebujemy okręgu przez A i B, który jest prostopadły do `Plane`.
   
 ![Kontrukcja linii w przestrzeni hiperbolicznej](figures/line_contruction.png){ width=250px }
 
-  > Podczas konstruowania okręgu przez A i B, dowolny z odbijanych punktów $A'$ lub $B'$ może być użyty do zdefiniowania okręgu. Jeśli jeden z punktów ma współrzędne $(0,0)$, należy użyć drugiego punktu. ($(0,0)$ odzwierciedla nieskończoność, która w tym kontekście jest niezdefiniowanym punktem).
+  > Podczas konstruowania okręgu przez A i B, dowolny z odbijanych punktów $A'$ lub $B'$ może być użyty do zdefiniowania okręgu. Jeśli jeden z punktów ma współrzędne $(0,0)$, należy użyć drugiego punktu ($(0,0)$ odzwierciedla nieskończoność, która w tym kontekście jest niezdefiniowanym punktem).
 
 __Algorytm wyznaczania okręgu na podstawie dwóch punktów i płaszczyny:__
 
@@ -270,7 +288,7 @@ __Algorytm wyznaczania okręgu na podstawie dwóch punktów i płaszczyny:__
 
 2. Oblicz dwusieczną punktów `p` i `q` oraz `q` i `validPoint.inversion(plane)`.
 
-3. Znajdź centrum nowego okręgu będące punktem przecięcia obu linii z pomocą funcji `Line.intersectPoint(Line)`  
+3. Znajdź centrum nowego okręgu będące punktem przecięcia obu linii z pomocą funcji `intersectPoint` klasy `Line`.  
 
 4. Znadź promień nowego okręgu licząc odległość euklidesową pomiędzy jednym z początkowych punków a punktem przecięcia dwusiecznych.
 
@@ -282,15 +300,15 @@ Ostatnią nieomówioną funcją jest `countAngle(circle: Circle)`, określając�
 
 Klasa HypPoint to w rzeczywistości reprezentacja punktu względem płaszczyzny hiperbolicznej w dziedzinie $(-1, 1) \times (-1, 1) \in \mathbb {R} \times \mathbb {R}$.  
 
-Klasa udostępnia metodę `toCanvasCoords(): Point`, zwracającą instancję tego samego punktu, zdolną do wyświetlenia przez aplikację, funkcję `reflect(point: HypPoint): HypPoint` - zwracającą odbicie tego punktu względem innego, podanego w argumentach, co jest wymagane do poprawnego rysowania obiektów na przestrzeni i dwie prywatne, pomocnicze funkcje `times(point: HypPoint | number): HypPoint` oraz `over(point: HypPoint | number): HypPoint` służące kolejno do mnożenia lub dzielenia danego punktu przez stałą lub inny punkt.  
+Klasa udostępnia metodę `toCanvasCoords(): Point`, zwracającą instancję tego samego punktu, nadającą się do wyświetlenia przez silnik. Funkcja `reflect(point: HypPoint): HypPoint` zwraca odbicie tego punktu względem innego, podanego w argumentach. Jest to wymagane do poprawnego rysowania obiektów na przestrzeni. Klasa zawiera również dwie prywatne, pomocnicze funkcje `times(point: HypPoint | number): HypPoint` oraz `over(point: HypPoint | number): HypPoint` służące kolejno do mnożenia lub dzielenia danego punktu przez stałą lub inny punkt.  
 
-Najważniejszą metodą tej klasy jest `moebius(point: HypPoint, t: number): HypPoint`. Aby zrozumieć jej działanie potrzebne będzie zdefiniowanie _Transformacji Möbiusa_ i jej udziału w obliczaniu punktu na przestrzeni dysku Poincaré. Opisana jest ona na końcu tego rozdziału.
+Najważniejszą metodą tej klasy jest `moebius(point: HypPoint, t: number): HypPoint`. Aby zrozumieć jej działanie potrzebne jest zdefiniowanie _Transformacji Möbiusa_ i jej udziału w obliczaniu punktu na przestrzeni dysku Poincaré. Opis zamieszono w punkcie __3.6__, na końcu niniejszego rozdziału.
 
 ### Klasa HypPolygon
 
-Konstruktor klasy `HypPolygon` przyjmuje dwie zmienne typu `Point` oraz instancję klasy `Plane` i tworzy z nich wielokąt na przestrzeni hiperbolicznej.  
+Konstruktor klasy `HypPolygon` przyjmuje dwie zmienne typu `Point` oraz instancję klasy `Plane`. Tworzy z nich wielokąt na przestrzeni hiperbolicznej.  
 
-Wielokąt może zostać rozszerzony o kolejne punkty z pomocą metody `addVerticle(point: Point)`. Funkcja `getCompletePolygonLines(): HypLine[]` zwraca wszystkie odcinki wchodzące w skład wielokąta, wraz z jednym dodatkowym odcinkiem, łączącym pierwszy i ostatni wierzchołek. Funkcje `moebius(point: HypPoint, t: number): HypPolygon` oraz `reflect(point: HypPoint): HypPolygon` wykonują kolejno transformację Möbiusa oraz odbicie względem punktu na wszystkich wierzchołkach wielokąta.  
+Wielokąt może zostać rozszerzony o kolejne punkty z pomocą metody `addVerticle(point: Point)`. Funkcja `getCompletePolygonLines(): HypLine[]` zwraca wszystkie odcinki wchodzące w skład wielokąta, wraz z jednym dodatkowym odcinkiem, łączącym pierwszy i ostatni wierzchołek. Funkcje `moebius(point: HypPoint, t: number): HypPolygon` oraz `reflect(point: HypPoint): HypPolygon` wykonują kolejno transformację Möbiusa oraz odbicie względem przekazanego punktu na wszystkich wierzchołkach wielokąta.  
 
 Programista może skorzystać ze statycznej metody `fromVerticles(verts: Point[], plane: Plane): HypPolygon`, która przyjmuje tablicę punków oraz instancję klasy `Plane` i zwraca gotowy wielokąt.
 
@@ -301,7 +319,7 @@ Klasa `HypTile` jest nietypowa na tle swoich poprzedniczek. Konstruktor tej klas
 - `fromPolygon(polygon: HypPolygon, center: HypPoint, plane: Plane): HypTile` - funkcja tworzy obiekt klasy `HypTile` wykorzystując do tego instancję obiekty klasy `HypPolygon`
 \vspace{3mm}
 
-- `createNKPolygon(n: number, k: number, center: HypPoint, plane: Plane): HypTile` - Tworzy n-kąt o wielkości i kątach dobranych w ten sposób, by przy układaniu ich obok siebie, tworzyły przestrzeń będączą k-kątem (k = liczba n-gonów 'spotykających się' na każdym wierzchołku).
+- `createNKPolygon(n: number, k: number, center: HypPoint, plane: Plane): HypTile` - Zwraca n-kąt o wielkości i kątach dobranych w ten sposób, by przy układaniu ich obok siebie, tworzyły przestrzeń będączą k-kątem (k = liczba n-gonów 'spotykających się' na każdym wierzchołku).
 \vspace{3mm}
 
 - `createRegularPolygon(numOfVerts: number, distance: number, center: HypPoint, plane: Plane, startAngle = 0): HypTile` - funkcja tworzy wielokąt foremny o podanych parametrach.
@@ -324,9 +342,9 @@ $$ transformacja \: Möbiusa = złożenie \: inwersji = izometrie \: hiperbolicz
 __Hiperboliczne symetrie są modelowane jako przekształcenia Möbiusa:__ [^moebius]
 \vspace{3mm}
 
-Transformacje Möbiusa (zwane również homografiami) tworzą grupę geometryczną. Odwrócenie przestrzeni przez sferę ze środkiem w punkcie $O$ i promieniu $r$, odwzorowuje na siebie wszystkie promienie pochodzące z tego, że iloczyn punktu na tym promieniu wraz z jego obrazem jest równy $r^2$. Transformacje Möbiusa zachowują również kąty. Izometria geometrii hiperbolicznych to właśnie transformacje Möbiusa. W ten sposób, z ich pomocą możemy nawigować po przestrzeni hiperbolicznej, płynnie przesuwając punkt widzenia modelu dysku Poincaré.
+Transformacje Möbiusa (zwane również homografiami) tworzą grupę geometryczną. Odwrócenie przestrzeni przez sferę ze środkiem w punkcie $O$ i promieniu $r$, odwzorowuje na siebie wszystkie promienie takie, że iloczyn punktu na tym promieniu wraz z jego obrazem jest równy $r^2$. Transformacje Möbiusa zachowują również kąty. Izometria geometrii hiperbolicznych to właśnie transformacje Möbiusa. W ten sposób, z ich pomocą możemy nawigować po przestrzeni hiperbolicznej, płynnie przesuwając punkt widzenia modelu dysku Poincaré.
 
-![Transformacja Möbiusa](figures/moebius.png){ width=250px }
+![Przykładowa transformacja Möbiusa](figures/moebius.png){ width=250px }
 
 [^moebius]: [HyperbolicTransformations, Chapter 17](http://homepages.gac.edu/~hvidsten/geom-text/web-chapters/hyper-transf.pdf)
 
@@ -334,23 +352,24 @@ Transformacje Möbiusa (zwane również homografiami) tworzą grupę geometryczn
 
 # Implementacja systemu
 
-__W niniejszym rozdziale omówiona zostanie technologia, konfiguracja oraz wdrożenie systemu wraz z krótkim opisem poszczególnych części systemu i kodu źródłowego.__
+__W niniejszym rozdziale omówiona zostanie technologia, konfiguracja oraz wdrożenie systemu wraz z krótkim opisem jego poszczególnych składowych i kodu źródłowego.__
 
 ## Opis technologii
 
-Do implementacji systemu użyto języka `TypeScript` w wersji `3.6.3`, bundlera (transpilatora nowoczesnych wersji języka `JavaScript` do wersji zrozumiałych dla przeglądarek) `webpack` w wersji `2.3.3` oraz `SCSS` i  `HTML5` wraz z elementem `<canvas>` odpowiedzialnym za rysowanie grafiki na ekranie. Użyta została również funkcyjna biblioteka `ramda` w formie pomocniczej biblioteki _utilsowej_. Pełna lista wszystkich bibliotek wraz z ich wersjami znajduje się w pliku `package.json`, w katalogu głównym projektu.
+Do implementacji systemu użyto języka `TypeScript` w wersji `3.6.3`, bundlera (transpilatora nowoczesnych wersji języka `JavaScript` do wersji zrozumiałych dla przeglądarek) `webpack` w wersji `2.3.3` oraz `SCSS` i  `HTML5` wraz z elementem `<canvas>` odpowiedzialnym za rysowanie grafiki na ekranie.  
 
-## Poszczególne składowe systemu
-
-Aplikacja budowana jest ze źródeł z pomocą konfiguracji webpackowej. Kolejne paragrafy zawierają opisy i przeznaczenie poszczególnych plików oraz ogólny projekt całej aplikacji.
+Użyta została również funkcyjna biblioteka `ramda` w formie pomocniczej biblioteki _utilsowej_. Pełna lista wszystkich bibliotek wraz z ich wersjami znajduje się w pliku `package.json`, w katalogu głównym projektu na załączonej płycie CD.
 
 ## Konfiguracja systemu
 
 Konfiguracja systemu potrzebna do zbudowania silnika znajduje się w całości w katalogu głównym.
+Aplikacja budowana jest z plików źródłowych z pomocą konfiguracji webpackowej.  
+Poniżej zamieszczono opisy i przeznaczenie poszczególnych plików oraz ogólny projekt całej aplikacji.
 
 ### Biblioteki projektu
 
-Biblioteki potrzebne do zbudowania aplikacji wraz z ich wersjami znajdują się w pliku `package.json`. Instalują się one do katalogu `node_modules` po wpisaniu komendy `npm install`. Aby zbudować aplikacje potrzebne jest połączenie z internetem.
+Biblioteki potrzebne do zbudowania aplikacji wraz z ich wersjami znajdują się w pliku `package.json`.  
+Instalują się one do katalogu `node_modules` po wpisaniu komendy `npm install`. Aby zbudować aplikacje potrzebne jest połączenie z internetem.
 
 ### Bundlowanie aplikacji
 
