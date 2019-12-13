@@ -21,6 +21,31 @@ header-includes: |
 
 # Wstęp
 
+## Wprowadzenie
+
+__Celem pracy jest zaprogramowanie i implementacja silnika graficznego służącego do generowania podstawowych obiektów geometrycznych w geometrii hiperbolicznej. Weybrano jej model - tak zwany dysk Poincaré. Biblioteka została napisana w języku `Typescript` (który jest wersją języka `JavaScript` zawierającą ponadto silne typowianie).__
+\vspace{3mm}
+
+Praca swoim zakresem obejmie obsługę rysowania lini, okręgów, wielokątów na tejże płaszczyźnie oraz implementacje przykładowych programów obejmujących wizualizacje bardziej skomplikowanych struktur. Na tle innych implementacji, aplikacja wyróżnia się dostarczanymi możliwościami i realizacją problemu z pomocą matematycznego opisu pewnego modelu. Przykładowe demonstracje możliwości aplikacji są dostarczone razem z kodem źródłowym, jest to, poza możliwością narysowania dowolnego wielokąta, rysowaniem figur foremnych czy prostych animacji, także interakcja z urządzeniami peryferyjnymi i tesselacja przestrzeni hiperbolicznej. Niewątpliwą zaletą dostarczonej aplikacji jest prostota implementacji własnych rozwiązań, na co składa się silne typowanie języka Typescript wraz z dokładnymi interfejsami dla klas oraz funkcje dostarczone przez silnik, pozwalające na łatwe manipulowanie wyświetlającymi się obiektami, nie wymagające przy tym zrozumienia modelu.
+
+\vspace{3mm}
+__Praca składa się z czterech rozdziałów:__
+
+\vspace{3mm}
+__Rozdział pierwszy__: Omówienie analizy wybranego problemu, przedstawienie motywacji podjęcia tego tematu oraz uzasadnionienie wybór modelu płaszczyzny Poincaré. Rozdział zawiera poza tym komentarz do różnych rodzajów geometrii nieeuklidesowych, oraz krótki opis i porównanie innych modeli geometrii hiperbolicznej.
+
+\vspace{3mm}
+__Rozdział drugi__: Szczegółowa charakterystyka systemu wraz z opisem poszczególnych plików oraz przeznaczeniem klas i funkcji składających się na program. Opisanie algorytmów przekształcających byty w geometrii euklidesowej na odpowiadające im elementy geometrii hiperbolicznej, funkcji pomocniczych, reprezentacji punktów i linii w obu modelach.
+
+\vspace{3mm}
+__Rozdział trzeci__: Opis technologii użytych do implementacji projektu: wybranego języka programowania, środowiska składającego się na aplikację oraz bibliotek wykorzystanych w programie.
+
+\vspace{3mm}
+__Rozdział czwarty__: Instrukcje instalacji i wdrożenia systemu w środowisku docelowym. Końcowy rozdział stanowi podsumowanie uzyskanych wyników i ewentualne możliwości rozwoju projektu.
+
+\vspace{3mm}
+Udało się zrealizować wszystkie postawione cele.
+
 ## Kontekst historyczny
 
 __Geometria jest nauką o mierze. Nazwa ta narzuca silne skojarzenia z nauką niemalże przyrodniczą. Nauczana we wszystkich szkołach od dwóch i pół tysiaca lat - wydawałoby się jest już czymś bardzo dobrze poznanym. Nowe teorie matematyczne doprowadziły jednak do podważenia tej pewności i powstania geometrii alternatywnych.__
@@ -51,32 +76,11 @@ Dosadnie do nowego modelu odniósł się fizyk - Hermann Helmholtz, publikując 
 [^axioms]: [Geometria euklidesowa. Encyklopedia PWN](https://encyklopedia.pwn.pl/haslo/geometria-euklidesowa;3904959.html)
 [^proklos_annotation]: [Najgłupiej postawiony problem matematyki. Marek Kordos - Delta, maj 2012](http://www.deltami.edu.pl/temat/matematyka/geometria/planimetria/2012/04/25/Dowody_V_postulatu_Euklidesa/)
 
-## Wybrane zagadnienie
-
-Celem niniejszej pracy jest implementacja prostego silnika graficznego skupiający się na renderowaniu wizualizacji płaszczyzny dysku w modelu Poincarégo geometrii hiperbolicznej.
-
-Praca swoim zakresem obejmie obsługę rysowania lini, okręgów, wielokątów na tejże płaszczyźnie oraz implementacje przykładowych programów obejmujących wizualizacje bardziej skomplikowanych struktur. Na tle innych implementacji, aplikacja wyróżnia się dostarczanymi możliwościami i realizacją problemu z pomocą matematycznego opisu pewnego modelu. Przykładowe demonstracje możliwości aplikacji są dostarczone razem z kodem źródłowym, jest to, poza możliwością narysowania dowolnego wielokąta, rysowaniem figur foremnych czy prostych animacji, także interakcja z urządzeniami peryferyjnymi i tesselacja przestrzeni hiperbolicznej. Niewątpliwą zaletą dostarczonej aplikacji jest prostota implementacji własnych rozwiązań, na co składa się silne typowanie języka Typescript wraz z dokładnymi interfejsami dla klas oraz funkcje dostarczone przez silnik, pozwalające na łatwe manipulowanie wyświetlającymi się obiektami, nie wymagające przy tym zrozumienia modelu.
-
-\vspace{3mm}
-__Praca składa się z czterech rozdziałów:__
-
-\vspace{3mm}
-__Rozdział pierwszy__: Omówienie analizy wybranego problemu, przedstawienie motywacji podjęcia tego tematu oraz uzasadnionienie wybór modelu płaszczyzny Poincaré. Rozdział zawiera poza tym komentarz do różnych rodzajów geometrii nieeuklidesowych, oraz krótki opis i porównanie innych modeli geometrii hiperbolicznej.
-
-\vspace{3mm}
-__Rozdział drugi__: Szczegółowa charakterystyka systemu wraz z opisem poszczególnych plików oraz przeznaczeniem klas i funkcji składających się na program. Opisanie algorytmów przekształcających byty w geometrii euklidesowej na odpowiadające im elementy geometrii hiperbolicznej, funkcji pomocniczych, reprezentacji punktów i linii w obu modelach.
-
-\vspace{3mm}
-__Rozdział trzeci__: Opis technologii użytych do implementacji projektu: wybranego języka programowania, środowiska składającego się na aplikację oraz bibliotek wykorzystanych w programie.
-
-\vspace{3mm}
-__Rozdział czwarty__: Instrukcje instalacji i wdrożenia systemu w środowisku docelowym. Końcowy rozdział stanowi podsumowanie uzyskanych wyników i ewentualne możliwości rozwoju projektu.
-
 \newpage\null\newpage
 
 # Analiza problemu
 
-__W niniejszym rozdziale przedstawiona będzie analiza problemu, opis matematyczny modelu płaszczyzny dysku Poincaré oraz przegląd kilku wybranych modeli geometrii nieeuklidesowej.__
+__W tym rozdziale przedstawiona będzie analiza problemu, opis matematyczny modelu płaszczyzny dysku Poincaré oraz przegląd kilku wybranych modeli geometrii nieeuklidesowej.__
 
 \vspace{3mm}
 Odkrycie, że piątego aksjomatu nie można udowodnić na podstawie pozostałych czterech aksjomatów, było dla naukowców niespodzianką. Zrobiono to, demonstrując istnienie geometrii, w której pierwsze cztery aksjomaty utrzymywały się, ale piąty nie. Debata nad piątym postulatem Euklidesa stworzyła problem, jak powinna wyglądać alternatywna geometria. Umiano pokazać zaledwie poszczególne właściwości takich geometrii. Pierwszy model geometrii nieeuklidesowej został stworzony przez Kleina. W sprawę zaangażowało się wielu matematyków, w tym również Bernard Rieman. Stwierdził on, że można opisać nieskończenie wiele struktur matematycznych, które nie będą spełniały postulatów Euklidesa, będąc dalej geometriami.
@@ -118,7 +122,7 @@ Omawiane różnice pokazane są na poniższym rysunku.
 
 ![Zachowanie linii ze wspólną prostopadłą w każdym z trzech rodzajów geometrii](figures/noneuclid.png)
 
-Niniejsza praca skupia się na geometrii hiperbolicznej.  
+Ta praca skupia się na geometrii hiperbolicznej.  
 Istnieje kilka możliwych sposobów wykorzystania części przestrzeni euklidesowej jako modelu płaszczyzny hiperbolicznej. Wszystkie te modele spełniają ten sam zestaw aksjomatów i wyrażają tę samą abstrakcyjną płaszczyznę hiperboliczną. Dlatego wybór modelu nie ma znaczenia dla twierdzeń czysto hiperbolicznych, jednak różnica występuje podczas ich wizualizacji.  
 Następne podrozdziały są poświęcone krótkiemu omówieniu najpopularniejszych z nich.
 
@@ -162,9 +166,11 @@ W poniższych przykładach omawiany będzie dysk jednostkowy, który będzie ró
 \vspace{1mm}
 - __Kąty__ są mierzone jako kąt euklidesowy między stycznymi w punkcie przecięcia.
 \vspace{1mm}
-- __Odległości__ między punktami hiperbolicznymi można mierzyć w oparciu o normę euklidesową:
+- __Odległości__ między punktami hiperbolicznymi można mierzyć w oparciu o wzór:[^distance]
 
-$$ {\displaystyle \delta (u,v)=2{\frac {\lVert u-v\rVert ^{2}}{(1-\lVert u\rVert ^{2})(1-\lVert v\rVert ^{2})}}} $$
+$$ d_{H}(z_0, z_1) = ln(\frac{\left |1 - z_0 \overline{z_1}  \right | + \left |z_0 - z_1  \right |}{\left |1 - z_0 \overline{z_1}  \right | - \left |z_0 - z_1  \right |}) $$
+
+[^distance]: [HyperbolicTransformations, Chapter 17, Equation 17.2.13](http://homepages.gac.edu/~hvidsten/geom-text/web-chapters/hyper-transf.pdf)
 
 \vspace{3mm}
 Ponieważ rozpatrywany jest dysk jednostkowy, powyższy wzór nie zawiera w zmiennej dla promienia.
@@ -183,7 +189,11 @@ Hemisfera nie jest często używana jako model płaszczyzny hiperbolicznej. Jest
 \vspace{1mm}
 - __Linie hiperboliczne__ to półkola powstałe z przecięcia półkuli południowej z płaszczyznami prostopadłymi do równika.
 
-![Rzut na dysk Poincaré (a) i projekcja do modelu Klein-Beltrami (b)](figures/hemisphere.png){ width=500px }
+\begin{figure}[H]
+\includegraphics[width=250px]{figures/hemisphere.png}
+\centering
+\caption{Rzut na dysk Poincaré (a) i projekcja do modelu Klein-Beltrami (b) [Martin Freiherr von Gagern, Creation of Hyperbolic Ornaments]}
+\end{figure}
 
 Wadą omawianego rozwiązania, jest dodatkowy wymiar, jaki należy rozpatrzeć podczas implementacji, co komplikuje pracę z tym modelem.
 
@@ -197,7 +207,7 @@ Jak zaznaczono na wstępie, kolejne rozdziały, a także opisane implementacje b
 
 # Projekt systemu
 
-__W niniejszym rozdziale przedstawiony zostanie szczegółowy projekt systemu, jego matematyczna interpretacja, zależności pomiędzy klasami oraz podstawowe algorytmy składające się na logikę funkcjonowania silnika.__
+__W tym rozdziale przedstawiony zostanie szczegółowy projekt systemu, jego matematyczna interpretacja, zależności pomiędzy klasami oraz podstawowe algorytmy składające się na logikę funkcjonowania silnika.__
 
 ## Cykl pracy silnika
 
@@ -236,7 +246,7 @@ Konstruktor klasy `Point` przyjmuje dwie zmienne typu `number`, które są repre
 
 Funkcja `inversion(plane: Plane)` przyjmuje instancję klasy `Plane` (sfery hiperbolicznej) i zwraca dla niej koordynaty punktu w interfejsie klasy `HypPoint`, natomiast funkcja `inversion(plane: Plane)` zwraca punkt będący inwersją tego punktu wezględem płaszyzny `Plane`. Funkcja `inversion` odgrywa ważną rolę w obliczaniu zakrzywień linii na przestrzeni hiperbolicznej.
 
-![Przykłąd inwersji punktu P względem okręgu](figures/inversion.png){ width=200px }
+![Przykład inwersji punktu P względem okręgu](figures/inversion.png){ width=200px }
 
 ### Klasa Line
 
@@ -302,7 +312,7 @@ Klasa HypPoint to w rzeczywistości reprezentacja punktu względem płaszczyzny 
 
 Klasa udostępnia metodę `toCanvasCoords(): Point`, zwracającą instancję tego samego punktu, nadającą się do wyświetlenia przez silnik. Funkcja `reflect(point: HypPoint): HypPoint` zwraca odbicie tego punktu względem innego, podanego w argumentach. Jest to wymagane do poprawnego rysowania obiektów na przestrzeni. Klasa zawiera również dwie prywatne, pomocnicze funkcje `times(point: HypPoint | number): HypPoint` oraz `over(point: HypPoint | number): HypPoint` służące kolejno do mnożenia lub dzielenia danego punktu przez stałą lub inny punkt.  
 
-Najważniejszą metodą tej klasy jest `moebius(point: HypPoint, t: number): HypPoint`. Aby zrozumieć jej działanie potrzebne jest zdefiniowanie _Transformacji Möbiusa_ i jej udziału w obliczaniu punktu na przestrzeni dysku Poincaré. Opis zamieszono w punkcie __3.6__, na końcu niniejszego rozdziału.
+Najważniejszą metodą tej klasy jest `moebius(point: HypPoint, t: number): HypPoint`. Aby zrozumieć jej działanie potrzebne jest zdefiniowanie _Transformacji Möbiusa_ i jej udziału w obliczaniu punktu na przestrzeni dysku Poincaré. Opis zamieszono w punkcie __3.6__, na końcu tego rozdziału.
 
 ### Klasa HypPolygon
 
@@ -344,15 +354,26 @@ __Hiperboliczne symetrie są modelowane jako przekształcenia Möbiusa:__ [^moeb
 
 Transformacje Möbiusa (zwane również homografiami) tworzą grupę geometryczną. Odwrócenie przestrzeni przez sferę ze środkiem w punkcie $O$ i promieniu $r$, odwzorowuje na siebie wszystkie promienie takie, że iloczyn punktu na tym promieniu wraz z jego obrazem jest równy $r^2$. Transformacje Möbiusa zachowują również kąty. Izometria geometrii hiperbolicznych to właśnie transformacje Möbiusa. W ten sposób, z ich pomocą możemy nawigować po przestrzeni hiperbolicznej, płynnie przesuwając punkt widzenia modelu dysku Poincaré.
 
-![Przykładowa transformacja Möbiusa](figures/moebius.png){ width=250px }
+![Przykładowa transformacja Möbiusa [Marshall Bern, Optimal Möbius Transformation]](figures/moebius.png){ width=250px }
 
-[^moebius]: [HyperbolicTransformations, Chapter 17](http://homepages.gac.edu/~hvidsten/geom-text/web-chapters/hyper-transf.pdf)
+Na użytek apliacji i wybranego modelu użyty został zmodyfikowany wzór Transformacji Möbiusa. [^moebius_poincare]
+
+\begin{theorem}
+Transformacja wyrażona równaniem równaniem:
+
+$$ f(z) = \beta \frac{z - \alpha }{\overline{\alpha }z - 1}, \: gdzie \: \left | \alpha  \right | < 1 \: i \: \left | \beta  \right | = 1 $$
+
+zachowuje funkcje odległości Poincaré.
+\end{theorem}
+
+[^moebius]: [Hyperbolic Transformations, Chapter 17, Definition 17.1](http://homepages.gac.edu/~hvidsten/geom-text/web-chapters/hyper-transf.pdf)
+[^moebius_poincare]: [Hyperbolic Transformations, Chapter 17, Corollary 17.12](http://homepages.gac.edu/~hvidsten/geom-text/web-chapters/hyper-transf.pdf)
 
 \newpage\null\newpage
 
 # Implementacja systemu
 
-__W niniejszym rozdziale omówiona zostanie technologia, konfiguracja oraz wdrożenie systemu wraz z krótkim opisem jego poszczególnych składowych i kodu źródłowego.__
+__W tym rozdziale omówiona zostanie technologia, konfiguracja oraz wdrożenie systemu wraz z krótkim opisem jego poszczególnych składowych i kodu źródłowego.__
 
 ## Opis technologii
 
