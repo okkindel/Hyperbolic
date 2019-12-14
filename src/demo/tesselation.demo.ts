@@ -1,4 +1,4 @@
-import { HypTile, HypPoint } from "../core/entity";
+import { HypTile, HypPoint, Circle } from "../core/entity";
 import { Program } from "../core/program";
 import { Canvas } from "../core/canvas";
 
@@ -20,21 +20,22 @@ export class TesselationDemo extends Program {
     window.addEventListener("click", () => {
       switch (clicked % 6) {
         case 0:
-          this.createTiles({ n: 8, k: 3 });
+          this.createTiles({ n: 5, k: 5 });
           break;
         case 1:
-          this.createTiles({ n: 8, k: 4 });
+          this.createTiles({ n: 8, k: 3 });
           break;
         case 2:
-          this.createTiles({ n: 8, k: 5 });
-          break;
-        case 3:
           this.createTiles({ n: 3, k: 8 });
           break;
-        case 4:
+        case 3:
           this.createTiles({ n: 4, k: 7 });
+          break;
+        case 4:
+          this.createTiles({ n: 8, k: 5 });
+          break;
         case 5:
-          this.createTiles({ n: 5, k: 5 });
+          this.createTiles({ n: 8, k: 4 });
           break;
       }
       clicked++;
@@ -61,16 +62,16 @@ export class TesselationDemo extends Program {
   }
 
   onLoop() {
-    let alpha = 200;
+    this.canvas.setColors("black");
+    this.canvas.drawCircle(
+      new Circle(this.plane.center, this.plane.radius),
+      true
+    );
+    let alpha = 300;
     this.tiles.forEach(element => {
-      this.canvas.setColors(`rgba(224,61,13,${alpha / 200})`);
+      this.canvas.setColors(`rgba(255,255,255,${alpha / 500})`);
       this.canvas.drawHypPolygon(element.polygon, true);
       alpha--;
-    });
-    this.canvas.setColors("rgba(0,0,0,1)");
-    this.canvas.setLineWidth(1);
-    this.tiles.forEach(element => {
-      this.canvas.drawHypPolygon(element.polygon);
     });
   }
 }

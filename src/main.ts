@@ -2,7 +2,7 @@ import { TesselationDemo } from "./demo/tesselation.demo";
 import { InteractionDemo } from "./demo/interaction.demo";
 import { FiguresDemo } from "./demo/figures.demo";
 import { PolygonDemo } from "./demo/polygon.demo";
-import { RegularDemo } from "./demo/regular.demo";
+import { SquareDemo } from "./demo/square.demo";
 
 import { Engine } from "./core/engine";
 import { Canvas } from "./core/canvas";
@@ -14,7 +14,7 @@ var programs = [
   TesselationDemo,
   FiguresDemo,
   PolygonDemo,
-  RegularDemo
+  SquareDemo
 ];
 var canvas: Canvas;
 var engine: Engine;

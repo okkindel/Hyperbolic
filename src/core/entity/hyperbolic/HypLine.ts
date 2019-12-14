@@ -17,29 +17,14 @@ export class HypLine {
   q: Point;
 
   constructor(p: Point, q: Point, plane: Plane) {
+    this.plane = plane;
     this.arc = this.calculateArc(p, q, plane);
     this.countAngle(this.arc);
-    this.plane = plane;
   }
 
   private calculateArc(p: Point, q: Point, plane: Plane): Circle {
     const validPoint = p.x === plane.center.x && p.y === plane.center.y ? q : p;
-
-    let arc = null;
-
-    // ALTERNATIVE WAY
-    // const den = p.x * q.y - q.x * p.y;
-    // const s1 = (1.0 + p.x * p.x + p.y * p.y) / 2.0;
-    // const s2 = (1.0 + q.x * q.x + q.y * q.y) / 2.0;
-    // const C = new Point(
-    //   (s1 * q.y - s2 * p.y) / den,
-    //   (p.x * s2 - q.x * s1) / den
-    // );
-    // const r = Math.sqrt(C.x * C.x + C.y * C.y - 1.0);
-    // arc = new Circle(C, r);
-
-    arc = Circle.fromPoints(p, q, validPoint.inversion(plane));
-
+    const arc = Circle.fromPoints(p, q, validPoint.inversion(plane));
     this.p = this.cutIfSticksOut(p, arc, plane);
     this.q = this.cutIfSticksOut(q, arc, plane);
     return arc;

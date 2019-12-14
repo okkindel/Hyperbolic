@@ -72,7 +72,7 @@ export class Canvas {
     this.ctx.stroke();
   }
 
-  drawCircle(circle: Circle) {
+  drawCircle(circle: Circle, isFilled = false) {
     this.ctx.beginPath();
     this.ctx.arc(
       circle.center.x,
@@ -82,6 +82,7 @@ export class Canvas {
       2 * Math.PI
     );
     this.ctx.stroke();
+    if (isFilled) this.ctx.fill();
   }
 
   drawArc(line: HypLine) {
