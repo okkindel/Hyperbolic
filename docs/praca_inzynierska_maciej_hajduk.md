@@ -23,10 +23,10 @@ header-includes: |
 
 ## Wprowadzenie
 
-__Celem pracy jest zaprogramowanie i implementacja silnika graficznego służącego do generowania podstawowych obiektów geometrycznych w geometrii hiperbolicznej. Weybrano jej model - tak zwany dysk Poincaré. Biblioteka została napisana w języku `Typescript` (który jest wersją języka `JavaScript` zawierającą ponadto silne typowianie).__
+__Celem pracy jest zaprogramowanie i implementacja silnika graficznego służącego do generowania podstawowych obiektów geometrycznych w geometrii hiperbolicznej. Wybrano jej model - tak zwany dysk Poincaré. Biblioteka została napisana w języku `Typescript` (który jest wersją języka `JavaScript` zawierającą ponadto między innymi silne typowianie).__
 \vspace{3mm}
 
-Praca swoim zakresem obejmie obsługę rysowania lini, okręgów, wielokątów na tejże płaszczyźnie oraz implementacje przykładowych programów obejmujących wizualizacje bardziej skomplikowanych struktur. Na tle innych implementacji, aplikacja wyróżnia się dostarczanymi możliwościami i realizacją problemu z pomocą matematycznego opisu pewnego modelu. Przykładowe demonstracje możliwości aplikacji są dostarczone razem z kodem źródłowym, jest to, poza możliwością narysowania dowolnego wielokąta, rysowaniem figur foremnych czy prostych animacji, także interakcja z urządzeniami peryferyjnymi i tesselacja przestrzeni hiperbolicznej. Niewątpliwą zaletą dostarczonej aplikacji jest prostota implementacji własnych rozwiązań, na co składa się silne typowanie języka Typescript wraz z dokładnymi interfejsami dla klas oraz funkcje dostarczone przez silnik, pozwalające na łatwe manipulowanie wyświetlającymi się obiektami, nie wymagające przy tym zrozumienia modelu.
+Praca swoim zakresem obejmie obsługę rysowania lini, okręgów, wielokątów na tejże płaszczyźnie oraz implementację przykładowych programów obejmujących wizualizacje bardziej skomplikowanych struktur. Na tle innych implementacji, aplikacja wyróżnia się dostarczanymi możliwościami i realizacją problemu z pomocą matematycznego opisu pewnego modelu. Przykładowe demonstracje możliwości aplikacji są dostarczone razem z kodem źródłowym, jest to, poza możliwością narysowania dowolnego wielokąta, rysowaniem figur foremnych czy prostych animacji, także interakcja z urządzeniami peryferyjnymi i tesselacja przestrzeni hiperbolicznej. Niewątpliwą zaletą dostarczonej aplikacji jest prostota implementacji własnych rozwiązań, na co składa się silne typowanie języka Typescript wraz z dokładnymi interfejsami dla klas oraz funkcje dostarczone przez silnik, pozwalające na łatwe manipulowanie wyświetlającymi się obiektami, nie wymagające przy tym zrozumienia modelu.
 
 \vspace{3mm}
 __Praca składa się z czterech rozdziałów:__
@@ -170,7 +170,7 @@ W poniższych przykładach omawiany będzie dysk jednostkowy, który będzie ró
 
 $$ d_{H}(z_0, z_1) = ln(\frac{\left |1 - z_0 \overline{z_1}  \right | + \left |z_0 - z_1  \right |}{\left |1 - z_0 \overline{z_1}  \right | - \left |z_0 - z_1  \right |}) $$
 
-[^distance]: [HyperbolicTransformations, Chapter 17, Equation 17.2.13](http://homepages.gac.edu/~hvidsten/geom-text/web-chapters/hyper-transf.pdf)
+[^distance]: [Hyperbolic Transformations, Chapter 17, Equation 17.2.13](http://homepages.gac.edu/~hvidsten/geom-text/web-chapters/hyper-transf.pdf)
 
 \vspace{3mm}
 Ponieważ rozpatrywany jest dysk jednostkowy, powyższy wzór nie zawiera w zmiennej dla promienia.

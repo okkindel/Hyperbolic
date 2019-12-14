@@ -18,7 +18,7 @@ export class TesselationDemo extends Program {
     let clicked = 0;
 
     window.addEventListener("click", () => {
-      switch (clicked % 5) {
+      switch (clicked % 6) {
         case 0:
           this.createTiles({ n: 8, k: 3 });
           break;
@@ -33,6 +33,8 @@ export class TesselationDemo extends Program {
           break;
         case 4:
           this.createTiles({ n: 4, k: 7 });
+        case 5:
+          this.createTiles({ n: 5, k: 5 });
           break;
       }
       clicked++;
@@ -40,63 +42,30 @@ export class TesselationDemo extends Program {
   }
 
   createTiles(config: IConfig) {
-    this.tiles = [];
-    const rule: number[] = [];
-    this.tiles[0] = HypTile.createNKPolygon(
-      config.n,
-      config.k,
-      this.center,
-      this.plane
-    );
-    rule[0] = 0;
-    let j = 1; // index of the next tile to create
-    for (let i = 0; i < 15; ++i) {
-      j = this.applyRule(i, j, rule, config);
-    }
-  }
-
-  applyRule(i: number, j: number, rule: number[], config: IConfig): number {
-    let r = rule[i];
-    let special = r === 1;
-    if (special) {
-      r = 2;
-    }
-    let start = r === 4 ? 3 : 2;
-    let quantity = config.k === 3 && r !== 0 ? config.n - r - 1 : config.n - r;
-    for (let s = start; s < start + quantity; ++s) {
-      // Create a tile adjacent to P[i]
-      this.tiles[j] = this.createNextTile(this.tiles[i], s % config.n);
-      rule[j] = config.k === 3 && s === start && r !== 0 ? 4 : 3;
-      j++;
-
-      let m = 0;
-      if (special) {
-        m = 2;
-      } else if (s === 2 && r !== 0) {
-        m = 1;
-      }
-
-      for (; m < config.k - 3; ++m) {
-        // Create a tile adjacent to P[j-1]
-        console.log(this.createNextTile(this.tiles[j - 1], 1))
-        this.tiles[j] = this.createNextTile(this.tiles[j - 1], 1);
-        rule[j] = config.n === 3 && m === config.k - 4 ? 1 : 2;
-        j++;
+    this.tiles = [
+      HypTile.createNKPolygon(config.n, config.k, this.center, this.plane)
+    ];
+    for (let i = 0; i < 500; i++) {
+      for (let s = 0; s < config.n; s++) {
+        this.tiles.push(this.createNextTile(this.tiles[i], s));
       }
     }
-    return j;
   }
 
   createNextTile(tile: HypTile, s: number): HypTile {
-    let V = tile.getVertex(s);
-    const _tile = HypTile.fromPolygon(tile.polygon, this.center, this.plane);
-    return _tile.reflect(V);
+    return HypTile.fromPolygon(
+      tile.polygon.reflect(tile.getVertex(s)),
+      this.center,
+      this.plane
+    );
   }
 
   onLoop() {
-    this.canvas.setColors("rgba(224,61,13,1)");
+    let alpha = 200;
     this.tiles.forEach(element => {
+      this.canvas.setColors(`rgba(224,61,13,${alpha / 200})`);
       this.canvas.drawHypPolygon(element.polygon, true);
+      alpha--;
     });
     this.canvas.setColors("rgba(0,0,0,1)");
     this.canvas.setLineWidth(1);
