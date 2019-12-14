@@ -10,10 +10,10 @@ import { head } from "ramda";
 import "./styles/main.scss";
 
 var programs = [
-  InteractionDemo,
   TesselationDemo,
-  FiguresDemo,
   PolygonDemo,
+  InteractionDemo,
+  FiguresDemo,
   SquareDemo
 ];
 var canvas: Canvas;
@@ -28,7 +28,7 @@ window.onload = () => {
   engine = new Engine(canvas);
   createChooserButtons();
 
-  engine.createLoop(new InteractionDemo(canvas));
+  engine.createLoop(new TesselationDemo(canvas));
 };
 
 /**

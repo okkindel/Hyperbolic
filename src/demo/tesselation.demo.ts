@@ -15,7 +15,9 @@ export class TesselationDemo extends Program {
 
   constructor(canvas: Canvas) {
     super(canvas);
-    let clicked = 0;
+
+    this.createTiles({ n: 5, k: 5 });
+    let clicked = 1;
 
     window.addEventListener("click", () => {
       switch (clicked % 6) {
