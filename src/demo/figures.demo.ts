@@ -1,4 +1,5 @@
 import { HypPolygon, HypPoint, Point } from "../core/entity";
+import { euclidean } from "../core/geometry";
 import { Program } from "../core/program";
 import { Canvas } from "../core/canvas";
 
@@ -32,7 +33,10 @@ export class FiguresDemo extends Program {
   }
 
   onLoop() {
-    if (this.polygons) {
+    if (
+      this.polygons &&
+      euclidean(this.point, this.plane.center) < this.plane.radius
+    ) {
       this.canvas.setColors("rgba(0,255,126,1)");
       this.polygons.forEach(element => {
         this.canvas.drawHypPolygon(element, true);

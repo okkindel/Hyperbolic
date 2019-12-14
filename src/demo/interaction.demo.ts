@@ -1,4 +1,5 @@
 import { HypTile, HypPoint } from "../core/entity";
+import { euclidean } from "../core/geometry";
 import { Program } from "../core/program";
 import { Canvas } from "../core/canvas";
 
@@ -8,6 +9,7 @@ export class InteractionDemo extends Program {
 
   constructor(canvas: Canvas) {
     super(canvas);
+    this.point = this.plane.center;
   }
 
   createTiles() {
@@ -29,15 +31,17 @@ export class InteractionDemo extends Program {
   onLoop() {
     this.createTiles();
 
-    this.canvas.setColors("rgba(235,255,113,1)");
-    this.tiles.forEach(element => {
-      this.canvas.drawHypPolygon(element.polygon, true);
-    });
-    this.canvas.setColors("rgba(0,0,0,1)");
-    this.canvas.setLineWidth(1);
-    this.tiles.forEach(element => {
-      this.canvas.drawHypPolygon(element.polygon, false);
-    });
+    if (euclidean(this.point, this.plane.center) < this.plane.radius) {
+        this.canvas.setColors("rgba(235,255,113,1)");
+        this.tiles.forEach(element => {
+          this.canvas.drawHypPolygon(element.polygon, true);
+        });
+        this.canvas.setColors("rgba(0,0,0,1)");
+        this.canvas.setLineWidth(1);
+        this.tiles.forEach(element => {
+          this.canvas.drawHypPolygon(element.polygon, false);
+        });
+      }
     this.rotate+= 0.01;
   }
 }
