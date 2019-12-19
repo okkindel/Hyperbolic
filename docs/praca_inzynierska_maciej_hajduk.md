@@ -359,7 +359,7 @@ Transformacje Möbiusa (zwane również homografiami) tworzą grupę geometryczn
 Na użytek aplikacji i wybranego modelu użyty został zmodyfikowany wzór Transformacji Möbiusa. [^moebius_poincare]
 
 \begin{theorem}
-Transformacja wyrażona równaniem równaniem:
+Transformacja wyrażona równaniem:
 
 $$ f(z) = \beta \frac{z - \alpha }{\overline{\alpha }z - 1}, \: gdzie \: \left | \alpha  \right | < 1 \: i \: \left | \beta  \right | = 1 $$
 
@@ -490,43 +490,44 @@ Projekt można w przyszłości rozszerzyć o wsparcie dla obrazków, co ułatwi�
 
 # Bibliografia
 
-- Joan Gómez, Tam, gdzie proste są krzywe, Geometrnie enieuklidesowe, RBA, 2010
+[1] \hspace{3mm} Michael Hvidsten, _Exploring Geometry - Web Chapters_, 2017, Gustavus Adolphus College
 \vspace{3mm}
 
-- Martin Freiherr von Gagern, Creation of Hyperbolic Ornaments Algorithmic and Interactive Methods, Technischen Universitat Munchen
+[2] \hspace{3mm} Martin Freiherr von Gagern, _Creation of Hyperbolic Ornaments - Algorithmic and Interactive Methods_, 2010, Technischen Universitat Munchen
 \vspace{3mm}
 
-- Mateusz Kłeczek, Geometria hiperboliczna, Chrzanów 2016
+[3] \hspace{3mm} Joan Gómez, _Tam, gdzie proste są krzywe_, 2010, RBA Coleccionables. S. A.
 \vspace{3mm}
 
-- Bjørn Jahren, An introduction to hyperbolic geometry, MAT4510/3510
+[4] \hspace{3mm} Bjørn Jahren, _An introduction to hyperbolic geometry_, MAT4510/3510, August 2010
 \vspace{3mm}
 
-- Izabela Przezdzink, Geometria Poincaré i Kleina. Skrypt do zajęć: Podstawy geometrii i elementy geometrii nieeuklidesowej, Wrocław 2010, Uniwersytet Wrocławski Wydział Matematyki i Informatyki Instytut Matematyczny
+[6] \hspace{3mm} Marek Kordos, _O różnych geometriach_,  Warszawa 1987, Wydawnictwa Alfa
 \vspace{3mm}
 
-- Stefan Kulczycki Biblioteka Problemów Geometria NieeuklidesowaWarszawa 1960,  Państwowe Wydawnictwo Naukowe
+[7] \hspace{3mm} David Hilbert, _Foundations of Geometry_, Open Court Press, LaSalle, Illinois 1971
 \vspace{3mm}
 
-- Marek Kordos, O różnych geometriach,  Warszawa 1987, Wydawnictwa Alfa
+[8] \hspace{3mm} Frank Nielsen1and and Richard Nock, _Hyperbolic Voronoi diagrams made easy_, Sony Computer Science Laboratories Inc
 \vspace{3mm}
 
-- Caroline Series With assistance from Sara Maloni, Hyperbolic geometry MA448
+[9] \hspace{3mm} Marshall Bern and David Eppstein, _Optimal Möbius Transformationfor Information Visualization and Meshing_, Univ.  of California
 \vspace{3mm}
 
-- Marshall Bern, Optimal Möbius Transformationfor Information Visualization and Meshing
+[10] \hspace{3mm} Marek Kordos, _Geometria Bolyaia–Łobaczewskiego_, DeltaMi, Sierpień 2018, Instytut Matematyki UW
 \vspace{3mm}
 
-- Steve Szydlik, Hyperbolic Constructions in Geometer’s Sketchpad, December 21, 2001
+[11] \hspace{3mm} Steve Szydlik, _Hyperbolic Constructions in Geometer’s Sketchpad_, December 21, 2001
 \vspace{3mm}
 
-- Douglas N. Arnold and Jonathan Rogness, Möbius Transformations Revealed
+[12] \hspace{3mm} Douglas N. Arnold and Jonathan Rogness, _Möbius Transformations Revealed_, Minneapolis 2008, Institute for Mathematics and its Applications
 \vspace{3mm}
 
-- Frank Nielsen1and, Richard Nock, Hyperbolic Voronoi diagrams made easy
+[13] \hspace{3mm} C. Series, _Hyperbolic Geometry_, MA448, 2008
 \vspace{3mm}
 
-- Marek Kordos, Geometria Bolyaia–Łobaczewskiego, http://www.deltami.edu.pl, Sierpień 2018
+[14] \hspace{3mm} Izabela Przezdzink, _Geometria Poincaré i Kleina_, Wrocław 2010, Uniwersytet Wrocławski Wydział Matematyki i Informatyki - Instytut Matematyczny
+\vspace{3mm}
 
 \newpage\null\newpage
 
