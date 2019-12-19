@@ -32,7 +32,7 @@ Praca swoim zakresem obejmie obsługę rysowania lini, okręgów, wielokątów n
 __Praca składa się z czterech rozdziałów:__
 
 \vspace{3mm}
-__Rozdział pierwszy__: Omówienie analizy wybranego problemu, przedstawienie motywacji podjęcia tego tematu oraz uzasadnionienie wybór modelu płaszczyzny Poincaré. Rozdział zawiera poza tym komentarz do różnych rodzajów geometrii nieeuklidesowych, oraz krótki opis i porównanie innych modeli geometrii hiperbolicznej.
+__Rozdział pierwszy__: Omówienie analizy wybranego problemu, przedstawienie motywacji podjęcia tego tematu oraz uzasadnienie wyboru modelu dysku Poincaré. Rozdział zawiera poza tym komentarz do różnych rodzajów geometrii nieeuklidesowych, oraz krótki opis i porównanie innych modeli geometrii hiperbolicznej.
 
 \vspace{3mm}
 __Rozdział drugi__: Szczegółowa charakterystyka systemu wraz z opisem poszczególnych plików oraz przeznaczeniem klas i funkcji składających się na program. Opisanie algorytmów przekształcających byty w geometrii euklidesowej na odpowiadające im elementy geometrii hiperbolicznej, funkcji pomocniczych, reprezentacji punktów i linii w obu modelach.
@@ -48,7 +48,7 @@ Udało się zrealizować wszystkie postawione cele.
 
 ## Kontekst historyczny
 
-__Geometria jest nauką o mierze. Nazwa ta narzuca silne skojarzenia z nauką niemalże przyrodniczą. Nauczana we wszystkich szkołach od dwóch i pół tysiaca lat - wydawałoby się jest już czymś bardzo dobrze poznanym. Nowe teorie matematyczne doprowadziły jednak do podważenia tej pewności i powstania geometrii alternatywnych.__
+__Geometria jest nauką o mierze. Nazwa ta narzuca silne skojarzenia z nauką niemalże przyrodniczą. Nauczana we wszystkich szkołach od dwóch i pół tysiąca lat - wydawałoby się jest już czymś bardzo dobrze poznanym. Nowe teorie matematyczne doprowadziły jednak do podważenia tej pewności i powstania geometrii alternatywnych.__
 
 \vspace{3mm}
 
@@ -215,7 +215,7 @@ Głównym plikiem silnika jest `main.ts` znajdujący się w katalogu `/src`. Po 
 
 \vspace{3mm}
 
-Moduł odpowiedzialny za renderowanie obrazu znajduje się w pliku `canvas.ts`. Konstruktor klasy `Canvas` przyjmuje element `canvas` ze strony `index.html` oraz jego kontekst. Następie inicjuje się poprzez wywołanie funkcji `setupCanvas()`, która ustala szerokość i wysokość elementu. W każdym cyklu silnika, wywoływana jest funkcja `drawOverlay()`, która resetuje element do podstawowego widoku. Kolejne funkcje klasy odpowiadają za rysowanie punktów, linii, łuków i wielokątów. Poza tym klasa udostępnia też funcje zmiany koloru rysowanych elementów i grubości linii.
+Moduł odpowiedzialny za renderowanie obrazu znajduje się w pliku `canvas.ts`. Konstruktor klasy `Canvas` przyjmuje element `canvas` ze strony `index.html` oraz jego kontekst. Następie inicjuje się poprzez wywołanie funkcji `setupCanvas()`, która ustala szerokość i wysokość elementu. W każdym cyklu silnika, wywoływana jest funkcja `drawOverlay()`, która resetuje element do podstawowego widoku. Kolejne funkcje klasy odpowiadają za rysowanie punktów, linii, łuków i wielokątów. Klasa udostępnia też funkcje zmiany koloru rysowanych elementów i grubości linii.
 
 ![Diagram klasy Canvas](figures/program_canvas.png){ width=200px }
 
@@ -244,7 +244,7 @@ Instancje klas opisanych poniżej są obiektami rysowanymi finalnie przez silnik
 
 Konstruktor klasy `Point` przyjmuje dwie zmienne typu `number`, które są reprezentacją bezwzględnych koordynatów punktu na płótnie. Programista może skorzystać z metod `toHypPoint(plane: Plane): HypPoint` oraz `inversion(plane: Plane)`.  
 
-Funkcja `inversion(plane: Plane)` przyjmuje instancję klasy `Plane` (sfery hiperbolicznej) i zwraca dla niej koordynaty punktu w interfejsie klasy `HypPoint`, natomiast funkcja `inversion(plane: Plane)` zwraca punkt będący inwersją tego punktu wezględem płaszyzny `Plane`. Funkcja `inversion` odgrywa ważną rolę w obliczaniu zakrzywień linii na przestrzeni hiperbolicznej.
+Funkcja `inversion(plane: Plane)` przyjmuje instancję klasy `Plane` (sfery hiperbolicznej) i zwraca dla niej koordynaty punktu w interfejsie klasy `HypPoint`, natomiast funkcja `inversion(plane: Plane)` zwraca punkt będący inwersją tego punktu względem płaszczyzny `Plane`. Funkcja `inversion` odgrywa ważną rolę w obliczaniu zakrzywień linii na przestrzeni hiperbolicznej.
 
 ![Przykład inwersji punktu P względem okręgu](figures/inversion.png){ width=200px }
 
@@ -280,31 +280,31 @@ Klasa zezwala na następujące operacje:
 
 - Funkcja `calculateArc(p: Point, q: Point, plane: Plane): Circle` za pomocą algorytmu opisanego poniżej, zwraca instancję klasy `Circle`. Jest ona w istocie opisem okręgu, na obwodzie którego leży dana prosta hiperboliczna.
 
-- Funkcja `cutIfSticksOut(point: Point, circle: Circle, plane: Plane): Point` ustala punkty `p` i `q` wyznaczające końce odcinka oraz sprawdza, czy punkt nie leży poza granicą koła wyznaczonego przez obiekt klasy `Plane`. W takim przypadku przesuwa dany punkt na punkt przecięcia obu okręgów używając do tego wpomnianej już metody `intersectPoints(circle: Circle): [Point, Point]`.  
+- Funkcja `cutIfSticksOut(point: Point, circle: Circle, plane: Plane): Point` ustala punkty `p` i `q` wyznaczające końce odcinka oraz sprawdza, czy punkt nie leży poza granicą koła wyznaczonego przez obiekt klasy `Plane`. W takim przypadku przesuwa dany punkt na punkt przecięcia obu okręgów używając do tego wspomnianej już metody `intersectPoints(circle: Circle): [Point, Point]`.  
 
 \vspace{1mm}
-__Konstrukcja lnii hiperbolicznej na podstawie dwóch punków:__
+__Konstrukcja linii hiperbolicznej na podstawie dwóch punków:__
 \vspace{1mm}
 
-  > Niech A i B będą punktami na dysku Poincarégo, a punkty $A'$ i $B'$ będą ich inwersjami na płaszczyźnie `Plane`. Potrzebujemy okręgu przez A i B, który jest prostopadły do `Plane`.
+  > Niech A i B będą punktami na dysku Poincaré, a punkty $A'$ i $B'$ będą ich inwersjami na płaszczyźnie `Plane`. Potrzebujemy okręgu przez A i B, który jest prostopadły do `Plane`.
   
-![Kontrukcja linii w przestrzeni hiperbolicznej](figures/line_contruction.png){ width=250px }
+![Konstrukcja linii w przestrzeni hiperbolicznej](figures/line_contruction.png){ width=250px }
 
   > Podczas konstruowania okręgu przez A i B, dowolny z odbijanych punktów $A'$ lub $B'$ może być użyty do zdefiniowania okręgu. Jeśli jeden z punktów ma współrzędne $(0,0)$, należy użyć drugiego punktu ($(0,0)$ odzwierciedla nieskończoność, która w tym kontekście jest niezdefiniowanym punktem).
 
 __Algorytm wyznaczania okręgu na podstawie dwóch punktów i płaszczyny:__
 
-1. Sprawdź współrzędne punktu `p`: jeżeli są takie same jak współrzędnę centrum Plane, przypisz `q` do zmiennej `validPoint`, w przeciwnym wypadku przypisz `p`.  
+1. Sprawdź współrzędne punktu `p`: jeżeli są takie same jak współrzędne centrum Plane, przypisz `q` do zmiennej `validPoint`, w przeciwnym wypadku przypisz `p`.  
 
 2. Oblicz dwusieczną punktów `p` i `q` oraz `q` i `validPoint.inversion(plane)`.
 
-3. Znajdź centrum nowego okręgu będące punktem przecięcia obu linii z pomocą funcji `intersectPoint` klasy `Line`.  
+3. Znajdź centrum nowego okręgu będące punktem przecięcia obu linii z pomocą funkcji `intersectPoint` klasy `Line`.  
 
 4. Znadź promień nowego okręgu licząc odległość euklidesową pomiędzy jednym z początkowych punków a punktem przecięcia dwusiecznych.
 
 \vspace{3mm}
 
-Ostatnią nieomówioną funcją jest `countAngle(circle: Circle)`, określającą na podstawie wsześniej obliczonych punktów, początkowy i końcowy kąt łuku oraz kierunek, w jakim rysowany będzie ten łuk. Ma to znaczenie dla klasy `Canvas` i pomaga w ustaleniu, gdzie znajduje się wnętrze rysowanej figury.
+Ostatnią nieomówioną funkcją jest `countAngle(circle: Circle)`, określającą na podstawie wcześniej obliczonych punktów, początkowy i końcowy kąt łuku oraz kierunek, w jakim rysowany będzie ten łuk. Ma to znaczenie dla klasy `Canvas` i pomaga w ustaleniu, gdzie znajduje się wnętrze rysowanej figury.
 
 ### Klasa HypPoint
 
@@ -356,7 +356,7 @@ Transformacje Möbiusa (zwane również homografiami) tworzą grupę geometryczn
 
 ![Przykładowa transformacja Möbiusa [Marshall Bern, Optimal Möbius Transformation]](figures/moebius.png){ width=250px }
 
-Na użytek apliacji i wybranego modelu użyty został zmodyfikowany wzór Transformacji Möbiusa. [^moebius_poincare]
+Na użytek aplikacji i wybranego modelu użyty został zmodyfikowany wzór Transformacji Möbiusa. [^moebius_poincare]
 
 \begin{theorem}
 Transformacja wyrażona równaniem równaniem:
@@ -414,34 +414,34 @@ Każdy program demonstracyjny dziedziczy po klasie `Program`. Klasa bazowa udost
 Program `Polygon Demo` prezentuje możliwości rysowania linii i wielokątów na dysku Poincaré. Klasa zawiera zmienną globalną `polygon` typu `HypPolygon`, która definiowana jest po wybraniu dwóch punków na dysku. Wybór punktu odbywa się poprzez klikniecie lewym przyciskiem myszy na ekranie.
 \vspace{3mm}
 
-Funkcja `onLoop()` zawiera instrukcje rysowania wielokątu, co ogranicza się do wywołania metody `canvas.drawHypPolygon(this.polygon)`. Podobnie działa rysowanie punktów i linii. Programista nie musi znać wewnętrznych implementacji, jedynie api udostępniane przez klasy silnika.
+Funkcja `onLoop()` zawiera instrukcje rysowania wielokąta, co ogranicza się do wywołania metody `canvas.drawHypPolygon(this.polygon)`. Podobnie działa rysowanie punktów i linii. Programista nie musi znać wewnętrznych implementacji, jedynie api udostępniane przez klasy silnika.
 \vspace{3mm}
 
-Program `Polygon` pokazuje również możliwości manipulowania grubością linii oraz kolorami płótna. W przykładzie jest to osiągnięte za pomocą wywołania funkcji klasy `Canvas` - `canvas.setColors("#FFF")`.
+Program `Polygon` pokazuje również możliwości manipulowania grubością linii oraz kolorami płótna. W omawianym przykładzie jest to osiągnięte za pomocą wywołania funkcji klasy `Canvas` - `canvas.setColors("#FFF")`.
 
-![Wielokąt narysowany przy użyciu programu Polygon Demo](figures/polygon_demo.png){ width=200px }
+![Przykład wielokąta narysowany przy użyciu programu Polygon Demo](figures/polygon_demo.png){ width=200px }
 
 ### Interaction Demo
 
-Program `Interaction Demo` zawiera wykorzystanie klasy `HypTile`. W każdym przebiegu pętli silnika, dookoła wskaźnika myszy zdefiniowanego zmienną `point`, z pomocą statycznej metody `createRegularPolygon()` tworzone są wielokąty foremne. Zmienna globalna `rotate`, definiuje kąt obrotu każdej z figur. Po narysowaniu wszystkich figur, zmienna ta jest inkrementowana, po czym wyświetlana jest następna klatka obrazu.
+Program `Interaction Demo` zawiera wykorzystanie klasy `HypTile`. W każdym przebiegu pętli silnika, dookoła wskaźnika myszy zdefiniowanego zmienną `point`, z pomocą statycznej metody `createRegularPolygon()` tworzone są wielokąty foremne. Kąt obrotu każdej z figur jest zdefiniowany za pomocą zmiennej globalnej `rotate`. Po narysowaniu wszystkich figur, zmienna ta jest inkrementowana, następnie wyświetlana jest następna klatka obrazu.
 
-![Przykład działania programu Interaction Demo](figures/interaction_demo.png){ width=200px }
+![Przykładowe figury narysowane za pomocą programu Interaction Demo](figures/interaction_demo.png){ width=200px }
 
 ### Tesselation Demo
 
-Program `Tesselation Demo` różni się od innych demonstracji. Pętla silnika wyświetla raz już zdefiniowany obraz, rysując wszystkie kafelki umieszczone w tablicy `tiles` interfejsu `HypTile[]`. Konstruktor klasy wywołuje metodę `determineTiles()`, która tworzy pierwszy kafelek za pomocą statycznej metody `createNKPolygon()` a następnie, określoną ilość razy odbija jego obraz, co skutkuje wypełnieniem dysku przylegającymi do siebie kafelkami. Do tego celu została użyta opisana w poprzednim rozdziale funkcja `reflect()`.
+Program `Tesselation Demo` różni się od innych demonstracji: pętla silnika wyświetla raz już zdefiniowany obraz, rysując wszystkie kafelki umieszczone w tablicy `tiles` interfejsu `HypTile[]`. Konstruktor klasy wywołuje metodę `determineTiles()`, która tworzy pierwszy kafelek za pomocą statycznej metody `createNKPolygon()`, a następnie określoną ilość razy odbija jego obraz, co skutkuje wypełnieniem dysku przylegającymi do siebie kafelkami. Do tego celu została użyta opisana w poprzednim rozdziale funkcja `reflect()`.
 
 !['Kafelkowanie' dysku wykonane przez program Tesselation Demo](figures/tesselation_demo.png){ width=200px }
 
 ## Pliki źródłowe pracy
 
-Katalog `/docs` zawiera źródła tej pracy, budowane za pomocą sktyptu zamieszczonego w pliku `makefile` z wykorzystaniem programu `pandoc` i biblioteki `texlive`. Praca napisana jest w języku `markdown`. Katalog `/docs/figures` zawiera statyczne pliki. Strona tytułowa napisana jest w języku `latex` i budowana jest osobno.
+Tekst tej pracy napisany został w języku `markdown`. Pliki źródłowe umieszczone są w katalogu `/docs` i budowane są za pomocą skryptu zamieszczonego w pliku `makefile` z wykorzystaniem programu `pandoc` i biblioteki `texlive`. Katalog `/docs/figures` zawiera statyczne pliki. Strona tytułowa napisana jest w języku `latex` i budowana jest osobno.
 
 \newpage\null\newpage
 
 # Instalacja i wdrożenie
 
-__Rozdział ten zawiera informacje o sposobie zbudowania aplikacji w celu jej uruchomienia i opcjonalnie - wdrożenia na serwerze WWW.__
+__Rozdział zawiera informacje o sposobie zbudowania aplikacji w celu jej uruchomienia i opcjonalnie - wdrożenia na serwerze WWW.__
 
 Do zbudowania aplikacji konieczny będzie menadżer pakietów `npm` w wersji przynajmniej `6.5.0` oraz środowisko uruchomieniowe języka `JavaScript` - `node.js` w wersji  `10.6.0` lub nowszej. Instalacja wymaganych pakietów odbywa się poprzez wpisanie w konsoli polecenia
 
@@ -449,19 +449,19 @@ Do zbudowania aplikacji konieczny będzie menadżer pakietów `npm` w wersji prz
 npm install
 ```
 
-w katalogu głównym projektu. Następnie należy zbudować aplikację poleceniem
+w katalogu głównym projektu. Skrypt umożliwiający zbudowanie aplikacji wykonuje się poleceniem:
 
 ``` BASH
 npm run build
 ```
 
-Po zbudowaniu aplikacji, w katalogu głównym pojawi się folder `dist` z plikami, które wraz z plikiem `index.html` składają się na gotowy program możliwy do uruchomiania w przeglądarce.
+Skutkuje to pojawieniem się w katalogu głównym folderu `/dist` z plikami, które wraz z plikiem `index.html` składają się na gotowy program możliwy do uruchomiania w przeglądarce.
 
 ![Wygląd aplikacji po uruchomieniu](figures/app_view.png)
 
 ## Serwer deweloperski
 
-Aplikacja wspiera tryb deweloperski, w którym bieżące zmiany w kodzie automatycznie są budowane do plików wynikowych. Do uruchomienia trybu deweloperskiego potrzebne są te same pakiety instalowane poleceniem:
+Stworzony program wspiera tryb deweloperski, w którym bieżące zmiany w kodzie automatycznie są kompilowane do plików wynikowych. Do uruchomienia trybu deweloperskiego potrzebne są pakiety instalowane poleceniem:
 
 ``` BASH
 npm install
@@ -475,16 +475,16 @@ npm run build-watch
 
 ## Wdrożenie na serwerze WWW
 
-Projekt można wystawić na serwerze WWW. Sposób wdrożenia zależy od posiadanego serwera. Nie należy jednak umieszczać na serwerze całego katalogu z projektem. Zalecane jest przede wszystkim usunięcie katalogu `node_modules`. Do poprawnego działania projektu wystarczy plik `index.html` oraz katalog `/dist` pojawiający się po zbudowaniu aplikacji.
+Projekt można umieścić na serwerze WWW. Sposób wdrożenia zależy od posiadanego serwera. Ze względu na dużą objętość zaleca się umieszczenie projektu bez katalogu `node_modules`. Do poprawnego działania projektu wystarczy plik `index.html` oraz katalog `/dist` pojawiający się po zbudowaniu aplikacji.
 
 \newpage\null\newpage
 
 # Podsumowanie
 
-Praca została napisana w oparciu o analizę zagadnienia. Zamierzony efekt pracy - to jest skonstrułowanie silnika graficznego renderującego geometrię dysku Poincare udało się osiągnąć, na co wskazują programy demonstracyjne dla silnika. Jest to autorskie, unikalne rozwiązanie, pozwalające na kompleksową obsługę zadanego modelu. Użycie nadal niestandardowych technologi webowych takich jak silnie typowany język `Typescript` umożliwia przyjemną pracę z silnikiem, na co składa się również dobrze napisana warstwa renderująca grafikę, pozwalająca w sposób bezpośredni wyświetlić dowolny, wspierany interfejsami silnika byt lub figurę.
+Praca została napisana w oparciu o analizę zagadnienia. Zamierzony efekt pracy - to jest skonstruowanie silnika graficznego renderującego geometrię dysku Poincaré udało się osiągnąć. Wskazują na to programy demonstrujące działanie silnika. Zaprezentowana aplikacja to autorskie rozwiązanie, pozwalające na kompleksową obsługę modelu dysku Poincaré. Użycie nowoczesnych i technologi webowych takich jak silnie typowany język `Typescript`, umożliwia przyjemną pracę z silnikiem. Składają się na to również dobrze napisana warstwa renderująca grafikę, pozwalająca w sposób bezpośredni wyświetlić dowolny, wspierany interfejsami silnika figurę lub kształt.
 \vspace{3mm}
 
-Projekt można w przyszłości rozszerzyć o wsparcie dla obrazków, co umożliwiłoby łatwą implementację grafik Eschera, co jednak jest możliwe nawet teraz z wykorzystaniem odbijanych względem siebie wielokątów, podobnie, jak zostało to osiągnięte w programie `Tesselation Demo`.
+Projekt można w przyszłości rozszerzyć o wsparcie dla obrazków, co ułatwiłoby implementację grafik Eschera. Jest to obecnie także możliwe, jednak należy w tym celu wykorzystać odbicia odpowiednich wielokątów, podobnie, jak zostało to osiągnięte w punkcie `4.3.3`, w programie `Tesselation Demo`.
 
 \newpage\null\newpage
 
@@ -532,4 +532,12 @@ Projekt można w przyszłości rozszerzyć o wsparcie dla obrazków, co umożliw
 
 # Zawartość płyty CD
 
-Płyta CD zawiera cały kod źródłowy programu, zbudowany w katalogu `/dist` projekt oraz katalog `/docs` zawierający źródła tej pracy oraz jej końcową wersję w postaci pliku `pdf`.
+Do pracy dołączono płytę CD o następującej zawartości:
+
+- kod źródłowy programu znajdujący się w folderze `/src`
+\vspace{3mm}
+- gotową, zbudowaną w katalogu `/dist` aplikację
+\vspace{3mm}
+- katalog `/docs` zawierający kod źródłowy tej pracy
+\vspace{3mm}
+- plik w formacie `pdf` zawierający pracę
