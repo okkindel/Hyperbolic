@@ -157,29 +157,88 @@ Model nosi imię Henri Poincaré, ale został stworzony przez Eugenio Beltrami, 
 
 ### Model dysku Poincaré
 
-Model dysku Poincaré wykorzystuje wnętrze dysku jako model płaszczyzny hiperbolicznej.  
-W poniższych przykładach omawiany będzie dysk jednostkowy, który będzie również przedmiotem dalszych rozważań.
+Model Poincaré geometrii hiperbolicznej wykorzystuje wnętrze dysku jednostkowego:
 
-- __Punkty hiperboliczne__ to punkty wewnątrz dysku jednostkowego.
-\vspace{1mm}
-- __Linie hiperboliczne__ to łuki koła prostopadłe do dysku. Linie hiperboliczne przechodzące przez początek degenerują się do średnic.
-\vspace{1mm}
-- __Kąty__ są mierzone jako kąt euklidesowy między stycznymi w punkcie przecięcia.
-\vspace{1mm}
-- __Odległości__ między punktami hiperbolicznymi można mierzyć w oparciu o wzór:[^distance]
+$$
+  K = \{(x,y)\in\mathbf{R}^2: x^2 + y^2 <1\}~.
+$$
+Zauważmy, że zbior ten można utożsamiać ze zbiorem liczb zespolonych:
 
-$$ d_{H}(z_0, z_1) = ln(\frac{\left |1 - z_0 \overline{z_1}  \right | + \left |z_0 - z_1  \right |}{\left |1 - z_0 \overline{z_1}  \right | - \left |z_0 - z_1  \right |}) $$
+$$
+K^* = \{z \in \mathbf{C}: |z| < 1\}.
+$$
 
-[^distance]: [Hyperbolic Transformations, Chapter 17, Equation 17.2.13](http://homepages.gac.edu/~hvidsten/geom-text/web-chapters/hyper-transf.pdf)
+Dokładniej:
+\begin{itemize}
+\item punktami hiperbolicznymi są elementy zbioru $K^*$.
+\item odległość pomiędzy punktami $z_1, z_2 \in K^*$ wyraża się wzorem 
+\begin{equation}
+\label{eq:distH}
+d_H(z_1,z_2) = \ln\left( \frac{|1-z_1 \cdot \overline{z_2}| + |z_1-z_2|}{ |1-z_1 \cdot \overline{z_2}| - |z_1-z_2|} \right)~,
+\end{equation}
+gdzie $|z|$ oznacza normę liczby zespolonej $z$ oraz $\overline{z}$ oznacza sprzężenie liczby zespolonej $z$.
+\end{itemize}
 
-\vspace{3mm}
-Ponieważ rozpatrywany jest dysk jednostkowy, powyższy wzór nie zawiera w zmiennej dla promienia.
-
+W modelu tym liniami hiperbolicznymi są to łuki koła prostopadłe do okręgu jednostkowego. 
+Linie hiperboliczne przechodzace przez środek dysku jednostkowego degeneruja sie do średnic. 
+Kąty pomiędzy liniami hiperbolicznymi sa mierzone jako katy euklidesowe miedzy stycznymi w punkcie przeciecia
 ![Przykład kilkunastu linii w modelu dysku Poincaré](figures/poincare_disc_lines.png){ width=250px }
 
-Model jest zgodny, to znaczy, że zachowuje kąty. Oznacza to, że kąty hiperboliczne między krzywymi są równe kątom euklidesowym w punkcie przecięcia. Wadą jest, że linie hiperboliczne są modelowane poprzez łuki koła euklidesowego, przez co wydają się zakrzywione.
+Długość krzywych na dysku Poincaré mierzy się za pomocą tak zwanego tensora metrycznego, który wyraża się wzorem
+$$
+  ds^2 = 4 \frac{dx^2+dy^2}{(1-(x^2+y^2))^2} ~.
+$$
+
+Oznacza to, że w celu wyznaczenia długości krzywej $\gamma= (\gamma_1,\gamma_2):[a,b] \to K$ 
+na dysku Poincaire należy obliczyć całkę oznaczoną:
+
+$$
+  L_{\gamma} =\int\limits_{a}^{b} \frac{2 \sqrt{\gamma_1'(t)^2 + \gamma_2'(t)^2}}{1-(\gamma_1(t)^2+\gamma_2(t)^2)} dt ~,
+$$
+
+gdzie $\gamma_i'(t)$ oznacza pochodną $i$-tej współrzędnej krzywej $\gamma$ w punkcie $t$.
+
+\paragraph{Długość odcinka.}
+Niech $0\leq r <1$. Stosując ten wzór do odcinka (w klasycznej geometrii) $\gamma(t) = (t,0)$ dla $t\in [0,r]$ otrzymujemy wzór:
+
+$$
+  L_{\gamma} = \int\limits_0^r \frac{2 }{1-t^2} dt = \ln\left(\frac{1 + r}{1 - r}\right)~.
+$$
+
+Jest to wzór zgodny ze wzorem (\ref{eq:distH}):
+
+$$
+d_h(0,r) = \ln\left(\frac{|1-0\cdot\overline{r}|+|0-r|}{|1-0\cdot\overline{r}|-|0-r|}\right) = \ln\left(\frac{1+r}{1-r}\right) ~.
+$$
+
+Widzimy więc, że długość (w sensie odległości na dysku Poincaré) odcinka o końcach $(0,0)$ i $(r,0)$ pokrywa się z odległością $d_h$ między tymi punktami.
+
+Zauważmy, że $\lim_{r\to 1-} d_H((0,0),(r,0)) = \infty$. Oznacza to, że odległości punktów dysku Poincaré od jego środka rosną do nieskończoności wraz ze zbliżaniem się do jego brzegu $\{(x,y)\in\mathbf{R}^2:x^2+y^2=1\}$.
 
 ![Przykład tesselacji w modelu dysku Poincaré](figures/poincare_disk_tesselation.png){ width=250px }
+
+\paragraph{Obwód koła.}
+Załóżmy ponownie, że $0< r <1$. Obliczymy długość okręgu $\{(x,y): x^2+y^2 = r^2\}$ na dysku Poincaré.
+W tym celu rozważamy krzywą $\gamma(t) = (r\cos(t),r\sin(t))$ dla $t\in[0,2\pi]$ i otrzymujemy
+\begin{equation}
+\label{eq:circle}
+L_r =\int\limits_{0}^{2\pi} 
+     \frac{ 2 \sqrt{r^2 \sin^2(t) + r^2 \cos^2(t)}}
+           {1-(r^2\cos^2(t)+r^2 \sin^2(t))} dt = 
+     \int\limits_{0}^{2\pi} \frac{ 2 r } {1- r^2} dt =
+       \frac{4 \pi  r}{1-r^2}~.
+\end{equation}
+Widzimy więc, że $\lim_{r\to 1-} L_r = \infty$. 
+
+Rozważmy teraz zbiór $C_R=\{(x,y)\in K: d_H((x,y),(0,0)) = R\}$. Zauważmy, że
+$$
+  (d_H((r,0),(0,0)) = R) \equiv \left(\ln\frac{1+r}{1-r} = R\right) \equiv \left(r=\frac{e^{R}-1}{e^{R}+1}\right)
+$$
+Po podstawieniu wzoru $r= (e^R-1)/(e^R+1)$ do formuły (\ref{eq:circle}) otrzymujemy
+$$
+  L_{C_r} = \pi\left( e^{R} - e^{-R}\right)
+$$
+Oznacza to, że dla dużych $R$ okrąg o środku w puncie $(0,0)$ i promieniu $R$ ma w przybliżeniu długość $\pi\cdot e^R$.
 
 ### Model Hemisfery
 
@@ -481,10 +540,14 @@ Projekt można umieścić na serwerze WWW. Sposób wdrożenia zależy od posiada
 
 # Podsumowanie
 
-Praca została napisana w oparciu o analizę zagadnienia. Zamierzony efekt pracy - to jest skonstruowanie silnika graficznego renderującego geometrię dysku Poincaré udało się osiągnąć. Wskazują na to programy demonstrujące działanie silnika. Zaprezentowana aplikacja to autorskie rozwiązanie, pozwalające na kompleksową obsługę modelu dysku Poincaré. Użycie nowoczesnych i technologi webowych takich jak silnie typowany język `Typescript`, umożliwia przyjemną pracę z silnikiem. Składają się na to również dobrze napisana warstwa renderująca grafikę, pozwalająca w sposób bezpośredni wyświetlić dowolny, wspierany interfejsami silnika figurę lub kształt.
+Udało się zrealizować główny cel pracy, jakim było skonstruowanie silnika graficznego służącego do obsługi grafiki na dysku Poincaré. Silnik ten umożliwia generowanie podstawowych obiektów graficznych: lini, okręgów, wieloboków. Przed przystąpieniem do realizacji projektu przeprowadzona została teoretyczna analiza zagadnienia. Poprawność zbudowanego silnika została przetestowana za pomocą kilku aplikacji. W szczególności: zastosowano go do wyświetlenia kilku przykładów tasselizacji dysku Poincaré.
 \vspace{3mm}
 
-Projekt można w przyszłości rozszerzyć o wsparcie dla obrazków, co ułatwiłoby implementację grafik Eschera. Jest to obecnie także możliwe, jednak należy w tym celu wykorzystać odbicia odpowiednich wielokątów, podobnie, jak zostało to osiągnięte w punkcie `4.3.3`, w programie `Tesselation Demo`.
+Naturalnym sposobem rozszerzenia zbudowanego silnika graficznego jest rozszerzenie go o mechanizmy fakturowania za pomocą plików graficznych. Innym, bardziej ambitnym, możliwym rozszerzeniem zbudowanego narzędzia jest przekształcenie go w silnik służący do generowania grafiki dla trójwymiarowej geometrii hiperbolicznej.
+\vspace{3mm}
+
+Projekt został zrealizowany w języku TypeScript, będącym typowaną wersją języka JavaScript. Zdaniem autora użycie tego wariantu języka JavaScript znacznie przyśpieszyło proces budowania aplikacji.  
+\vspace{3mm}
 
 \newpage\null\newpage
 
