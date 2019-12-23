@@ -180,8 +180,9 @@ gdzie $|z|$ oznacza normę liczby zespolonej $z$ oraz $\overline{z}$ oznacza spr
 \end{itemize}
 
 W modelu tym liniami hiperbolicznymi są to łuki koła prostopadłe do okręgu jednostkowego. 
-Linie hiperboliczne przechodzace przez środek dysku jednostkowego degeneruja sie do średnic. 
-Kąty pomiędzy liniami hiperbolicznymi sa mierzone jako katy euklidesowe miedzy stycznymi w punkcie przeciecia
+Linie hiperboliczne przechodzące przez środek dysku jednostkowego degenerują sie do średnic. 
+Kąty pomiędzy liniami hiperbolicznymi sa mierzone jako katy euklidesowe miedzy stycznymi w punkcie przecięcia.
+
 ![Przykład kilkunastu linii w modelu dysku Poincaré](figures/poincare_disc_lines.png){ width=250px }
 
 Długość krzywych na dysku Poincaré mierzy się za pomocą tak zwanego tensora metrycznego, który wyraża się wzorem
@@ -190,7 +191,7 @@ $$
 $$
 
 Oznacza to, że w celu wyznaczenia długości krzywej $\gamma= (\gamma_1,\gamma_2):[a,b] \to K$ 
-na dysku Poincaire należy obliczyć całkę oznaczoną:
+na dysku Poincaré należy obliczyć całkę oznaczoną:
 
 $$
   L_{\gamma} =\int\limits_{a}^{b} \frac{2 \sqrt{\gamma_1'(t)^2 + \gamma_2'(t)^2}}{1-(\gamma_1(t)^2+\gamma_2(t)^2)} dt ~,
@@ -215,7 +216,6 @@ Widzimy więc, że długość (w sensie odległości na dysku Poincaré) odcinka
 
 Zauważmy, że $\lim_{r\to 1-} d_H((0,0),(r,0)) = \infty$. Oznacza to, że odległości punktów dysku Poincaré od jego środka rosną do nieskończoności wraz ze zbliżaniem się do jego brzegu $\{(x,y)\in\mathbf{R}^2:x^2+y^2=1\}$.
 
-![Przykład tesselacji w modelu dysku Poincaré](figures/poincare_disk_tesselation.png){ width=250px }
 
 \paragraph{Obwód koła.}
 Załóżmy ponownie, że $0< r <1$. Obliczymy długość okręgu $\{(x,y): x^2+y^2 = r^2\}$ na dysku Poincaré.
@@ -239,6 +239,8 @@ $$
   L_{C_r} = \pi\left( e^{R} - e^{-R}\right)
 $$
 Oznacza to, że dla dużych $R$ okrąg o środku w puncie $(0,0)$ i promieniu $R$ ma w przybliżeniu długość $\pi\cdot e^R$.
+
+![Przykład tesselacji w modelu dysku Poincaré](figures/poincare_disk_tesselation.png){ width=250px }
 
 ### Model Hemisfery
 
