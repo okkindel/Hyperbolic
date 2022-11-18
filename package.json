@@ -21,7 +21,7 @@
     "style-loader": "^0.16.1",
     "ts-loader": "^2.0.3",
     "typescript": "^3.6.3",
-    "webpack": "^2.3.3"
+    "webpack": "^5.75.0"
   },
   "dependencies": {
     "@types/ramda": "^0.26.26",
